@@ -33,4 +33,11 @@ export const SUBREDDIT_TAGS: Record<
   programminghumor: { products: ['humor'], roles: ['developer'] },
   talesfromtechsupport: { products: ['humor'], roles: ['sre'] },
   sysadmin: { roles: ['sre'] },
+  // UFO / conspiracy — only auto-tag, content filtering happens at fetch time
+  // (we drop self-posts from these subs so we only keep linked news articles).
+  ufos: { products: ['ufo'] },
+  ufob: { products: ['ufo'] },
+  aliens: { products: ['ufo'] },
+  highstrangeness: { products: ['ufo'] },
+  conspiracy: { products: ['ufo'] },
 };
