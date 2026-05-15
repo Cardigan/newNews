@@ -381,6 +381,50 @@ export const PRODUCT_KEYWORDS: Record<ProductChannel, string[]> = {
     'works on my machine',
     'it works',
   ],
+  ufo: [
+    // direct UFO/UAP terms
+    'ufo',
+    'ufos',
+    'uap',
+    'uaps',
+    'unidentified aerial',
+    'unidentified anomalous',
+    'flying saucer',
+    'alien craft',
+    'extraterrestrial',
+    'non-human intelligence',
+    'nhi',
+    // famous incidents / locations
+    'roswell',
+    'area 51',
+    'skinwalker',
+    'tic tac',
+    'gimbal video',
+    'nimitz encounter',
+    // people
+    'bob lazar',
+    'luis elizondo',
+    'david grusch',
+    'ross coulthart',
+    // process / disclosure
+    'uap disclosure',
+    'aaro',
+    'aatip',
+    'congressional uap',
+    'uap hearing',
+    'declassified',
+    'jfk files',
+    'mkultra',
+    'project blue book',
+    'whistleblower',
+    // conspiracy-news adjacent
+    'conspiracy theory',
+    'cover-up',
+    'cover up',
+    'redacted documents',
+    'foia',
+    'freedom of information',
+  ],
 };
 
 // Terms that strongly suggest a low-relevance item even if it matched.

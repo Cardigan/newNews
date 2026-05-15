@@ -24,7 +24,8 @@ export type ProductChannel =
   | 'azure'
   | 'azure-gov'
   | 'ai'
-  | 'humor';
+  | 'humor'
+  | 'ufo';
 
 export const PRODUCT_LABELS: Record<ProductChannel, string> = {
   'power-query': 'Power Query / PQO',
@@ -42,6 +43,7 @@ export const PRODUCT_LABELS: Record<ProductChannel, string> = {
   'azure-gov': 'Azure Government',
   ai: 'AI / ML / LLMs',
   humor: 'Fun / Humor',
+  ufo: 'UFO / Conspiracy',
 };
 
 export const ALL_PRODUCTS: ProductChannel[] = Object.keys(

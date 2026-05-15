@@ -12,17 +12,20 @@ import type {
 
 const OUT_PATH = resolve(process.cwd(), 'public/data/feed.json');
 
-// Minimum score threshold so the feed isn't drowned in unrelated headlines.
-const MIN_SCORE = 3;
+// Minimum score threshold for *untagged* general news. Tagged items
+// (any role/product match) keep a much lower bar so the client has a
+// long tail to filter into when narrow filters would otherwise show <10.
+const MIN_SCORE_UNTAGGED = 3;
+const MIN_SCORE_TAGGED = 0;
 
 // Per-source caps so one chatty source (Reddit) doesn't crowd out the others.
 // The final feed is the union of these caps, sorted by score.
 const PER_SOURCE_CAP: Record<SourceId, number> = {
-  bbc: 50,
-  nyt: 50,
-  guardian: 50,
-  hn: 50,
-  reddit: 80,
+  bbc: 70,
+  nyt: 70,
+  guardian: 70,
+  hn: 70,
+  reddit: 110,
 };
 
 function dedupe(items: RawArticle[]): RawArticle[] {
@@ -66,7 +69,10 @@ async function main() {
 
   const scored = deduped
     .map((a) => scoreArticle(a))
-    .filter((a) => a.score >= MIN_SCORE);
+    .filter((a) => {
+      const tagged = a.roles.length > 0 || a.products.length > 0;
+      return a.score >= (tagged ? MIN_SCORE_TAGGED : MIN_SCORE_UNTAGGED);
+    });
 
   const final = applyPerSourceCaps(scored);
 

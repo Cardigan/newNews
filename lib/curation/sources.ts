@@ -1,7 +1,5 @@
 import Parser from 'rss-parser';
-import type { RawArticle, SourceId } from './types';
-
-const UA =
+import type { RawArticle, SourceId } from './types';const UA =
   'newNews-poc/0.1 (+https://github.com/Cardigan/newNews) team-curated-feed';
 
 const rss = new Parser({
@@ -215,7 +213,22 @@ const SUBREDDITS = [
   // fun, job-adjacent
   'ProgrammingHumor',
   'talesfromtechsupport',
+  // UFO / conspiracy — filtered to news-only at scoring time
+  'UFOs',
+  'UFOB',
+  'aliens',
+  'HighStrangeness',
+  'conspiracy',
 ];
+
+// Subreddits where we only want LINK posts (external article URLs).
+// Used to keep the UFO/conspiracy channel news-only and drop discussion
+// threads / self-posts.
+export const NEWS_ONLY_SUBREDDITS = new Set(
+  ['ufos', 'ufob', 'aliens', 'highstrangeness', 'conspiracy'].map((s) =>
+    s.toLowerCase(),
+  ),
+);
 
 // Reddit RSS embeds two anchors in each item's description:
 //   <a href="ARTICLE_URL">[link]</a>  <a href="COMMENTS_URL">[comments]</a>
@@ -256,6 +269,11 @@ async function fetchReddit(): Promise<RawArticle[]> {
             item.content,
             commentsUrl,
           );
+          // Some subs (UFO/conspiracy) we only want as news, not as
+          // self-post discussions. Skip if the post has no external link.
+          if (NEWS_ONLY_SUBREDDITS.has(sub.toLowerCase()) && !externalUrl) {
+            continue;
+          }
           // Prefer the external article URL when present so dedupe across
           // sources works (a BBC story shared in r/azure collapses with
           // the same BBC RSS item).

@@ -90,7 +90,10 @@ export default function Page() {
   const roleSet = useMemo(() => new Set(prefs.roles), [prefs.roles]);
   const sourceSet = useMemo(() => new Set(prefs.sources), [prefs.sources]);
 
-  const filtered = useMemo(() => {
+  const MIN_RESULTS = 10;
+
+  // Primary pass: respects all three filters (sources + roles + channels).
+  const primary = useMemo(() => {
     if (!feed) return [];
     return feed.articles.filter((a) => {
       if (!sourceSet.has(a.source)) return false;
@@ -100,6 +103,28 @@ export default function Page() {
       return matchesRole || matchesProduct;
     });
   }, [feed, roleSet, channelSet, sourceSet]);
+
+  // If the primary list is too thin, broaden by relaxing the source toggle:
+  // pull additional items from *any* source as long as they match the
+  // selected roles/channels. This is the "get more content based on the new
+  // filters" fallback. Items already in `primary` are skipped.
+  const filtered = useMemo(() => {
+    if (!feed || primary.length >= MIN_RESULTS) return primary;
+    const seen = new Set(primary.map((a) => a.id));
+    const extras: ScoredArticle[] = [];
+    for (const a of feed.articles) {
+      if (seen.has(a.id)) continue;
+      // Skip purely untagged general news in the broaden pass — we already
+      // matched those above where the source filter let them through.
+      if (a.roles.length === 0 && a.products.length === 0) continue;
+      const matchesRole = a.roles.some((r) => roleSet.has(r));
+      const matchesProduct = a.products.some((p) => channelSet.has(p));
+      if (matchesRole || matchesProduct) extras.push(a);
+    }
+    return [...primary, ...extras];
+  }, [feed, primary, roleSet, channelSet]);
+
+  const broadened = filtered.length > primary.length;
 
   const sourceCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -259,12 +284,17 @@ export default function Page() {
             ) : (
               <>
                 {!selected ? (
-                  <div className="mb-3 flex flex-wrap gap-3 font-retro text-base text-ink/60">
+                  <div className="mb-3 flex flex-wrap items-center gap-3 font-retro text-base text-ink/60">
                     {ALL_SOURCES.filter((s) => sourceCounts[s]).map((s) => (
                       <span key={s}>
                         {SOURCE_LABELS[s]}: {sourceCounts[s]}
                       </span>
                     ))}
+                    {broadened ? (
+                      <span className="ml-auto rounded-none border-2 border-ink bg-coin px-2 py-0.5 font-pixel text-[9px] uppercase text-ink">
+                        + broadened (ignoring source toggles)
+                      </span>
+                    ) : null}
                   </div>
                 ) : null}
                 <div className="space-y-3">
