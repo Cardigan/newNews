@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { ArticleCard } from './components/ArticleCard';
 import { ChannelToggles } from './components/ChannelToggles';
 import { ReaderPane } from './components/ReaderPane';
+import { PixelLogo } from './components/PixelLogo';
 import {
   ALL_PRODUCTS,
   ROLES,
@@ -14,6 +15,13 @@ import {
   type ScoredArticle,
   type SourceId,
 } from '@/lib/curation/types';
+import {
+  isSoundEnabled,
+  loadSoundPref,
+  playClose,
+  playTick,
+  setSoundEnabled,
+} from '@/lib/sounds';
 
 const STORAGE_KEY = 'newnews:prefs:v3';
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
@@ -56,9 +64,11 @@ export default function Page() {
   const [feed, setFeed] = useState<FeedFile | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [selected, setSelected] = useState<ScoredArticle | null>(null);
+  const [soundOn, setSoundOn] = useState(false);
 
   useEffect(() => {
     setPrefs(loadPrefs());
+    setSoundOn(loadSoundPref());
     setHydrated(true);
   }, []);
 
@@ -84,8 +94,6 @@ export default function Page() {
     if (!feed) return [];
     return feed.articles.filter((a) => {
       if (!sourceSet.has(a.source)) return false;
-      // Untagged general news always passes. Tagged items must match at
-      // least one selected role OR product channel.
       if (a.roles.length === 0 && a.products.length === 0) return true;
       const matchesRole = a.roles.some((r) => roleSet.has(r));
       const matchesProduct = a.products.some((p) => channelSet.has(p));
@@ -99,6 +107,18 @@ export default function Page() {
     return counts;
   }, [filtered]);
 
+  const toggleSound = () => {
+    const next = !isSoundEnabled();
+    setSoundEnabled(next);
+    setSoundOn(next);
+    if (next) playTick();
+  };
+
+  const handleClose = () => {
+    playClose();
+    setSelected(null);
+  };
+
   return (
     <div className={selected ? 'flex h-screen flex-col' : ''}>
       <main
@@ -110,23 +130,38 @@ export default function Page() {
       >
         <section className={selected ? 'flex min-h-0 flex-col overflow-hidden' : ''}>
           <header className={selected ? 'mb-3 space-y-3' : 'mb-6 space-y-4'}>
-            <div className="flex items-baseline justify-between gap-2">
-              <h1 className="text-2xl font-bold tracking-tight">
-                newNews{' '}
-                <span className="text-sm font-normal text-neutral-500">
-                  curated team feed
-                </span>
-              </h1>
-              {feed ? (
-                <span className="text-xs text-neutral-500">
-                  {filtered.length}/{feed.count} · updated{' '}
-                  {new Date(feed.generatedAt).toLocaleString()}
-                </span>
-              ) : null}
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <PixelLogo size={selected ? 40 : 56} />
+                <div>
+                  <h1 className="pixel-h1 text-mario">
+                    new<span className="text-sky">News</span>
+                  </h1>
+                  <span className="font-retro text-base text-ink/60">
+                    curated team feed
+                  </span>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                {feed ? (
+                  <span className="hidden font-retro text-base text-ink/60 sm:inline">
+                    {filtered.length}/{feed.count} · {' '}
+                    {new Date(feed.generatedAt).toLocaleString()}
+                  </span>
+                ) : null}
+                <button
+                  onClick={toggleSound}
+                  className="nes-btn"
+                  title={soundOn ? 'Mute sounds' : 'Enable 8-bit sounds'}
+                  aria-label={soundOn ? 'Mute sounds' : 'Enable sounds'}
+                >
+                  {soundOn ? '♪ ON' : '♪ OFF'}
+                </button>
+              </div>
             </div>
 
             {!selected ? (
-              <div className="space-y-3 rounded-lg border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+              <div className="nes-card space-y-3 p-4">
                 <ChannelToggles
                   selectedRoles={roleSet}
                   selectedChannels={channelSet}
@@ -159,29 +194,24 @@ export default function Page() {
                 />
 
                 <div>
-                  <div className="mb-2 text-xs uppercase tracking-wide text-neutral-500">
-                    Sources
-                  </div>
+                  <div className="pixel-label mb-2 text-ink/70">Sources</div>
                   <div className="flex flex-wrap gap-1.5">
                     {ALL_SOURCES.map((s) => {
                       const active = sourceSet.has(s);
                       return (
                         <button
                           key={s}
-                          onClick={() =>
+                          onClick={() => {
+                            playTick();
                             setPrefs((p) => ({
                               ...p,
                               sources: p.sources.includes(s)
                                 ? p.sources.filter((x) => x !== s)
                                 : [...p.sources, s],
-                            }))
-                          }
-                          className={[
-                            'rounded-md border px-2 py-1 text-xs transition',
-                            active
-                              ? 'border-blue-500 bg-blue-50 text-blue-800 dark:bg-blue-950 dark:text-blue-200'
-                              : 'border-neutral-300 bg-white text-neutral-700 hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800',
-                          ].join(' ')}
+                            }));
+                          }}
+                          data-pressed={active}
+                          className={`nes-btn ${active ? 'nes-btn--warn' : ''}`}
                         >
                           {SOURCE_LABELS[s]}
                         </button>
@@ -190,7 +220,7 @@ export default function Page() {
                   </div>
                 </div>
 
-                <label className="flex cursor-pointer items-center gap-2 text-xs text-neutral-600 dark:text-neutral-400">
+                <label className="flex cursor-pointer items-center gap-2 font-retro text-base text-ink/70">
                   <input
                     type="checkbox"
                     checked={prefs.showDebug}
@@ -210,24 +240,28 @@ export default function Page() {
             }
           >
             {error ? (
-              <div className="rounded border border-red-300 bg-red-50 p-4 text-sm text-red-800">
+              <div className="nes-card border-mario bg-mario/10 p-4 font-retro text-base text-ink">
+                <span className="font-pixel text-[10px] uppercase text-mario">✗ Error.</span>{' '}
                 Failed to load feed: {error}. The feed may not have been
-                generated yet — run <code>npm run fetch-feed</code> locally or
-                wait for the next GitHub Actions run.
+                generated yet — run <code className="font-pixel text-[10px]">npm run fetch-feed</code> locally
+                or wait for the next GitHub Actions run.
               </div>
             ) : !feed ? (
-              <div className="text-sm text-neutral-500">Loading feed…</div>
+              <div className="flex items-center gap-3 font-retro text-base text-ink/70">
+                <span className="pixel-spinner" />
+                Loading feed…
+              </div>
             ) : filtered.length === 0 ? (
-              <div className="rounded border border-neutral-200 bg-white p-6 text-center text-sm text-neutral-500 dark:border-neutral-800 dark:bg-neutral-900">
+              <div className="nes-card p-6 text-center font-retro text-base text-ink/70">
                 No articles match your current filters. Try selecting more
                 channels, a different role, or enabling more sources.
               </div>
             ) : (
               <>
                 {!selected ? (
-                  <div className="mb-3 text-xs text-neutral-500">
+                  <div className="mb-3 flex flex-wrap gap-3 font-retro text-base text-ink/60">
                     {ALL_SOURCES.filter((s) => sourceCounts[s]).map((s) => (
-                      <span key={s} className="mr-3">
+                      <span key={s}>
                         {SOURCE_LABELS[s]}: {sourceCounts[s]}
                       </span>
                     ))}
@@ -251,22 +285,23 @@ export default function Page() {
 
         {selected ? (
           <section className="hidden min-h-0 lg:block">
-            <ReaderPane article={selected} onClose={() => setSelected(null)} />
+            <ReaderPane article={selected} onClose={handleClose} />
           </section>
         ) : null}
 
-        {/* Mobile: full-screen overlay reader */}
         {selected ? (
-          <div className="fixed inset-0 z-50 bg-white p-2 lg:hidden dark:bg-neutral-950">
-            <ReaderPane article={selected} onClose={() => setSelected(null)} />
+          <div className="fixed inset-0 z-50 bg-cream p-2 lg:hidden">
+            <ReaderPane article={selected} onClose={handleClose} />
           </div>
         ) : null}
       </main>
 
       {!selected ? (
-        <footer className="mx-auto mt-10 max-w-4xl px-4 pb-6 text-center text-xs text-neutral-400">
-          Sources: BBC · Guardian · Hacker News · Reddit. Public news only — no
-          Microsoft-confidential content.
+        <footer className="mx-auto mt-10 max-w-4xl px-4 pb-6 text-center font-retro text-base text-ink/50">
+          ★ Sources: BBC · NYT · Guardian · Hacker News · Reddit ★
+          <div className="mt-1 font-pixel text-[8px] uppercase tracking-wider">
+            Public news only — no Microsoft-confidential content
+          </div>
         </footer>
       ) : null}
     </div>

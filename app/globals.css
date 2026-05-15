@@ -4,14 +4,148 @@
 
 :root {
   color-scheme: light dark;
+  --nes-ink: #2d2d44;
+  --nes-cream: #fff8e7;
+  --nes-shadow: #1a1a2e;
 }
 
 html, body {
-  @apply bg-neutral-50 text-neutral-900 antialiased;
+  @apply bg-cream text-ink antialiased;
+  font-family: 'VT323', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 18px;
+  line-height: 1.35;
 }
 
 @media (prefers-color-scheme: dark) {
   html, body {
-    @apply bg-neutral-950 text-neutral-100;
+    background-color: #1a1a2e;
+    color: #fff8e7;
   }
+}
+
+/* Make every raster image render as crisp pixels (matches the aesthetic). */
+img, svg {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+}
+
+/* ---------- Pixel-art utilities ---------- */
+
+/* NES-style chunky button: hard 2px ink border with a hard drop shadow,
+   no rounded corners, no smooth transitions. Press-down on click. */
+.nes-btn {
+  @apply inline-flex items-center justify-center px-3 py-1 font-pixel text-[10px] uppercase tracking-wider;
+  border: 2px solid var(--nes-ink);
+  background: #fff;
+  color: var(--nes-ink);
+  box-shadow: 3px 3px 0 0 var(--nes-ink);
+  transition: transform 80ms steps(2), box-shadow 80ms steps(2), background-color 80ms steps(2);
+  border-radius: 0;
+  cursor: pointer;
+}
+.nes-btn:hover { background: #ffe9b3; }
+.nes-btn:active,
+.nes-btn[data-pressed='true'] {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 0 var(--nes-ink);
+}
+
+/* Variants */
+.nes-btn--primary { background: #5c94fc; color: #fff; }
+.nes-btn--primary:hover { background: #4a7fe0; }
+.nes-btn--success { background: #43b047; color: #fff; }
+.nes-btn--success:hover { background: #379239; }
+.nes-btn--warn { background: #fbd000; color: #2d2d44; }
+.nes-btn--danger { background: #e52521; color: #fff; }
+.nes-btn--danger:hover { background: #c21f1c; }
+
+/* Chunky pixel card (no border-radius, hard shadow). */
+.nes-card {
+  background: #fff;
+  border: 3px solid var(--nes-ink);
+  box-shadow: 4px 4px 0 0 var(--nes-ink);
+  border-radius: 0;
+}
+
+/* Source badges: chunky pixel chips in font-pixel. */
+.nes-chip {
+  @apply inline-flex items-center px-1.5 py-0.5 font-pixel text-[9px] uppercase;
+  border: 2px solid var(--nes-ink);
+  border-radius: 0;
+  letter-spacing: 0.05em;
+}
+
+/* Pixel tag (smaller, thinner border). */
+.nes-tag {
+  @apply inline-flex items-center px-1.5 py-0.5 font-pixel text-[8px] uppercase;
+  border: 2px solid var(--nes-ink);
+  border-radius: 0;
+  letter-spacing: 0.05em;
+}
+
+/* ---------- Animated pixel logo ---------- */
+
+.pixel-logo {
+  position: relative;
+}
+
+/* Constant 2px bob, stepped so it looks pixel-y, never smooth. */
+.pixel-logo__bob {
+  animation: pixel-bob 0.9s steps(3) infinite alternate;
+  transform-origin: 50% 100%;
+}
+
+@keyframes pixel-bob {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-3px); }
+}
+
+/* Two-frame blink: frame B (eyes closed) is hidden 95% of the time. */
+.pixel-logo__frameA { opacity: 1; }
+.pixel-logo__frameB {
+  opacity: 0;
+  animation: pixel-blink 4.2s steps(1) infinite;
+}
+.pixel-logo__frameA {
+  animation: pixel-blink-inv 4.2s steps(1) infinite;
+}
+
+@keyframes pixel-blink {
+  0%, 92%, 100% { opacity: 0; }
+  93%, 96%      { opacity: 1; }
+}
+@keyframes pixel-blink-inv {
+  0%, 92%, 100% { opacity: 1; }
+  93%, 96%      { opacity: 0; }
+}
+
+/* Scanline-free static for loading state. */
+.pixel-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background:
+    linear-gradient(#5c94fc 50%, transparent 0) 0 0/8px 8px,
+    linear-gradient(#5c94fc 50%, transparent 0) 8px 8px/8px 8px;
+  animation: pixel-spin 0.5s steps(2) infinite;
+}
+@keyframes pixel-spin {
+  0%   { background-position: 0 0, 8px 8px; }
+  100% { background-position: 8px 0, 0 8px; }
+}
+
+/* Headings should use the pixel font but be readable. */
+.pixel-h1 { @apply font-pixel; font-size: 18px; line-height: 1.4; }
+.pixel-h2 { @apply font-pixel; font-size: 12px; line-height: 1.4; }
+.pixel-label { @apply font-pixel uppercase; font-size: 9px; letter-spacing: 0.1em; }
+
+/* Reduce motion respect: stop the bob and blink for users who ask. */
+@media (prefers-reduced-motion: reduce) {
+  .pixel-logo__bob,
+  .pixel-logo__frameA,
+  .pixel-logo__frameB,
+  .pixel-spinner {
+    animation: none !important;
+  }
+  .nes-btn { transition: none; }
 }
