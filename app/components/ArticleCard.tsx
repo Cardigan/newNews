@@ -15,6 +15,7 @@ const SOURCE_CLASSES: Record<string, string> = {
   guardian: 'bg-guardian text-white',
   hn: 'bg-hn text-white',
   reddit: 'bg-reddit text-white',
+  custom: 'bg-luigi text-white',
 };
 
 function timeAgo(iso: string): string {

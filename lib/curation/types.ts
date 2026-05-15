@@ -50,7 +50,7 @@ export const ALL_PRODUCTS: ProductChannel[] = Object.keys(
   PRODUCT_LABELS,
 ) as ProductChannel[];
 
-export type SourceId = 'bbc' | 'nyt' | 'guardian' | 'hn' | 'reddit';
+export type SourceId = 'bbc' | 'nyt' | 'guardian' | 'hn' | 'reddit' | 'custom';
 
 export const SOURCE_LABELS: Record<SourceId, string> = {
   bbc: 'BBC',
@@ -58,6 +58,7 @@ export const SOURCE_LABELS: Record<SourceId, string> = {
   guardian: 'Guardian',
   hn: 'Hacker News',
   reddit: 'Reddit',
+  custom: 'Custom',
 };
 
 export interface RawArticle {
