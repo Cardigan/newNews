@@ -18,7 +18,7 @@ import {
 const STORAGE_KEY = 'newnews:prefs:v3';
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
-const ALL_SOURCES: SourceId[] = ['bbc', 'guardian', 'hn', 'reddit'];
+const ALL_SOURCES: SourceId[] = ['bbc', 'nyt', 'guardian', 'hn', 'reddit'];
 
 interface Prefs {
   roles: Role[];
