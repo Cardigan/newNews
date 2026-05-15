@@ -100,23 +100,23 @@ img, svg {
   100% { transform: translateY(-3px); }
 }
 
-/* Two-frame blink: frame B (eyes closed) is hidden 95% of the time. */
-.pixel-logo__frameA { opacity: 1; }
+/* Two-frame leg scuttle: alternate A and B every ~0.25s for a constant
+   wiggle. Combined with the bob it looks like the spider is creeping. */
+.pixel-logo__frameA {
+  animation: pixel-scuttle-a 0.45s steps(1) infinite;
+}
 .pixel-logo__frameB {
   opacity: 0;
-  animation: pixel-blink 4.2s steps(1) infinite;
-}
-.pixel-logo__frameA {
-  animation: pixel-blink-inv 4.2s steps(1) infinite;
+  animation: pixel-scuttle-b 0.45s steps(1) infinite;
 }
 
-@keyframes pixel-blink {
-  0%, 92%, 100% { opacity: 0; }
-  93%, 96%      { opacity: 1; }
+@keyframes pixel-scuttle-a {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0; }
 }
-@keyframes pixel-blink-inv {
-  0%, 92%, 100% { opacity: 1; }
-  93%, 96%      { opacity: 0; }
+@keyframes pixel-scuttle-b {
+  0%, 49%   { opacity: 0; }
+  50%, 100% { opacity: 1; }
 }
 
 /* Scanline-free static for loading state. */
@@ -135,9 +135,16 @@ img, svg {
 }
 
 /* Headings should use the pixel font but be readable. */
-.pixel-h1 { @apply font-pixel; font-size: 18px; line-height: 1.4; }
+.pixel-h1 { @apply font-pixel; font-size: 36px; line-height: 1.2; letter-spacing: -0.02em; }
 .pixel-h2 { @apply font-pixel; font-size: 12px; line-height: 1.4; }
 .pixel-label { @apply font-pixel uppercase; font-size: 9px; letter-spacing: 0.1em; }
+
+/* Smaller variant for when the reader pane is open and space is tight. */
+.pixel-h1--sm { font-size: 22px; }
+
+@media (min-width: 640px) {
+  .pixel-h1 { font-size: 44px; }
+}
 
 /* Reduce motion respect: stop the bob and blink for users who ask. */
 @media (prefers-reduced-motion: reduce) {

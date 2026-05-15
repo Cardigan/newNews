@@ -131,10 +131,10 @@ export default function Page() {
         <section className={selected ? 'flex min-h-0 flex-col overflow-hidden' : ''}>
           <header className={selected ? 'mb-3 space-y-3' : 'mb-6 space-y-4'}>
             <div className="flex items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <PixelLogo size={selected ? 40 : 56} />
+              <div className="flex items-center gap-4">
+                <PixelLogo size={selected ? 56 : 88} />
                 <div>
-                  <h1 className="pixel-h1 text-mario">
+                  <h1 className={`pixel-h1 text-mario ${selected ? 'pixel-h1--sm' : ''}`}>
                     new<span className="text-sky">News</span>
                   </h1>
                   <span className="font-retro text-base text-ink/60">
