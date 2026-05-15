@@ -2,10 +2,11 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { SOURCE_LABELS, type ScoredArticle } from '@/lib/curation/types';
+import { playClose } from '@/lib/sounds';
 
 const SOURCE_CLASSES: Record<string, string> = {
   bbc: 'bg-bbc text-white',
-  nyt: 'bg-black text-white',
+  nyt: 'bg-shadow text-white',
   guardian: 'bg-guardian text-white',
   hn: 'bg-hn text-white',
   reddit: 'bg-reddit text-white',
@@ -20,11 +21,6 @@ export function ReaderPane({
   article: ScoredArticle;
   onClose: () => void;
 }) {
-  // Browsers don't expose X-Frame-Options / CSP / "refused to connect"
-  // failures to JS, AND iframe.onload often fires for the browser's own
-  // error page — so we can't reliably detect a blocked frame. Instead we
-  // *always* show a small explanatory banner above the iframe, and let
-  // the user dismiss it persistently if they don't need it.
   const [hintHidden, setHintHidden] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
@@ -34,14 +30,21 @@ export function ReaderPane({
     }
   }, []);
 
-  // Close on Escape.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') {
+        playClose();
+        onClose();
+      }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [onClose]);
+
+  const handleClose = () => {
+    playClose();
+    onClose();
+  };
 
   const dismissHint = () => {
     setHintHidden(true);
@@ -51,51 +54,56 @@ export function ReaderPane({
   };
 
   return (
-    <aside className="flex h-full flex-col overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-lg dark:border-neutral-800 dark:bg-neutral-900">
-      <header className="flex items-start gap-2 border-b border-neutral-200 p-3 dark:border-neutral-800">
+    <aside className="nes-card flex h-full flex-col overflow-hidden">
+      <header className="flex items-start gap-2 border-b-2 border-ink bg-cream p-2">
         <span
-          className={`shrink-0 rounded px-1.5 py-0.5 text-[11px] font-semibold ${
-            SOURCE_CLASSES[article.source] ?? 'bg-neutral-700 text-white'
+          className={`nes-chip shrink-0 ${
+            SOURCE_CLASSES[article.source] ?? 'bg-shadow text-white'
           }`}
         >
           {SOURCE_LABELS[article.source]}
           {article.subSource ? ` · ${article.subSource}` : ''}
         </span>
-        <h2 className="min-w-0 flex-1 truncate text-sm font-semibold" title={article.title}>
+        <h2
+          className="min-w-0 flex-1 truncate font-retro text-lg text-ink"
+          title={article.title}
+        >
           {article.title}
         </h2>
         <a
           href={article.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="shrink-0 rounded border border-neutral-300 px-2 py-0.5 text-xs text-neutral-700 hover:bg-neutral-100 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800"
+          className="nes-btn nes-btn--primary shrink-0"
           title="Open in new tab"
         >
           ↗
         </a>
         <button
-          onClick={onClose}
+          onClick={handleClose}
           aria-label="Close reader"
-          className="shrink-0 rounded border border-neutral-300 px-2 py-0.5 text-xs text-neutral-700 hover:bg-neutral-100 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800"
+          className="nes-btn nes-btn--danger shrink-0"
         >
           ✕
         </button>
       </header>
 
       {!hintHidden ? (
-        <div className="border-b border-amber-300 bg-amber-50 px-4 py-3 text-base leading-relaxed text-amber-900 dark:border-amber-700 dark:bg-amber-950 dark:text-amber-200">
+        <div className="border-b-2 border-ink bg-coin px-4 py-3 font-retro text-base leading-relaxed text-ink">
           <div className="flex items-start gap-3">
             <div className="flex-1">
-              <span className="font-semibold">Seeing a sad-face &ldquo;refused to connect&rdquo;? You&rsquo;re not crazy.</span>{' '}
-              Most newsrooms (BBC, NYT, Guardian, GitHub, etc.) refuse to be
-              embedded in an iframe — and corporate networks often block Reddit
-              outright. This page can&rsquo;t tell the difference; it just gets
-              a blank frame.{' '}
+              <span className="font-pixel text-[10px] uppercase">⚠ Heads up.</span>{' '}
+              Seeing a sad-face &ldquo;refused to connect&rdquo;? You&rsquo;re not
+              crazy. Most newsrooms (BBC, NYT, Guardian, GitHub, etc.) refuse
+              to be embedded in an iframe — and corporate networks often block
+              Reddit outright. This page can&rsquo;t tell the difference; it
+              just gets a blank frame. Known offenders now open in a new tab
+              automatically; for the rest,{' '}
               <a
                 href={article.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold underline"
+                className="font-pixel text-[10px] uppercase underline decoration-2"
               >
                 Open in a new tab ↗
               </a>{' '}
@@ -104,7 +112,7 @@ export function ReaderPane({
             <button
               onClick={dismissHint}
               aria-label="Dismiss"
-              className="shrink-0 rounded px-1 text-amber-900/70 hover:bg-amber-100 dark:text-amber-200/70 dark:hover:bg-amber-900"
+              className="nes-btn shrink-0"
               title="Don't show this again"
             >
               ✕
@@ -113,7 +121,7 @@ export function ReaderPane({
         </div>
       ) : null}
 
-      <div className="relative flex-1 bg-neutral-50 dark:bg-neutral-950">
+      <div className="relative flex-1 bg-cream">
         <iframe
           ref={iframeRef}
           key={article.url}
@@ -127,3 +135,4 @@ export function ReaderPane({
     </aside>
   );
 }
+
