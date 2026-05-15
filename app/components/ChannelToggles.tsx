@@ -29,18 +29,18 @@ export function ChannelToggles({
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <span className="pixel-label text-ink/70">Filters</span>
-        <span className="space-x-2">
+        <span className="flex items-center gap-2">
           <button
             onClick={() => { playTick(); onAll(); }}
-            className="font-pixel text-[9px] uppercase text-ink/70 hover:text-luigi"
+            className="nes-btn nes-btn--success"
           >
-            all
+            All
           </button>
           <button
             onClick={() => { playTick(); onNone(); }}
-            className="font-pixel text-[9px] uppercase text-ink/70 hover:text-mario"
+            className="nes-btn"
           >
-            none
+            None
           </button>
         </span>
       </div>
