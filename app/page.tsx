@@ -36,8 +36,8 @@ interface Prefs {
 }
 
 const DEFAULT_PREFS: Prefs = {
-  roles: [...ROLES],
-  channels: [...ALL_PRODUCTS],
+  roles: [],
+  channels: [],
   sources: [...ALL_SOURCES],
   showDebug: false,
 };
@@ -91,10 +91,25 @@ export default function Page() {
   const sourceSet = useMemo(() => new Set(prefs.sources), [prefs.sources]);
 
   const MIN_RESULTS = 10;
+  const noChannelOrRole = roleSet.size === 0 && channelSet.size === 0;
 
   // Primary pass: respects all three filters (sources + roles + channels).
+  // Special case: when nothing is selected in roles/channels, just show the
+  // top story from each enabled source (a quick at-a-glance front page).
   const primary = useMemo(() => {
     if (!feed) return [];
+    if (noChannelOrRole) {
+      const top = new Map<string, ScoredArticle>();
+      for (const a of feed.articles) {
+        if (!sourceSet.has(a.source)) continue;
+        const cur = top.get(a.source);
+        if (!cur || a.score > cur.score) top.set(a.source, a);
+      }
+      // Preserve the canonical source order in ALL_SOURCES.
+      return ALL_SOURCES.map((s) => top.get(s)).filter(
+        (a): a is ScoredArticle => Boolean(a),
+      );
+    }
     return feed.articles.filter((a) => {
       if (!sourceSet.has(a.source)) return false;
       if (a.roles.length === 0 && a.products.length === 0) return true;
@@ -102,14 +117,15 @@ export default function Page() {
       const matchesProduct = a.products.some((p) => channelSet.has(p));
       return matchesRole || matchesProduct;
     });
-  }, [feed, roleSet, channelSet, sourceSet]);
+  }, [feed, roleSet, channelSet, sourceSet, noChannelOrRole]);
 
   // If the primary list is too thin, broaden by relaxing the source toggle:
   // pull additional items from *any* source as long as they match the
   // selected roles/channels. This is the "get more content based on the new
   // filters" fallback. Items already in `primary` are skipped.
+  // Skipped entirely in the "top story per source" mode.
   const filtered = useMemo(() => {
-    if (!feed || primary.length >= MIN_RESULTS) return primary;
+    if (!feed || noChannelOrRole || primary.length >= MIN_RESULTS) return primary;
     const seen = new Set(primary.map((a) => a.id));
     const extras: ScoredArticle[] = [];
     for (const a of feed.articles) {
@@ -122,7 +138,7 @@ export default function Page() {
       if (matchesRole || matchesProduct) extras.push(a);
     }
     return [...primary, ...extras];
-  }, [feed, primary, roleSet, channelSet]);
+  }, [feed, primary, roleSet, channelSet, noChannelOrRole]);
 
   const broadened = filtered.length > primary.length;
 
