@@ -57,6 +57,37 @@ async function fetchBbc(): Promise<RawArticle[]> {
   return results;
 }
 
+// ---------- NYT ----------
+const NYT_FEEDS = [
+  { name: 'tech', url: 'https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml' },
+  { name: 'business', url: 'https://rss.nytimes.com/services/xml/rss/nyt/Business.xml' },
+  { name: 'home', url: 'https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml' },
+];
+
+async function fetchNyt(): Promise<RawArticle[]> {
+  const results: RawArticle[] = [];
+  for (const feed of NYT_FEEDS) {
+    try {
+      const parsed = await rss.parseURL(feed.url);
+      for (const item of parsed.items) {
+        if (!item.link || !item.title) continue;
+        results.push({
+          id: hashId('nyt', item.link),
+          source: 'nyt',
+          subSource: feed.name,
+          title: item.title,
+          url: item.link,
+          summary: item.contentSnippet ?? item.content ?? '',
+          publishedAt: item.isoDate ?? new Date().toISOString(),
+        });
+      }
+    } catch (err) {
+      console.warn(`[nyt:${feed.name}] failed:`, (err as Error).message);
+    }
+  }
+  return results;
+}
+
 // ---------- Guardian ----------
 interface GuardianResponse {
   response: {
@@ -250,14 +281,15 @@ async function fetchReddit(): Promise<RawArticle[]> {
 
 // ---------- Orchestration ----------
 export async function fetchAll(): Promise<RawArticle[]> {
-  const [bbc, guardian, hn, reddit] = await Promise.all([
+  const [bbc, nyt, guardian, hn, reddit] = await Promise.all([
     fetchBbc(),
+    fetchNyt(),
     fetchGuardian(),
     fetchHn(),
     fetchReddit(),
   ]);
   console.log(
-    `[fetch] bbc=${bbc.length} guardian=${guardian.length} hn=${hn.length} reddit=${reddit.length}`,
+    `[fetch] bbc=${bbc.length} nyt=${nyt.length} guardian=${guardian.length} hn=${hn.length} reddit=${reddit.length}`,
   );
-  return [...bbc, ...guardian, ...hn, ...reddit];
+  return [...bbc, ...nyt, ...guardian, ...hn, ...reddit];
 }

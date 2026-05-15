@@ -9,6 +9,7 @@ import {
 
 const SOURCE_CLASSES: Record<string, string> = {
   bbc: 'bg-bbc text-white',
+  nyt: 'bg-black text-white',
   guardian: 'bg-guardian text-white',
   hn: 'bg-hn text-white',
   reddit: 'bg-reddit text-white',

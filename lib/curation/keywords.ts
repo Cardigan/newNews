@@ -398,6 +398,7 @@ export const NOISE_KEYWORDS: string[] = [
 // Source-quality bonus (added once per article).
 export const SOURCE_QUALITY: Record<string, number> = {
   bbc: 2,
+  nyt: 2,
   guardian: 2,
   hn: 1,
   reddit: 0,
