@@ -11,8 +11,9 @@ let enabled = false;
 const STORAGE_KEY = 'newnews:sound';
 
 export function loadSoundPref(): boolean {
-  if (typeof window === 'undefined') return false;
-  enabled = window.localStorage.getItem(STORAGE_KEY) === '1';
+  if (typeof window === 'undefined') return true;
+  // Default ON: only treat as muted if the user explicitly turned it off.
+  enabled = window.localStorage.getItem(STORAGE_KEY) !== '0';
   return enabled;
 }
 
