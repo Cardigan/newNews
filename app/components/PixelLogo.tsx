@@ -1,97 +1,87 @@
 'use client';
 
-// 16x16 pixel-art mascot: a tiny rolled-up newspaper with eyes. Two frames
-// for blinking + a constant 2px bob. All animation is pure CSS so it keeps
-// going forever with zero JS cost.
-//
-// Each rect is one "pixel" at 6px on screen (96px sprite). image-rendering
-// pixelated keeps it crisp on hi-dpi.
+// 16x16 pixel-art spider mascot. Body in the middle, 4 legs per side, two
+// frames where the leg tips wiggle so it looks like it's scuttling. Pure
+// CSS animation alternates the frames + adds a 2px bob.
 
-const INK = '#2d2d44';
-const PAPER = '#fff8e7';
-const SHADOW = '#c8b88a';
-const RED = '#e52521';
-const SKY = '#5c94fc';
-const BLACK = '#1a1a2e';
+const BODY = '#5c2da8';      // purple body
+const BODY_HI = '#a36bf0';   // highlight
+const LEG = '#2d2d44';       // ink
+const EYE_W = '#fff8e7';     // cream
 
-// Pixel grid for frame A (eyes open).
-// Each character maps to a color. ' ' = transparent.
-//   . = ink outline
-//   p = paper (cream)
-//   s = shadow
-//   r = red banner
-//   o = open eye (white pupil with black dot, simplified to two cells)
-const FRAME_A = [
-  '   ........     ',
-  '  .pppppppp.    ',
-  ' .prrrrrrrp.    ',
-  ' .pppppppppp.   ',
-  ' .pp.pp.pp.p.   ',
-  ' .pppppppppp.   ',
-  ' .p.WBp.WBp.s.  ',
-  ' .ppppppppps.   ',
-  ' .pp.pp.pp.s.   ',
-  ' .pppppppps.    ',
-  '  .ppppppps.    ',
-  '   .ppppps.     ',
-  '    .pppps.     ',
-  '     .pps.      ',
-  '      ..        ',
-  '                ',
+type P = [number, number];
+
+// Filled oval body, rows 6-10, cols 5-10 (with rounded top/bottom).
+const BODY_PIXELS: P[] = [
+  [6, 6], [7, 6], [8, 6], [9, 6],
+  [5, 7], [6, 7], [7, 7], [8, 7], [9, 7], [10, 7],
+  [5, 8], [6, 8], [7, 8], [8, 8], [9, 8], [10, 8],
+  [5, 9], [6, 9], [7, 9], [8, 9], [9, 9], [10, 9],
+  [6, 10], [7, 10], [8, 10], [9, 10],
 ];
 
-const FRAME_B = [
-  '   ........     ',
-  '  .pppppppp.    ',
-  ' .prrrrrrrp.    ',
-  ' .pppppppppp.   ',
-  ' .pp.pp.pp.p.   ',
-  ' .pppppppppp.   ',
-  ' .p.--p.--p.s.  ',
-  ' .ppppppppps.   ',
-  ' .pp.pp.pp.s.   ',
-  ' .pppppppps.    ',
-  '  .ppppppps.    ',
-  '   .ppppps.     ',
-  '    .pppps.     ',
-  '     .pps.      ',
-  '      ..        ',
-  '                ',
+// Tiny highlight + spinneret to give the body a bit of shape.
+const HIGHLIGHT_PIXELS: P[] = [
+  [6, 7], [7, 6],
 ];
 
-const COLOR: Record<string, string> = {
-  '.': INK,
-  p: PAPER,
-  s: SHADOW,
-  r: RED,
-  W: '#ffffff',
-  B: BLACK,
-  '-': INK,
-};
+// Two cream-colored eyes.
+const EYES_W: P[] = [
+  [6, 8], [9, 8],
+];
 
-function renderFrame(rows: string[]) {
+// 8 legs, each a sequence of pixels from inner segment out to the tip.
+// LEGS_A is the "rest" pose, LEGS_B is the "wiggle" pose — outer tips
+// move 1-2 pixels perpendicular to give a scuttle effect.
+const LEGS_A: P[][] = [
+  // Left
+  [[4, 5], [3, 4], [2, 3]],          // L1 top diagonal
+  [[4, 7], [3, 7], [2, 7], [1, 7]],  // L2 horizontal upper
+  [[4, 9], [3, 9], [2, 9], [1, 9]],  // L3 horizontal lower
+  [[4, 11], [3, 12], [2, 13]],       // L4 bottom diagonal
+  // Right (mirror)
+  [[11, 5], [12, 4], [13, 3]],
+  [[11, 7], [12, 7], [13, 7], [14, 7]],
+  [[11, 9], [12, 9], [13, 9], [14, 9]],
+  [[11, 11], [12, 12], [13, 13]],
+];
+
+const LEGS_B: P[][] = [
+  [[4, 5], [3, 4], [2, 2]],          // L1 tip up
+  [[4, 6], [3, 6], [2, 6], [1, 6]],  // L2 raised
+  [[4, 10], [3, 10], [2, 10], [1, 10]], // L3 lowered
+  [[4, 11], [3, 12], [2, 14]],       // L4 tip down
+  [[11, 5], [12, 4], [13, 2]],
+  [[11, 6], [12, 6], [13, 6], [14, 6]],
+  [[11, 10], [12, 10], [13, 10], [14, 10]],
+  [[11, 11], [12, 12], [13, 14]],
+];
+
+function rect(x: number, y: number, fill: string, key: string) {
+  return <rect key={key} x={x} y={y} width={1} height={1} fill={fill} />;
+}
+
+function renderFrame(legs: P[][], suffix: string) {
   const cells: JSX.Element[] = [];
-  rows.forEach((row, y) => {
-    for (let x = 0; x < row.length; x++) {
-      const ch = row[x];
-      const fill = COLOR[ch];
-      if (!fill) continue;
-      cells.push(
-        <rect
-          key={`${x}-${y}`}
-          x={x}
-          y={y}
-          width={1}
-          height={1}
-          fill={fill}
-        />,
-      );
-    }
+  // Legs first so the body/eyes draw over the inner attach pixels.
+  legs.forEach((leg, li) => {
+    leg.forEach(([x, y], pi) => {
+      cells.push(rect(x, y, LEG, `l-${li}-${pi}-${suffix}`));
+    });
   });
+  BODY_PIXELS.forEach(([x, y]) =>
+    cells.push(rect(x, y, BODY, `b-${x}-${y}-${suffix}`)),
+  );
+  HIGHLIGHT_PIXELS.forEach(([x, y]) =>
+    cells.push(rect(x, y, BODY_HI, `h-${x}-${y}-${suffix}`)),
+  );
+  EYES_W.forEach(([x, y]) =>
+    cells.push(rect(x, y, EYE_W, `e-${x}-${y}-${suffix}`)),
+  );
   return cells;
 }
 
-export function PixelLogo({ size = 64 }: { size?: number }) {
+export function PixelLogo({ size = 96 }: { size?: number }) {
   return (
     <span
       className="pixel-logo inline-block align-middle"
@@ -106,12 +96,11 @@ export function PixelLogo({ size = 64 }: { size?: number }) {
           shapeRendering="crispEdges"
           style={{ imageRendering: 'pixelated' as const, display: 'block' }}
         >
-          {/* sky chip behind the news icon */}
-          <rect x={0} y={0} width={16} height={16} fill={SKY} opacity={0.0} />
-          <g className="pixel-logo__frameA">{renderFrame(FRAME_A)}</g>
-          <g className="pixel-logo__frameB">{renderFrame(FRAME_B)}</g>
+          <g className="pixel-logo__frameA">{renderFrame(LEGS_A, 'a')}</g>
+          <g className="pixel-logo__frameB">{renderFrame(LEGS_B, 'b')}</g>
         </svg>
       </span>
     </span>
   );
 }
+
