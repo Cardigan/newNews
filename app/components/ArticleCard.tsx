@@ -120,6 +120,13 @@ export function ArticleCard({
         <div className="mt-2 text-xs">
           <a
             href={article.commentsUrl}
+            onClick={(e) => {
+              if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+              e.preventDefault();
+              // Open the discussion thread in the reader pane by swapping
+              // the URL on the article we hand to the parent.
+              onSelect({ ...article, url: article.commentsUrl! });
+            }}
             target="_blank"
             rel="noopener noreferrer"
             className="text-neutral-500 hover:underline"

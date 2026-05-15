@@ -88,19 +88,28 @@ export function ReaderPane({
           referrerPolicy="no-referrer-when-downgrade"
         />
         {showFallbackHint && !loaded ? (
-          <div className="pointer-events-none absolute inset-0 flex items-start justify-center p-4">
-            <div className="pointer-events-auto max-w-sm rounded-md border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900 shadow dark:border-amber-700 dark:bg-amber-950 dark:text-amber-200">
-              Some sites (BBC, NYT, etc.) refuse to load in an embedded frame.
-              If this stays blank,{' '}
-              <a
-                href={article.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold underline"
-              >
-                open the article in a new tab
-              </a>
-              .
+          <div className="pointer-events-none absolute inset-x-0 top-0 flex justify-center p-3">
+            <div className="pointer-events-auto max-w-md rounded-md border border-amber-300 bg-amber-50 p-3 text-xs leading-relaxed text-amber-900 shadow dark:border-amber-700 dark:bg-amber-950 dark:text-amber-200">
+              <div className="mb-1 font-semibold">Frame still blank? You&rsquo;re not crazy.</div>
+              <p>
+                Some sites (looking at you, BBC, NYT, and basically every
+                major newsroom) refuse to be embedded in an iframe — and a few
+                others (👋 Reddit) are blocked outright on most corporate
+                networks. If you&rsquo;re on the work VPN or behind a proxy,
+                that&rsquo;s probably what&rsquo;s happening here, not your
+                computer suddenly forgetting how the internet works.
+              </p>
+              <p className="mt-2">
+                <a
+                  href={article.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold underline"
+                >
+                  Open in a new tab →
+                </a>{' '}
+                works every time.
+              </p>
             </div>
           </div>
         ) : null}

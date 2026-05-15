@@ -104,7 +104,7 @@ export default function Page() {
       <main
         className={
           selected
-            ? 'mx-auto grid w-full max-w-[1600px] flex-1 gap-4 overflow-hidden px-4 py-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]'
+            ? 'mx-auto grid w-full max-w-[1800px] flex-1 gap-4 overflow-hidden px-2 py-2 sm:px-4 sm:py-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,2.1fr)]'
             : 'mx-auto max-w-4xl px-4 py-6'
         }
       >
