@@ -15,19 +15,26 @@ const FRAME_H = 500;
 
 export function PixelLogo({ size = 96 }: { size?: number }) {
   const height = Math.round((size * FRAME_H) / FRAME_W);
+  // Pixel-based bg sizing so background-position can be in pixels too.
+  // (Percentage background-position is relative to container - bg width,
+  // not container width, so a "100% per frame" scheme produces a blank
+  // 7th frame at the end of the cycle.)
   return (
     <span
       className="pixel-logo inline-block align-middle"
-      style={{
-        width: size,
-        height,
-        backgroundImage: `url('${BASE}/spider-strip.png')`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: `${FRAMES * 100}% 100%`,
-        backgroundPosition: '0% 50%',
-        imageRendering: 'pixelated',
-        animation: 'spider-walk 0.9s steps(6) infinite',
-      }}
+      style={
+        {
+          width: size,
+          height,
+          backgroundImage: `url('${BASE}/spider-strip.png')`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: `${size * FRAMES}px ${height}px`,
+          backgroundPosition: '0px 0px',
+          imageRendering: 'pixelated',
+          animation: `spider-walk 0.9s steps(${FRAMES}) infinite`,
+          ['--spider-cycle' as string]: `-${size * FRAMES}px`,
+        } as React.CSSProperties
+      }
       aria-label="Pixel spider mascot"
       role="img"
     />
