@@ -62,3 +62,46 @@ test('noise terms reduce score', () => {
   const noisy = scoreArticle({ ...base, title: 'Azure announcement at football match' });
   assert.ok(noisy.score < clean.score);
 });
+
+test('subreddit hint tags items even when keywords miss', () => {
+  // No product/role keywords in this title at all.
+  const a: RawArticle = {
+    id: 'sr1',
+    source: 'reddit',
+    subSource: 'MicrosoftFabric',
+    title: 'Iceberg performance gotchas at scale',
+    url: 'https://example.com/sr1',
+    publishedAt: new Date().toISOString(),
+  };
+  const s = scoreArticle(a);
+  // 'iceberg' is now an onelake adjacent keyword, so it should match.
+  // Subreddit hint should also add 'fabric'.
+  assert.ok(s.products.includes('onelake'));
+  assert.ok(s.products.includes('fabric'));
+});
+
+test('subreddit hint adds role even with no role keywords', () => {
+  const a: RawArticle = {
+    id: 'sr2',
+    source: 'reddit',
+    subSource: 'sre',
+    title: 'A nice weekend project',
+    url: 'https://example.com/sr2',
+    publishedAt: new Date().toISOString(),
+  };
+  const s = scoreArticle(a);
+  assert.ok(s.roles.includes('sre'));
+});
+
+test('AI keywords map to ai channel', () => {
+  const a: RawArticle = {
+    id: 'ai1',
+    source: 'hn',
+    title: 'Anthropic releases Claude 4 with longer context window',
+    url: 'https://example.com/ai1',
+    summary: 'New foundation model with improved RAG support and agent tooling.',
+    publishedAt: new Date().toISOString(),
+  };
+  const s = scoreArticle(a);
+  assert.ok(s.products.includes('ai'));
+});

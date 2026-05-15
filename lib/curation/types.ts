@@ -3,10 +3,10 @@ export type Role = 'manager' | 'developer' | 'sre' | 'pm';
 export const ROLES: Role[] = ['manager', 'developer', 'sre', 'pm'];
 
 export const ROLE_LABELS: Record<Role, string> = {
-  manager: 'Manager',
-  developer: 'Developer',
-  sre: 'SRE',
-  pm: 'Product Manager',
+  manager: 'Managers',
+  developer: 'Devs',
+  sre: 'SREs',
+  pm: 'PMs',
 };
 
 export type ProductChannel =
@@ -22,7 +22,9 @@ export type ProductChannel =
   | 'data-lake'
   | 'synapse'
   | 'azure'
-  | 'azure-gov';
+  | 'azure-gov'
+  | 'ai'
+  | 'humor';
 
 export const PRODUCT_LABELS: Record<ProductChannel, string> = {
   'power-query': 'Power Query / PQO',
@@ -38,6 +40,8 @@ export const PRODUCT_LABELS: Record<ProductChannel, string> = {
   synapse: 'Synapse',
   azure: 'Azure (general)',
   'azure-gov': 'Azure Government',
+  ai: 'AI / ML / LLMs',
+  humor: 'Fun / Humor',
 };
 
 export const ALL_PRODUCTS: ProductChannel[] = Object.keys(

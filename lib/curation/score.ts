@@ -4,6 +4,7 @@ import {
   ROLE_KEYWORDS,
   SOURCE_QUALITY,
 } from './keywords';
+import { SUBREDDIT_TAGS } from './subreddit-tags';
 import type {
   ProductChannel,
   RawArticle,
@@ -69,25 +70,50 @@ export function scoreArticle(
 
   // Role matches
   let roleScore = 0;
-  const roles: Role[] = [];
+  const roleSet = new Set<Role>();
   for (const role of ROLES) {
     const { count } = countMatches(haystack, ROLE_KEYWORDS[role]);
     if (count > 0) {
-      roles.push(role);
+      roleSet.add(role);
       roleScore += count * ROLE_WEIGHT;
     }
   }
 
   // Product matches
   let productScore = 0;
-  const products: ProductChannel[] = [];
+  const productSet = new Set<ProductChannel>();
   for (const product of Object.keys(PRODUCT_KEYWORDS) as ProductChannel[]) {
     const { count } = countMatches(haystack, PRODUCT_KEYWORDS[product]);
     if (count > 0) {
-      products.push(product);
+      productSet.add(product);
       productScore += count * PRODUCT_WEIGHT;
     }
   }
+
+  // Subreddit-derived tags (semantic hints from where the post lives, even
+  // when keywords don't fire). Adds tags but only a small score bonus, so
+  // keyword matches still rank higher.
+  if (article.source === 'reddit' && article.subSource) {
+    const sub = article.subSource.toLowerCase();
+    const hint = SUBREDDIT_TAGS[sub];
+    if (hint) {
+      for (const p of hint.products ?? []) {
+        if (!productSet.has(p)) {
+          productSet.add(p);
+          productScore += PRODUCT_WEIGHT * 0.5; // half-weight for inferred tag
+        }
+      }
+      for (const r of hint.roles ?? []) {
+        if (!roleSet.has(r)) {
+          roleSet.add(r);
+          roleScore += ROLE_WEIGHT * 0.5;
+        }
+      }
+    }
+  }
+
+  const roles = Array.from(roleSet);
+  const products = Array.from(productSet);
 
   const sourceScore = SOURCE_QUALITY[article.source] ?? 0;
   const recScore = recencyBonus(article.publishedAt, now);

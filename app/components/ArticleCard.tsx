@@ -27,12 +27,30 @@ function timeAgo(iso: string): string {
 export function ArticleCard({
   article,
   showDebug,
+  active,
+  onSelect,
 }: {
   article: ScoredArticle;
   showDebug: boolean;
+  active: boolean;
+  onSelect: (a: ScoredArticle) => void;
 }) {
+  // Allow ctrl/cmd/middle-click to fall through to a normal new-tab open.
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+    e.preventDefault();
+    onSelect(article);
+  };
+
   return (
-    <article className="rounded-lg border border-neutral-200 bg-white p-4 shadow-sm transition hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900">
+    <article
+      className={[
+        'rounded-lg border bg-white p-4 shadow-sm transition hover:shadow-md dark:bg-neutral-900',
+        active
+          ? 'border-blue-500 ring-2 ring-blue-200 dark:ring-blue-900'
+          : 'border-neutral-200 dark:border-neutral-800',
+      ].join(' ')}
+    >
       <div className="mb-2 flex flex-wrap items-center gap-2 text-xs">
         <span
           className={`rounded px-1.5 py-0.5 font-semibold ${
@@ -56,6 +74,7 @@ export function ArticleCard({
       <h3 className="text-base font-semibold leading-snug">
         <a
           href={article.url}
+          onClick={handleClick}
           target="_blank"
           rel="noopener noreferrer"
           className="hover:underline"
@@ -97,7 +116,7 @@ export function ArticleCard({
         </pre>
       ) : null}
 
-      {article.commentsUrl ? (
+      {article.commentsUrl && article.commentsUrl !== article.url ? (
         <div className="mt-2 text-xs">
           <a
             href={article.commentsUrl}
