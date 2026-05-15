@@ -26,6 +26,7 @@ const PER_SOURCE_CAP: Record<SourceId, number> = {
   guardian: 70,
   hn: 70,
   reddit: 110,
+  custom: 0, // server-side fetcher never produces 'custom' items; user-added feeds are loaded client-side.
 };
 
 function dedupe(items: RawArticle[]): RawArticle[] {

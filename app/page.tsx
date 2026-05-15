@@ -5,6 +5,7 @@ import { ArticleCard } from './components/ArticleCard';
 import { ChannelToggles } from './components/ChannelToggles';
 import { ReaderPane } from './components/ReaderPane';
 import { PixelLogo } from './components/PixelLogo';
+import { CustomFeedManager } from './components/CustomFeedManager';
 import {
   ALL_PRODUCTS,
   ROLES,
@@ -22,11 +23,16 @@ import {
   playTick,
   setSoundEnabled,
 } from '@/lib/sounds';
+import {
+  fetchCustomFeed,
+  loadCustomFeeds,
+  type CustomFeed,
+} from '@/lib/custom-feeds';
 
 const STORAGE_KEY = 'newnews:prefs:v3';
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
-const ALL_SOURCES: SourceId[] = ['bbc', 'nyt', 'guardian', 'hn', 'reddit'];
+const ALL_SOURCES: SourceId[] = ['bbc', 'nyt', 'guardian', 'hn', 'reddit', 'custom'];
 
 interface Prefs {
   roles: Role[];
@@ -65,10 +71,15 @@ export default function Page() {
   const [error, setError] = useState<string | null>(null);
   const [selected, setSelected] = useState<ScoredArticle | null>(null);
   const [soundOn, setSoundOn] = useState(false);
+  const [customFeeds, setCustomFeeds] = useState<CustomFeed[]>([]);
+  const [customArticles, setCustomArticles] = useState<ScoredArticle[]>([]);
+  const [customErrors, setCustomErrors] = useState<Record<string, string>>({});
+  const [customRefreshing, setCustomRefreshing] = useState(false);
 
   useEffect(() => {
     setPrefs(loadPrefs());
     setSoundOn(loadSoundPref());
+    setCustomFeeds(loadCustomFeeds());
     setHydrated(true);
   }, []);
 
@@ -86,12 +97,54 @@ export default function Page() {
       .catch((e) => setError((e as Error).message));
   }, []);
 
+  // Refetch all custom feeds whenever the list changes (add/remove) or
+  // when the user clicks Refresh.
+  const refreshCustom = async (list: CustomFeed[]) => {
+    if (list.length === 0) {
+      setCustomArticles([]);
+      setCustomErrors({});
+      return;
+    }
+    setCustomRefreshing(true);
+    const results = await Promise.allSettled(
+      list.map((f) => fetchCustomFeed(f).then((arts) => ({ f, arts }))),
+    );
+    const merged: ScoredArticle[] = [];
+    const errs: Record<string, string> = {};
+    for (let i = 0; i < results.length; i++) {
+      const r = results[i];
+      if (r.status === 'fulfilled') {
+        merged.push(...r.value.arts);
+      } else {
+        errs[list[i].id] =
+          r.reason instanceof Error ? r.reason.message : String(r.reason);
+      }
+    }
+    setCustomArticles(merged);
+    setCustomErrors(errs);
+    setCustomRefreshing(false);
+  };
+
+  useEffect(() => {
+    if (!hydrated) return;
+    void refreshCustom(customFeeds);
+  }, [customFeeds, hydrated]);
+
   const channelSet = useMemo(() => new Set(prefs.channels), [prefs.channels]);
   const roleSet = useMemo(() => new Set(prefs.roles), [prefs.roles]);
   const sourceSet = useMemo(() => new Set(prefs.sources), [prefs.sources]);
 
   const MIN_RESULTS = 10;
   const noChannelOrRole = roleSet.size === 0 && channelSet.size === 0;
+
+  // Effective feed = curated server-side feed merged with user's custom feeds
+  // (fetched client-side). Custom articles always show as untagged, so the
+  // role/channel filter passes them through (since untagged items are kept).
+  const allArticles = useMemo<ScoredArticle[]>(() => {
+    const base = feed?.articles ?? [];
+    if (customArticles.length === 0) return base;
+    return [...base, ...customArticles];
+  }, [feed, customArticles]);
 
   // Primary pass: respects all three filters (sources + roles + channels).
   // Special case: when nothing is selected in roles/channels, just show the
@@ -100,24 +153,31 @@ export default function Page() {
     if (!feed) return [];
     if (noChannelOrRole) {
       const top = new Map<string, ScoredArticle>();
-      for (const a of feed.articles) {
+      for (const a of allArticles) {
         if (!sourceSet.has(a.source)) continue;
+        // For custom feeds, "top" means most recent rather than highest score
+        // (custom items all have score 0).
         const cur = top.get(a.source);
-        if (!cur || a.score > cur.score) top.set(a.source, a);
+        if (!cur) {
+          top.set(a.source, a);
+        } else if (a.source === 'custom') {
+          if (a.publishedAt > cur.publishedAt) top.set(a.source, a);
+        } else if (a.score > cur.score) {
+          top.set(a.source, a);
+        }
       }
-      // Preserve the canonical source order in ALL_SOURCES.
       return ALL_SOURCES.map((s) => top.get(s)).filter(
         (a): a is ScoredArticle => Boolean(a),
       );
     }
-    return feed.articles.filter((a) => {
+    return allArticles.filter((a) => {
       if (!sourceSet.has(a.source)) return false;
       if (a.roles.length === 0 && a.products.length === 0) return true;
       const matchesRole = a.roles.some((r) => roleSet.has(r));
       const matchesProduct = a.products.some((p) => channelSet.has(p));
       return matchesRole || matchesProduct;
     });
-  }, [feed, roleSet, channelSet, sourceSet, noChannelOrRole]);
+  }, [feed, allArticles, roleSet, channelSet, sourceSet, noChannelOrRole]);
 
   // If the primary list is too thin, broaden by relaxing the source toggle:
   // pull additional items from *any* source as long as they match the
@@ -128,7 +188,7 @@ export default function Page() {
     if (!feed || noChannelOrRole || primary.length >= MIN_RESULTS) return primary;
     const seen = new Set(primary.map((a) => a.id));
     const extras: ScoredArticle[] = [];
-    for (const a of feed.articles) {
+    for (const a of allArticles) {
       if (seen.has(a.id)) continue;
       // Skip purely untagged general news in the broaden pass — we already
       // matched those above where the source filter let them through.
@@ -237,7 +297,9 @@ export default function Page() {
                 <div>
                   <div className="pixel-label mb-2 text-ink/70">Sources</div>
                   <div className="flex flex-wrap gap-1.5">
-                    {ALL_SOURCES.map((s) => {
+                    {ALL_SOURCES.filter(
+                      (s) => s !== 'custom' || customFeeds.length > 0,
+                    ).map((s) => {
                       const active = sourceSet.has(s);
                       return (
                         <button
@@ -260,6 +322,26 @@ export default function Page() {
                     })}
                   </div>
                 </div>
+
+                <CustomFeedManager
+                  feeds={customFeeds}
+                  onChange={(next) => {
+                    setCustomFeeds(next);
+                    // Auto-enable the custom source toggle when the user adds
+                    // their first feed, otherwise the new articles would be
+                    // hidden behind a turned-off filter.
+                    if (next.length > 0) {
+                      setPrefs((p) =>
+                        p.sources.includes('custom')
+                          ? p
+                          : { ...p, sources: [...p.sources, 'custom'] },
+                      );
+                    }
+                  }}
+                  onRefresh={() => void refreshCustom(customFeeds)}
+                  refreshing={customRefreshing}
+                  errors={customErrors}
+                />
 
                 <label className="flex cursor-pointer items-center gap-2 font-retro text-base text-ink/70">
                   <input
