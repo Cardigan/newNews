@@ -4,9 +4,12 @@
 // /public/spider-strip.png (2172x500, six 362x500 frames laid out
 // horizontally, background already alpha'd out).
 //
-// We don't slice frames — a single CSS background-position animation with
-// steps(6) cycles through them, which is dramatically cheaper than React
-// re-renders.
+// Implementation note: we tried a single <span> with background-position
+// animation, but Chromium had trouble with CSS custom properties used
+// inside @keyframes (the substitution didn't always happen, leaving the
+// sprite frozen on frame 0). Using a wrapper with overflow:hidden and an
+// <img> that translateX(-100%) of its own width with steps(6) is rock-
+// solid across Chrome, Edge, Safari, Firefox, and mobile.
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 const FRAMES = 6;
@@ -15,29 +18,34 @@ const FRAME_H = 500;
 
 export function PixelLogo({ size = 96 }: { size?: number }) {
   const height = Math.round((size * FRAME_H) / FRAME_W);
-  // Pixel-based bg sizing so background-position can be in pixels too.
-  // (Percentage background-position is relative to container - bg width,
-  // not container width, so a "100% per frame" scheme produces a blank
-  // 7th frame at the end of the cycle.)
+  const stripWidth = size * FRAMES;
   return (
     <span
-      className="pixel-logo inline-block align-middle"
-      style={
-        {
-          width: size,
-          height,
-          backgroundImage: `url('${BASE}/spider-strip.png')`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: `${size * FRAMES}px ${height}px`,
-          backgroundPosition: '0px 0px',
-          imageRendering: 'pixelated',
-          animation: `spider-walk 0.9s steps(${FRAMES}) infinite`,
-          ['--spider-cycle' as string]: `-${size * FRAMES}px`,
-        } as React.CSSProperties
-      }
+      className="pixel-logo inline-block align-middle overflow-hidden"
+      style={{
+        width: size,
+        height,
+      }}
       aria-label="Pixel spider mascot"
       role="img"
-    />
+    >
+      <img
+        src={`${BASE}/spider-strip.png`}
+        alt=""
+        width={stripWidth}
+        height={height}
+        style={{
+          width: stripWidth,
+          height,
+          maxWidth: 'none',
+          display: 'block',
+          imageRendering: 'pixelated',
+          animation: 'spider-walk 0.9s steps(6) infinite',
+          willChange: 'transform',
+        }}
+        draggable={false}
+      />
+    </span>
   );
 }
 
