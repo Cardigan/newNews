@@ -83,8 +83,8 @@ export function ReaderPane({
       </header>
 
       {!hintHidden ? (
-        <div className="border-b border-amber-300 bg-amber-50 px-3 py-2 text-[11px] leading-relaxed text-amber-900 dark:border-amber-700 dark:bg-amber-950 dark:text-amber-200">
-          <div className="flex items-start gap-2">
+        <div className="border-b border-amber-300 bg-amber-50 px-4 py-3 text-base leading-relaxed text-amber-900 dark:border-amber-700 dark:bg-amber-950 dark:text-amber-200">
+          <div className="flex items-start gap-3">
             <div className="flex-1">
               <span className="font-semibold">Seeing a sad-face &ldquo;refused to connect&rdquo;? You&rsquo;re not crazy.</span>{' '}
               Most newsrooms (BBC, NYT, Guardian, GitHub, etc.) refuse to be
