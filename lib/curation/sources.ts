@@ -161,21 +161,48 @@ async function fetchHn(limit = 75): Promise<RawArticle[]> {
 
 // ---------- Reddit ----------
 const SUBREDDITS = [
+  // core team-relevant
   'azure',
+  'AzureGovernment',
   'dataengineering',
   'MicrosoftFabric',
   'PowerBI',
+  'databricks',
+  'snowflake',
+  'apachespark',
+  // SRE / dev
   'sre',
   'devops',
   'kubernetes',
+  'sysadmin',
   'programming',
+  // AI
   'MachineLearning',
+  'artificial',
+  'LocalLLaMA',
+  'OpenAI',
+  // fun, job-adjacent
+  'ProgrammingHumor',
+  'talesfromtechsupport',
 ];
 
-// Reddit's JSON endpoints frequently return 403 to non-residential IPs
-// (including GitHub Actions runners). RSS works, but only when fetched with
-// a minimal header set — rss-parser's defaults trigger the same 403, so we
-// fetch the XML manually and feed it to parseString().
+// Reddit RSS embeds two anchors in each item's description:
+//   <a href="ARTICLE_URL">[link]</a>  <a href="COMMENTS_URL">[comments]</a>
+// When [link] differs from [comments], the post is a link to an external
+// article — that's exactly the "current news article" signal we want.
+function extractExternalUrlFromContent(
+  content: string | undefined,
+  commentsUrl: string,
+): string | null {
+  if (!content) return null;
+  const m = content.match(/href="([^"]+)"[^>]*>\s*\[link\]/i);
+  if (!m) return null;
+  const link = m[1];
+  if (!link || link === commentsUrl) return null;
+  if (link.includes('reddit.com')) return null;
+  return link;
+}
+
 async function fetchReddit(): Promise<RawArticle[]> {
   const results: RawArticle[] = [];
   await Promise.all(
@@ -193,15 +220,24 @@ async function fetchReddit(): Promise<RawArticle[]> {
         const parsed = await rss.parseString(xml);
         for (const item of parsed.items) {
           if (!item.link || !item.title) continue;
+          const commentsUrl = item.link;
+          const externalUrl = extractExternalUrlFromContent(
+            item.content,
+            commentsUrl,
+          );
+          // Prefer the external article URL when present so dedupe across
+          // sources works (a BBC story shared in r/azure collapses with
+          // the same BBC RSS item).
+          const canonical = externalUrl ?? commentsUrl;
           results.push({
-            id: hashId('reddit', item.link),
+            id: hashId('reddit', canonical),
             source: 'reddit',
             subSource: sub,
             title: item.title,
-            url: item.link,
+            url: canonical,
             summary: (item.contentSnippet ?? '').slice(0, 400),
             publishedAt: item.isoDate ?? new Date().toISOString(),
-            commentsUrl: item.link,
+            commentsUrl,
           });
         }
       } catch (err) {
