@@ -26,8 +26,10 @@ import {
 import {
   fetchCustomFeed,
   loadCustomFeeds,
+  saveCustomFeeds,
   type CustomFeed,
 } from '@/lib/custom-feeds';
+import { readUrlState, writeUrlState } from '@/lib/url-state';
 
 const STORAGE_KEY = 'newnews:prefs:v3';
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
@@ -75,17 +77,48 @@ export default function Page() {
   const [customArticles, setCustomArticles] = useState<ScoredArticle[]>([]);
   const [customErrors, setCustomErrors] = useState<Record<string, string>>({});
   const [customRefreshing, setCustomRefreshing] = useState(false);
+  const [shareStatus, setShareStatus] = useState<'idle' | 'copied'>('idle');
 
   useEffect(() => {
-    setPrefs(loadPrefs());
+    const storedPrefs = loadPrefs();
+    const storedFeeds = loadCustomFeeds();
+    const url = readUrlState();
+
+    // URL wins for filter prefs (intent: shared config).
+    const mergedPrefs: Prefs = {
+      ...storedPrefs,
+      ...(url.roles ? { roles: url.roles } : {}),
+      ...(url.channels ? { channels: url.channels } : {}),
+      ...(url.sources ? { sources: url.sources } : {}),
+    };
+
+    // For custom feeds we merge instead of replace, so visiting a share
+    // link doesn't wipe the user's existing feeds. Dedupe by URL.
+    let mergedFeeds = storedFeeds;
+    if (url.feeds && url.feeds.length > 0) {
+      const seen = new Set(storedFeeds.map((f) => f.url));
+      const additions = url.feeds.filter((f) => !seen.has(f.url));
+      mergedFeeds = [...storedFeeds, ...additions];
+      if (additions.length > 0) saveCustomFeeds(mergedFeeds);
+    }
+
+    setPrefs(mergedPrefs);
+    setCustomFeeds(mergedFeeds);
     setSoundOn(loadSoundPref());
-    setCustomFeeds(loadCustomFeeds());
     setHydrated(true);
   }, []);
 
   useEffect(() => {
-    if (hydrated) savePrefs(prefs);
-  }, [prefs, hydrated]);
+    if (!hydrated) return;
+    savePrefs(prefs);
+    writeUrlState({
+      roles: prefs.roles,
+      channels: prefs.channels,
+      sources: prefs.sources,
+      defaultSources: ALL_SOURCES,
+      feeds: customFeeds,
+    });
+  }, [prefs, customFeeds, hydrated]);
 
   useEffect(() => {
     fetch(`${BASE}/data/feed.json`, { cache: 'no-store' })
@@ -220,6 +253,20 @@ export default function Page() {
     setSelected(null);
   };
 
+  const handleShare = async () => {
+    if (typeof window === 'undefined') return;
+    playTick();
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setShareStatus('copied');
+      setTimeout(() => setShareStatus('idle'), 1800);
+    } catch {
+      // Clipboard API can fail (insecure context, focus, etc.) — fall back
+      // to a prompt so the user can copy manually.
+      window.prompt('Copy this link to share your view:', window.location.href);
+    }
+  };
+
   return (
     <div className={selected ? 'flex h-screen flex-col' : ''}>
       <main
@@ -250,6 +297,14 @@ export default function Page() {
                     {new Date(feed.generatedAt).toLocaleString()}
                   </span>
                 ) : null}
+                <button
+                  onClick={handleShare}
+                  className="nes-btn"
+                  title="Copy a shareable link to your current filters + custom feeds"
+                  aria-label="Copy shareable link"
+                >
+                  {shareStatus === 'copied' ? '✓ Copied' : '🔗 Share'}
+                </button>
                 <button
                   onClick={toggleSound}
                   className="nes-btn"
