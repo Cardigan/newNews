@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-04T00:36:43.729Z",
+  "generatedAt": "2026-08-04T01:09:13.692Z",
   "count": 190,
   "articles": [
     {
@@ -9,9 +9,9 @@
       "url": "https://armature.tech/",
       "summary": "Hi HN! We’re Theodore and Louis, founders of Armature (YC P26). We reconstruct the entire session behind the MCP tool calls you receive, including what the user asked their agent to do and what the agent thought.<p>You wrap your MCP in 3 lines of code (our SDK is available in Typescript, Python and Go) and start seeing in your dashboard:\n- All sessions reconstructed: it’s like reading the real conversation the user had inside Claude or ChatGPT!\n- A ranking of your MCP most popular use cases, built from sessions clustering\n- The most frequent issues your users’ agents encounter so you can fix them.<p>Here is a quick demo: <a href=\"https:&#x2F;&#x2F;youtu.be&#x2F;ZFlvquhyNMQ\" rel=\"nofollow\">https:&#x2F;&#x2F;youtu.be&#x2F;ZFlvquhyNMQ</a><p>The story behind this is that we initially launched Armature as a standalone testing tool (<a href=\"https:&#x2F;&#x2F;www.ycombinator.com&#x2F;launches&#x2F;QQc-armature-making-your-app-finally-usable-by-ai-agents\">https:&#x2F;&#x2F;www.ycombinator.com&#x2F;launches&#x2F;QQc-armature-making-you...</a>) that could naturally be used through an MCP itself. We quickly realized we had no idea how our users were using Armature MCP and if they were satisfied with it or frustrated. It’s something we had also experienced in our previous companies: Louis built MCPs exposed to millions of users and Theo was a Forward Deployed Engineer at Palantir before joining a Datadog spin-off as Founding Engineer. Both testing and product analytics had always been real pains when exposing a product to agents but we always thought there wasn’t much we could do about analytics because the conversation lived in our users’ AI client.<p>Then it struck us: what if we asked the agents why they were making this or that tool call? And what’s the user&#x27;s intent or potential frustration? So we started experimenting with MCP instrumentation and the use-cases actually surprised us! Many of our first customers had implemented workarounds for their CI to trigger new tests or for their coding agents to fetch the results efficiently. Even though we talked to our first users regularly, they had never shared this feedback with us. We then built automations to automatically cluster use-cases, identify issues frequently encountered and let our own coding agents fix them. When our CTO friends heard about this, they wanted to try it for themselves so we gave them access to a cloned version of our internal product and they started sharing feedback like they never did on our “real” product!<p>That’s when we decided to start working seriously on MCP Analytics as a product. At first we were afraid of degrading MCP performance so we iterated until we reached the exact same success rate as without our instrumentation (89.17 % vs 89.15 % pass rate out of 870 runs). Then privacy was an obvious constraint so we applied the same methods we had learned from working with banking data or building sensitive data scanning in logs. Today, redaction runs client-side before reaching our servers. There are still a lot of things we haven’t fully figured out: not all fields are equally filled by all models, session fingerprinting for serverless &#x2F; stateless MCPs isn’t perfect, and use-case clustering remains to be optimized.<p>But we are finally launching our analytics product to everyone, self-serve at <a href=\"https:&#x2F;&#x2F;armature.tech\">https:&#x2F;&#x2F;armature.tech</a> with a set-up that takes less than 5 minutes and a generous free tier.<p>And now we are working on fully closing the loop, bringing evals back in our product so we can: identify top workflows and issues -&gt; recommend fixes and improvements -&gt; test fixes at scale on the same workflows run by users, across all harnesses and models -&gt; open PRs to ship fixes directly.\nThe evals can be generated automatically from the session analytics so you can catch every regression and can test every improvement’s real impact across all models and harnesses before shipping it.<p>Here’s an example to make it more concrete: 10 days ago, a marketing automation platform which has had early access to what we built for weeks identified thanks to MCP Analytics that users were frustrated not being able to change their target audience after campaign creation. So they shipped the feature and tested it successfully locally with Claude Code on Fable 5. Then a few days later when preparing their new MCP public release, they ran a suite of evals on Armature and realized that small models could hallucinate audience_ids which would lead their MCP to send the campaign to ALL their contacts by default (which could obviously lead to disasters in prod). This is the kind of story that makes what we are building feel so helpful!<p>Now, the most useful feedback for us would be to know what’s still missing in our product so you can feel you are now in full control of the “Agent Experience”.\nAnd if you run an MCP in production we’d also love to know: what do you do today to know if agents succeed and if the users behind them are happy?",
       "publishedAt": "2026-08-03T16:17:59.000Z",
-      "engagement": 36,
+      "engagement": 37,
       "commentsUrl": "https://news.ycombinator.com/item?id=49157807",
-      "score": 131.03,
+      "score": 130.93,
       "roles": [
         "developer",
         "pm"
@@ -23,8 +23,60 @@
         "role": 24,
         "product": 100,
         "source": 1,
-        "recency": 3.68,
-        "engagement": 2.35,
+        "recency": 3.56,
+        "engagement": 2.37,
+        "noise": 0
+      }
+    },
+    {
+      "id": "o0ecuj",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "Azure AI Foundry: GPT-4o to GPT-5.1 migration changed our RAG agent’s response style",
+      "url": "https://www.reddit.com/r/AZURE/comments/1vea8u8/azure_ai_foundry_gpt4o_to_gpt51_migration_changed/",
+      "summary": "Hi everyone,\n my team is migrating a production RAG agent from GPT-4o to GPT-5.1 in Azure AI Foundry because our GPT-4o version is approaching retirement.\n GPT-4o currently gives us concise, conversational, well-grounded answers. We tested GPT-5.1 with the same system prompt, knowledge base, RAG pipeline, and agent configuration, but the behavior is significantly different.\n GPT-5.1 produces much ",
+      "publishedAt": "2026-08-03T11:01:09.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1vea8u8/azure_ai_foundry_gpt4o_to_gpt51_migration_changed/",
+      "score": 112.61,
+      "roles": [],
+      "products": [
+        "azure",
+        "ai"
+      ],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 110,
+        "source": 0,
+        "recency": 2.61,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "93rb97",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "Has Azure updated pricing for DeepSeek V4 Flash and GPT-5.6 Luna?",
+      "url": "https://www.reddit.com/r/AZURE/comments/1vd6ely/has_azure_updated_pricing_for_deepseek_v4_flash/",
+      "summary": "OpenAI recently reduced GPT-5.6 Luna pricing, and DeepSeek also lowered its direct API pricing. However, Azure AI Foundry still seems to show the previous pricing (or it's not clear).\n Has anyone seen the new pricing reflected in Azure billing or the pricing page yet? If yes, which region/subscription are you using?\n    submitted by    /u/maa____z  \n [link]   [comments]",
+      "publishedAt": "2026-08-02T02:55:40.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1vd6ely/has_azure_updated_pricing_for_deepseek_v4_flash/",
+      "score": 89.4,
+      "roles": [
+        "manager",
+        "developer",
+        "pm"
+      ],
+      "products": [
+        "azure",
+        "ai"
+      ],
+      "scoreBreakdown": {
+        "role": 39,
+        "product": 50,
+        "source": 0,
+        "recency": 0.4,
+        "engagement": 0,
         "noise": 0
       }
     },
@@ -35,9 +87,9 @@
       "url": "https://hoplite.sh",
       "summary": "Hi HN, we’re Bence and Ryan, founders of Hoplite (<a href=\"https:&#x2F;&#x2F;hoplite.sh\">https:&#x2F;&#x2F;hoplite.sh</a>). Hoplite lets you deploy coding agents in the cloud, with a suite of tools that makes it incredibly easy to QA features. During onboarding, we port over your local setup - sessions, memories, MCP servers, and get your projects ready to run in the cloud.<p>Here’s a demo: <a href=\"https:&#x2F;&#x2F;youtu.be&#x2F;bnyktZ_9pjE\" rel=\"nofollow\">https:&#x2F;&#x2F;youtu.be&#x2F;bnyktZ_9pjE</a><p>We got here after pivoting away from the idea we applied to YC with; AI for retail investing. It ultimately wasn’t a product that we ourselves would use, nor served a customer base that we felt connected to. In reflecting on what we really wanted to do, we realised that we loved talking to founders and developers, and were really opinionated about the specific area of cloud agents. We tried out all the existing solutions, and didn’t find one that A) took good advantage of being in the cloud, and B) was performant and felt good to use.<p>We’re building a product that we feel reflects what mainstream development will look like in 6-12 months. As models improve, developers will end up reviewing less and less code, and will instead focus on reviewing the product output. That means evaluating new user flows, visually verifying that new features look good, that the API works as expected, that the CLI works on Windows, etc. And doing it while running hundreds of agents concurrently.<p>On the agent side, we’ve created a custom harness. We spent a lot of time deciding on whether we should use an off the shelf solution like Codex&#x2F;Claude Code, but ultimately wanted the independence and freedom that came with building it in house. It also means that we can test out completely new features without relying on Anthropic and OpenAI to catch up.<p>Everything is hosted on AWS, with the exception of: Temporal for durable workflows, Modal for sandboxes, and Planetscale for our database. Our infra decisions were driven by a strong belief that agents are becoming a tier 0 piece of infrastructure, and they need the reliability and security to match that.<p>You can try it now for free with the code ‘HACKERNEWS’ - we’ve included $100 in free credits, plus you can connect your Codex subscription and use OpenAI models via it. You can see some more details around our pricing at <a href=\"https:&#x2F;&#x2F;hoplite.sh&#x2F;pricing\">https:&#x2F;&#x2F;hoplite.sh&#x2F;pricing</a>.<p>At the moment we’re focusing on optimising two key experiences: onboarding and previews, and would love to hear your feedback on them. And if you find that the agent&#x27;s performance in certain tasks doesn’t match your expectations, please let us know!",
       "publishedAt": "2026-08-03T16:32:06.000Z",
-      "engagement": 53,
+      "engagement": 57,
       "commentsUrl": "https://news.ycombinator.com/item?id=49157997",
-      "score": 69.33,
+      "score": 69.26,
       "roles": [
         "manager",
         "developer",
@@ -51,38 +103,60 @@
         "role": 42,
         "product": 20,
         "source": 1,
-        "recency": 3.73,
-        "engagement": 2.6,
+        "recency": 3.61,
+        "engagement": 2.65,
         "noise": 0
       }
     },
     {
-      "id": "kvuvfs",
+      "id": "bwxhin",
       "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "To what extent do Data Engineers need to master Agentic AI?",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1veriag/to_what_extent_do_data_engineers_need_to_master/",
-      "summary": "I'm an Azure Data Engineer with 4.5 years of experience, primarily focused on Databricks.\n Since most of my role involves designing business solutions rather than writing raw code, I feel I might be falling behind on leveraging agentic AI workflows (such as custom skills, Markdown instructions, and orchestrators). As a Data Engineer, to what extent should we be adoption-ready for this new paradigm",
-      "publishedAt": "2026-08-03T22:04:25.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1veriag/to_what_extent_do_data_engineers_need_to_master/",
-      "score": 38.67,
+      "subSource": "azure",
+      "title": "Azure Weekly Highlights #30",
+      "url": "https://www.reddit.com/r/AZURE/comments/1vea8ly/azure_weekly_highlights_30/",
+      "summary": "Azure shipped another generous batch of updates this week—because apparently cloud platforms never sleep. Expect new networking and Kubernetes capabilities, AI-related additions, a new India region, plus a few previews for those who enjoy testing tomorrow’s features today. Full list:\n * [In preview] Public Preview: Azure Enclave(https://azure.microsoft.com/updates?id=568377). This feature is curre",
+      "publishedAt": "2026-08-03T11:00:53.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1vea8ly/azure_weekly_highlights_30/",
+      "score": 37.61,
       "roles": [
-        "manager",
+        "sre",
         "pm"
       ],
       "products": [
-        "fabric",
-        "azure",
-        "ai",
-        "data-factory",
-        "dataflows",
-        "pipelines"
+        "azure"
       ],
       "scoreBreakdown": {
-        "role": 6,
-        "product": 27.5,
+        "role": 15,
+        "product": 20,
         "source": 0,
-        "recency": 5.17,
+        "recency": 2.61,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "of4rvo",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "VNet Data Gateway License requirement, deployment method",
+      "url": "https://www.reddit.com/r/AZURE/comments/1vepqtr/vnet_data_gateway_license_requirement_deployment/",
+      "summary": "hello azure experts, \n Is a Power BI Premium Per User (PPU) or Fabric capacity (F SKU) required to deploy the VNet data gateway resource into an Azure subnet? (License requirement to deploy VNet data gateway)\n another q, Deployment method options\n Is app.fabric.microsoft.com (or app.powerbi.com then Manage gateways) the only supported way to deploy a VNet data gateway? We cannot find this resource",
+      "publishedAt": "2026-08-03T20:57:07.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1vepqtr/vnet_data_gateway_license_requirement_deployment/",
+      "score": 32.69,
+      "roles": [
+        "sre"
+      ],
+      "products": [
+        "fabric",
+        "power-bi",
+        "azure"
+      ],
+      "scoreBreakdown": {
+        "role": 3,
+        "product": 25,
+        "source": 0,
+        "recency": 4.69,
         "engagement": 0,
         "noise": 0
       }
@@ -94,9 +168,9 @@
       "url": "https://news.ycombinator.com/item?id=49156683",
       "summary": "Please state the location and include REMOTE for remote work, REMOTE (US)\nor similar if the country is restricted, and ONSITE when remote work is <i>not</i> an option.<p>Please only post if you personally are part of the hiring company—no\nrecruiting firms or job boards. One post per company. If it isn&#x27;t a household name,\nexplain what your company does.<p>Please only post if you are actively filling a position and are committed\nto replying to applicants.<p>Commenters: please don&#x27;t reply to job posts to complain about\nsomething. It&#x27;s off topic here.<p>Readers: please only email if you are personally interested in the job.<p>Searchers: try <a href=\"https:&#x2F;&#x2F;nthesis.ai&#x2F;public&#x2F;hn-who-is-hiring\" rel=\"nofollow\">https:&#x2F;&#x2F;nthesis.ai&#x2F;public&#x2F;hn-who-is-hiring</a>, <a href=\"https:&#x2F;&#x2F;dheerajck.github.io&#x2F;hnwhoishiring&#x2F;\" rel=\"nofollow\">https:&#x2F;&#x2F;dheerajck.github.io&#x2F;hnwhoishiring&#x2F;</a>,\n<a href=\"http:&#x2F;&#x2F;nchelluri.github.io&#x2F;hnjobs&#x2F;\" rel=\"nofollow\">http:&#x2F;&#x2F;nchelluri.github.io&#x2F;hnjobs&#x2F;</a>, <a href=\"https:&#x2F;&#x2F;hnjobs.emilburzo.com\" rel=\"nofollow\">https:&#x2F;&#x2F;hnjobs.emilburzo.com</a>.<p>Don&#x27;t miss this other fine thread: <i>Who wants to be hired?</i> <a href=\"https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=49156682\">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=49156682</a>",
       "publishedAt": "2026-08-03T15:00:54.000Z",
-      "engagement": 77,
+      "engagement": 92,
       "commentsUrl": "https://news.ycombinator.com/item?id=49156683",
-      "score": 31.25,
+      "score": 31.26,
       "roles": [
         "manager",
         "developer"
@@ -106,8 +180,8 @@
         "role": 24,
         "product": 0,
         "source": 1,
-        "recency": 3.41,
-        "engagement": 2.84,
+        "recency": 3.3,
+        "engagement": 2.95,
         "noise": 0
       }
     },
@@ -133,246 +207,123 @@
       }
     },
     {
-      "id": "882kjm",
+      "id": "5tcfio",
       "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "14 YOE in Data Engineering, strong on Foundry and GenAI, weak on coding interviews. What’s the path forward?",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1v9uy60/14_yoe_in_data_engineering_strong_on_foundry_and/",
-      "summary": "14 years in data engineering. Recent years deep in Palantir Foundry with Professional level certs, cleared 4 Anthropic’s certifications, maintaining production GenAI pipelines at scale. I understand LLM math, common architecture patterns, and I’ve led delivery end to end.\n What I’ve never been is a coder in the traditional sense. No LeetCode grind, could not build a code repo from scratch.. like I",
-      "publishedAt": "2026-07-29T12:35:45.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1v9uy60/14_yoe_in_data_engineering_strong_on_foundry_and/",
-      "score": 25,
-      "roles": [],
-      "products": [
-        "pipelines",
-        "ai",
-        "data-factory",
-        "dataflows"
-      ],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 25,
-        "source": 0,
-        "recency": 0,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "32lru5",
-      "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "Standing up new Fabric platform",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1vc7fu4/standing_up_new_fabric_platform/",
-      "summary": "I’m a new “data engineer” with a few years background in data science and GIS. I was hired into my current org to be the data guy by someone who didn’t really know what they needed, just that the data infrastructure was immature.\n In the beginning I was asked to do a lot of repetitive power query and power bi analysis and reporting, which quickly led me to building out some Python + SQLite pipelin",
-      "publishedAt": "2026-07-31T23:53:43.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vc7fu4/standing_up_new_fabric_platform/",
-      "score": 23.58,
+      "subSource": "azure",
+      "title": "Azure LB bandwidth costs",
+      "url": "https://www.reddit.com/r/AZURE/comments/1vemfuo/azure_lb_bandwidth_costs/",
+      "summary": "I recently inherited a network component that collects syslogs from various Network devices at my firm. I have checked the Azure costs, Azure LB costs are 800€ for processing 370TiB in July month (private, internal only LB).\n The 10 collector VM scale set instances behind this LB cost 600€. The VMs, LB are in the same subnet, region..\n We do have an Enterprise agreement, it's not that our firm is ",
+      "publishedAt": "2026-08-03T18:55:52.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1vemfuo/azure_lb_bandwidth_costs/",
+      "score": 22.16,
       "roles": [
-        "manager",
-        "developer"
+        "manager"
       ],
       "products": [
-        "power-query",
-        "power-bi",
-        "data-factory",
-        "dataflows",
-        "pipelines"
+        "azure"
       ],
       "scoreBreakdown": {
-        "role": 6,
-        "product": 17.5,
-        "source": 0,
-        "recency": 0.08,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "cn11ku",
-      "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "How to efficiently load large data into Iceberg?",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1vbkm30/how_to_efficiently_load_large_data_into_iceberg/",
-      "summary": "We have a partitioned parquet repo of ~10TB with a large number of partitions (id/date for 30 years of data). The partitioning is probably too granular, I think we should make it id/month.\n Anyway, what's the best way to efficiently transfer this into Iceberg (S3 Tables)? I tried with PyIceberg and with DuckDB but it felt very slow. I then tried running these jobs in parallel but hit issues with t",
-      "publishedAt": "2026-07-31T08:07:18.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vbkm30/how_to_efficiently_load_large_data_into_iceberg/",
-      "score": 22.53,
-      "roles": [],
-      "products": [
-        "onelake",
-        "data-factory",
-        "dataflows",
-        "pipelines"
-      ],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 22.5,
-        "source": 0,
-        "recency": 0.03,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "efmehf",
-      "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "Event-driven orders processing with MSK (AWS Managed Streaming for Apache Kafka)",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1vbzdmn/eventdriven_orders_processing_with_msk_aws/",
-      "summary": "I'm learning Kafka and doing a side project along the way. With the attached architecture, I’ve considered whether to apply the 'Transactional Outbox Pattern' to avoid data loss when sending to MSK. I mean, I want to keep data safe before sending it to MSK over the network.\n But this design can experience a bottleneck in writing data to tables between the checkout service and MSK, especially in fl",
-      "publishedAt": "2026-07-31T18:37:34.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vbzdmn/eventdriven_orders_processing_with_msk_aws/",
-      "score": 21.06,
-      "roles": [
-        "manager",
-        "pm"
-      ],
-      "products": [
-        "pipelines",
-        "data-factory",
-        "dataflows"
-      ],
-      "scoreBreakdown": {
-        "role": 6,
+        "role": 3,
         "product": 15,
         "source": 0,
-        "recency": 0.06,
+        "recency": 4.16,
         "engagement": 0,
         "noise": 0
       }
     },
     {
-      "id": "e4ppe7",
+      "id": "9qb08m",
       "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "ClickBench style benchmark for log search: SereneDB vs ArangoDB, 92 queries at 100M and 1B rows",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1vao2iw/clickbench_style_benchmark_for_log_search/",
-      "summary": "We benchmarked SereneDB against ArangoDB on search performance. That might sound like a quite strange competitor choice, right?\n SereneDB initially was a continuation of ArangoSearch, so we wanted to compare our previous work with us now to see the progress we made.\n It's a open clickbench-style benchmark for search and analytics over 100M/1B generated OpenTelemetry logs, 92 queries.\n TL;DR\n 16x m",
-      "publishedAt": "2026-07-30T08:51:54.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vao2iw/clickbench_style_benchmark_for_log_search/",
-      "score": 19.51,
+      "subSource": "azure",
+      "title": "Azure Foundry High capacity - Model unusable?",
+      "url": "https://www.reddit.com/r/AZURE/comments/1vepr4u/azure_foundry_high_capacity_model_unusable/",
+      "summary": "I'm trying out Azure Foundry and seem to be running into issues. Firstly, my quota is severely limited and most models need to be requested. I was able to get Opus 5 deployed and was using it for a few hours but now all I'm seeing is:\n \"Error: Error Code no_capacity: The system is currently experiencing high demand and cannot process your request\"\n I've set the TPM to the max allowed but still get",
+      "publishedAt": "2026-08-03T20:57:26.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1vepr4u/azure_foundry_high_capacity_model_unusable/",
+      "score": 17.69,
+      "roles": [
+        "sre"
+      ],
+      "products": [
+        "azure"
+      ],
+      "scoreBreakdown": {
+        "role": 3,
+        "product": 10,
+        "source": 0,
+        "recency": 4.69,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "407kui",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "Azure for Students expiring soon — can I renew it without my VPS going offline?",
+      "url": "https://www.reddit.com/r/AZURE/comments/1vdz8lc/azure_for_students_expiring_soon_can_i_renew_it/",
+      "summary": "I’m currently using an Azure for Students subscription, and it’s going to expire in about 2 months. I’m running a VPS (Linux VM) on it, and I want to know what exactly happens when the student subscription ends.\n My main question:\n Can I renew/extend Azure for Students without my running VPS stopping or being deleted?\n And a few related things I’m unsure about:\n  \nIf the subscription expires befor",
+      "publishedAt": "2026-08-03T01:11:35.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1vdz8lc/azure_for_students_expiring_soon_can_i_renew_it/",
+      "score": 16.47,
+      "roles": [],
+      "products": [
+        "azure"
+      ],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 15,
+        "source": 0,
+        "recency": 1.47,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "ankr27",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "Open-source Azure Security Posture Auditor",
+      "url": "https://www.reddit.com/r/AZURE/comments/1vcxai1/opensource_azure_security_posture_auditor/",
+      "summary": "Built this after wanting something lightweight that mirrors what \n Defender for Cloud checks, without needing to pay for it.\n It audits your Azure subscription from the CLI and surfaces \n misconfigurations across:\n - RBAC (Owner/Contributor assigned too broadly)\n - Network (RDP/SSH exposed, open NSG rules)\n - Storage (public blob access, HTTP allowed, weak TLS)\n - Identity (users without MFA, gues",
+      "publishedAt": "2026-08-01T20:06:57.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1vcxai1/opensource_azure_security_posture_auditor/",
+      "score": 16.26,
       "roles": [
         "developer",
         "sre"
       ],
       "products": [
-        "data-factory",
-        "dataflows",
-        "pipelines"
+        "azure"
       ],
       "scoreBreakdown": {
-        "role": 12,
-        "product": 7.5,
+        "role": 6,
+        "product": 10,
         "source": 0,
-        "recency": 0.01,
+        "recency": 0.26,
         "engagement": 0,
         "noise": 0
       }
     },
     {
-      "id": "1qo7fp",
+      "id": "3fcgk7",
       "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "Any Data Engineers using Pi Agent?",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1vc1s11/any_data_engineers_using_pi_agent/",
-      "summary": "I just discovered this amazing thing !!! started playing with it, and building some things already , I am original a software engineer/dev but transitioned to Data Engineering, analytics, you know ETLs, data modeling, etc... curious to hear from other fellow data engineers, their tips, getting started learnings, etc. etc.\n I do truly believe this is the future of agentic coding\n    submitted by   ",
-      "publishedAt": "2026-07-31T20:07:37.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vc1s11/any_data_engineers_using_pi_agent/",
-      "score": 17.57,
+      "subSource": "azure",
+      "title": "Azure Virtual Desktop Tutorial for Beginners | Deploy with Bicep Step by Step Guide",
+      "url": "https://www.reddit.com/r/AZURE/comments/1vdci2y/azure_virtual_desktop_tutorial_for_beginners/",
+      "summary": "🔥 I'm excited to publish this new video! Azure Virtual Desktop Session Host Configuration introduces a modern way to deploy and manage session hosts by defining their configuration directly within the Host Pool. Instead of manually provisioning and configuring virtual machines, you can automate the entire deployment while ensuring every session host is deployed with consistent image, networking, ",
+      "publishedAt": "2026-08-02T08:24:53.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1vdci2y/azure_virtual_desktop_tutorial_for_beginners/",
+      "score": 15.55,
       "roles": [],
       "products": [
-        "ai",
-        "data-factory",
-        "dataflows",
-        "pipelines"
+        "azure"
       ],
       "scoreBreakdown": {
         "role": 0,
-        "product": 17.5,
+        "product": 15,
         "source": 0,
-        "recency": 0.07,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "iqyn24",
-      "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "One Big Table vs. Kimball: where does OBT belong in a medallion architecture?",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1vb9zkj/one_big_table_vs_kimball_where_does_obt_belong_in/",
-      "summary": "I’m a little confused about how the One Big Table approach fits into a medallion architecture.\n My current understanding is that the Bronze layer contains raw data, the Silver layer contains cleaned and standardized data, and the Gold layer contains business-ready models. Based on that, an OBT seems like something that would usually be created in the Gold layer because it is denormalized and desig",
-      "publishedAt": "2026-07-30T23:34:24.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vb9zkj/one_big_table_vs_kimball_where_does_obt_belong_in/",
-      "score": 17.52,
-      "roles": [],
-      "products": [
-        "onelake",
-        "data-factory",
-        "dataflows",
-        "pipelines"
-      ],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 17.5,
-        "source": 0,
-        "recency": 0.02,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "3hxr7t",
-      "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "Spark for text embeddings?",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1vbmdh1/spark_for_text_embeddings/",
-      "summary": "Hey Data Engineers! I am a Data Engineer with quite some experience, but never worked on generating text embeddings at scale. Having some experience with Spark, I was looking for resources on how to achieve that with it, but did not find much.\n I can already see some challenges of doing that in Spark: distribution of the model across executors if doing that locally, managing connections to service",
-      "publishedAt": "2026-07-31T09:48:04.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vbmdh1/spark_for_text_embeddings/",
-      "score": 16.54,
-      "roles": [
-        "developer"
-      ],
-      "products": [
-        "data-factory",
-        "dataflows",
-        "pipelines"
-      ],
-      "scoreBreakdown": {
-        "role": 9,
-        "product": 7.5,
-        "source": 0,
-        "recency": 0.04,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "s5pizo",
-      "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "Identical data in DEV/TST/PROD?",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1vbay6i/identical_data_in_devtstprod/",
-      "summary": "I am doing a summer internship, and my company loads the exact same data into the development, testing, and production environments in Snowflake (although development and testing have some extra tables compared to production.)\n Is this normal? Google seems ambiguous on whether this is a massive antipattern. What do y'all's companies do?\n    submitted by    /u/BubblegumFish2  \n [link]   [comments]",
-      "publishedAt": "2026-07-31T00:14:50.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vbay6i/identical_data_in_devtstprod/",
-      "score": 15.52,
-      "roles": [
-        "manager"
-      ],
-      "products": [
-        "fabric",
-        "data-factory",
-        "dataflows",
-        "pipelines"
-      ],
-      "scoreBreakdown": {
-        "role": 3,
-        "product": 12.5,
-        "source": 0,
-        "recency": 0.02,
+        "recency": 0.55,
         "engagement": 0,
         "noise": 0
       }
@@ -402,59 +353,6 @@
       }
     },
     {
-      "id": "cmxxaf",
-      "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "Data Engineering Streaming Project Feedback",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1vennwc/data_engineering_streaming_project_feedback/",
-      "summary": "I had mostly worked on batch-based projects before and had played around with Kafka, Flink, and ClickHouse, but never really connected everything into one proper end-to-end flow. I am trying to assess how far this is from production use in terms of the techstack.\n So I decided to build a real-time anomaly detection system for simulated sensor data from an oil and gas plant. With AI based RCA to re",
-      "publishedAt": "2026-08-03T19:40:23.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vennwc/data_engineering_streaming_project_feedback/",
-      "score": 14.49,
-      "roles": [],
-      "products": [
-        "pipelines",
-        "data-factory",
-        "dataflows"
-      ],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 10,
-        "source": 0,
-        "recency": 4.49,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "jghgtc",
-      "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "Xberg v1 is out",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1vdd3kk/xberg_v1_is_out/",
-      "summary": "Hi all,\n I'm happy to announce that Xberg v1 is out.\n Xberg is the successor to Kreuzberg, equivalent to what would have been Kreuzberg v5. It's a content intelligence framework that handles a very wide range of inputs: documents (currently 101 formats), code and data formats (currently 367 types), audio/video transcription, and URLs (both static and JS-rendered content). It extracts and prepares ",
-      "publishedAt": "2026-08-02T09:00:51.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vdd3kk/xberg_v1_is_out/",
-      "score": 14.08,
-      "roles": [
-        "manager",
-        "developer"
-      ],
-      "products": [
-        "data-factory",
-        "dataflows",
-        "pipelines"
-      ],
-      "scoreBreakdown": {
-        "role": 6,
-        "product": 7.5,
-        "source": 0,
-        "recency": 0.58,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
       "id": "u2mfn",
       "source": "bbc",
       "subSource": "tech",
@@ -479,29 +377,50 @@
       }
     },
     {
-      "id": "9u23ts",
+      "id": "hu3ekv",
       "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "ssis help needed",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1vcb4jv/ssis_help_needed/",
-      "summary": "Hi, \n I'm a Data Analyst, buiding a pipeline to monthly extract moving 1 year SAP Vendor Report (FBL1N) via SSIS using Theobald Xtract Report connector. I'm doing one company code at a time to avoid timeout. \n It worked fine during development, but after scheduling, the column messed up, data overspill and cut halfway resulting fail downstream analysis script. \n I already have SAP template configu",
-      "publishedAt": "2026-08-01T02:42:21.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vcb4jv/ssis_help_needed/",
-      "score": 13.6,
+      "subSource": "azure",
+      "title": "Azure VM and Trusted Launch VM security advisory",
+      "url": "/r/sysadmin/comments/1ve63cg/azure_vm_and_trusted_launch_vm_security_advisory/",
+      "summary": "submitted by    /u/Administrative_Fan12  \n [link]   [comments]",
+      "publishedAt": "2026-08-03T07:07:07.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1ve64fy/azure_vm_and_trusted_launch_vm_security_advisory/",
+      "score": 13.08,
       "roles": [
-        "developer",
+        "sre",
         "pm"
       ],
       "products": [
-        "data-factory",
-        "dataflows",
-        "pipelines"
+        "azure"
       ],
       "scoreBreakdown": {
         "role": 6,
-        "product": 7.5,
+        "product": 5,
         "source": 0,
-        "recency": 0.1,
+        "recency": 2.08,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "mv2me1",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "Deduplicate Azure Bicep Parameter Files with Extendable Parameters",
+      "url": "https://johnlokerse.dev/2026/08/03/deduplicate-azure-bicep-parameter-files-with-extendable-parameters/",
+      "summary": "submitted by    /u/johnlokersedev  \n [link]   [comments]",
+      "publishedAt": "2026-08-03T11:47:01.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1veb4w4/deduplicate_azure_bicep_parameter_files_with/",
+      "score": 12.73,
+      "roles": [],
+      "products": [
+        "azure"
+      ],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 10,
+        "source": 0,
+        "recency": 2.73,
         "engagement": 0,
         "noise": 0
       }
@@ -513,9 +432,9 @@
       "url": "https://research.jfrog.com/post/sqlite-critical-cves-or-llm-slops/",
       "summary": "",
       "publishedAt": "2026-08-03T11:28:54.000Z",
-      "engagement": 695,
+      "engagement": 696,
       "commentsUrl": "https://news.ycombinator.com/item?id=49154332",
-      "score": 12.77,
+      "score": 12.68,
       "roles": [],
       "products": [
         "ai"
@@ -524,60 +443,8 @@
         "role": 0,
         "product": 5,
         "source": 1,
-        "recency": 2.77,
+        "recency": 2.68,
         "engagement": 4,
-        "noise": 0
-      }
-    },
-    {
-      "id": "wlpie0",
-      "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "Terminology Help For a Career Switcher?",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1vbqebs/terminology_help_for_a_career_switcher/",
-      "summary": "Hi everyone, I'm new to this community. I'm currently trying to make the switch over to data engineering as a career from my mechanical engineering background and was wondering where I could get some helpful tips for terminology and stuff like that. I've seen the Kimball textbook recommended by Gemini to me.\n I'm already taking a university level certificate for data science, and have some basic a",
-      "publishedAt": "2026-07-31T13:04:24.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vbqebs/terminology_help_for_a_career_switcher/",
-      "score": 12.54,
-      "roles": [],
-      "products": [
-        "ai",
-        "data-factory",
-        "dataflows",
-        "pipelines"
-      ],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 12.5,
-        "source": 0,
-        "recency": 0.04,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "sep4ue",
-      "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "Interesting Links in Data Engineering (July 2026)",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1vapv6a/interesting_links_in_data_engineering_july_2026/",
-      "summary": "This month I have for you a mammoth 162 links, hand-picked and curated for your viewing pleasure. \n As well as the usual Iceberg and Data Engineering stuff, there's the somewhat-inevitable subject of AI. Interesting, for me, is how we've moved well beyond \"hey look fancy auto-complete huh huh huh\" to real examples of things that people are building with AI and running in production, how they're us",
-      "publishedAt": "2026-07-30T10:32:28.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vapv6a/interesting_links_in_data_engineering_july_2026/",
-      "score": 12.51,
-      "roles": [],
-      "products": [
-        "onelake",
-        "data-factory",
-        "dataflows",
-        "pipelines"
-      ],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 12.5,
-        "source": 0,
-        "recency": 0.01,
-        "engagement": 0,
         "noise": 0
       }
     },
@@ -588,9 +455,9 @@
       "url": "https://ankursethi.com/blog/prevent-cognitive-debt-by-manually-retyping-llm-generated-code/",
       "summary": "",
       "publishedAt": "2026-08-03T09:32:07.000Z",
-      "engagement": 372,
+      "engagement": 377,
       "commentsUrl": "https://news.ycombinator.com/item?id=49153374",
-      "score": 12.33,
+      "score": 12.26,
       "roles": [],
       "products": [
         "ai"
@@ -599,81 +466,8 @@
         "role": 0,
         "product": 5,
         "source": 1,
-        "recency": 2.47,
-        "engagement": 3.86,
-        "noise": 0
-      }
-    },
-    {
-      "id": "ackdgp",
-      "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "How would you model this data?",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1veotpb/how_would_you_model_this_data/",
-      "summary": "I'm trying to figure out how to model some data in a classic Kimball dimensional model and struggling if I'm thinking about it the right way.\n Let's say we're in the retail industry and have a business of stores like your grocery store. The data we are dealing with is for stores and sales over time. Dimension tables are to be expected: a dim_date, dim_store and dim_product among others. Stores hav",
-      "publishedAt": "2026-08-03T20:22:53.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1veotpb/how_would_you_model_this_data/",
-      "score": 12.18,
-      "roles": [],
-      "products": [
-        "data-factory",
-        "dataflows",
-        "pipelines"
-      ],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 7.5,
-        "source": 0,
-        "recency": 4.68,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "yr0db7",
-      "source": "hn",
-      "title": "AirLLM 70B inference with single 4GB GPU",
-      "url": "https://github.com/lyogavin/airllm",
-      "summary": "",
-      "publishedAt": "2026-08-03T11:15:48.000Z",
-      "engagement": 184,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49154228",
-      "score": 12.14,
-      "roles": [],
-      "products": [
-        "ai"
-      ],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 5,
-        "source": 1,
-        "recency": 2.74,
-        "engagement": 3.4,
-        "noise": 0
-      }
-    },
-    {
-      "id": "sntz5v",
-      "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "Is anyone else losing interest in data engineering?",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1veof8v/is_anyone_else_losing_interest_in_data_engineering/",
-      "summary": "Sorry for the vague and maybe even repetitive title. I saw a couple of these posts on here already and thought I'd vent out too. I know this sub leans heavily into standard DE, so I hope /r/dataengineering is okay with a post from a Data Platform engineer's perspective. I rarely see those around here. \n Background: 7+ years in Software engineering + DE, and about 5 years of sysadmin experience pri",
-      "publishedAt": "2026-08-03T20:08:02.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1veof8v/is_anyone_else_losing_interest_in_data_engineering/",
-      "score": 12.11,
-      "roles": [],
-      "products": [
-        "data-factory",
-        "dataflows",
-        "pipelines"
-      ],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 7.5,
-        "source": 0,
-        "recency": 4.61,
-        "engagement": 0,
+        "recency": 2.39,
+        "engagement": 3.87,
         "noise": 0
       }
     },
@@ -699,15 +493,15 @@
       }
     },
     {
-      "id": "yr0ckh",
+      "id": "yr0db7",
       "source": "hn",
-      "title": "Show HN: Nightcrawler – A local AI pentesting agent running on a smartphone",
-      "url": "https://github.com/garagehq/nightcrawler/",
+      "title": "AirLLM 70B inference with single 4GB GPU",
+      "url": "https://github.com/lyogavin/airllm",
       "summary": "",
-      "publishedAt": "2026-08-03T11:06:15.000Z",
-      "engagement": 102,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49154127",
-      "score": 11.73,
+      "publishedAt": "2026-08-03T11:15:48.000Z",
+      "engagement": 185,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49154228",
+      "score": 12.05,
       "roles": [],
       "products": [
         "ai"
@@ -716,7 +510,30 @@
         "role": 0,
         "product": 5,
         "source": 1,
-        "recency": 2.71,
+        "recency": 2.65,
+        "engagement": 3.4,
+        "noise": 0
+      }
+    },
+    {
+      "id": "yr0ckh",
+      "source": "hn",
+      "title": "Show HN: Nightcrawler – A local AI pentesting agent running on a smartphone",
+      "url": "https://github.com/garagehq/nightcrawler/",
+      "summary": "",
+      "publishedAt": "2026-08-03T11:06:15.000Z",
+      "engagement": 102,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49154127",
+      "score": 11.64,
+      "roles": [],
+      "products": [
+        "ai"
+      ],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 5,
+        "source": 1,
+        "recency": 2.63,
         "engagement": 3.02,
         "noise": 0
       }
@@ -728,7 +545,7 @@
       "url": "https://www.theguardian.com/business/2026/aug/02/uk-state-investments-agency-data-breach",
       "summary": "Security lapse leaves sensitive information and contact details of 51 government officials exposed for 40 hours\nThe public body in charge of the UK’s state investments has been pushed to improve its internal security after a data breach left “high-level management information” publicly accessible for nearly two days.\nUK Government Investments (UKGI), the agency that manages the taxpayers’ interest in a swathe of companies including Channel 4 and the Post Office, said the security failure also left more than 50 government officials’ personal details exposed for nearly 40 hours.\n Continue reading...",
       "publishedAt": "2026-08-02T06:00:13.000Z",
-      "score": 11.49,
+      "score": 11.47,
       "roles": [
         "sre"
       ],
@@ -737,7 +554,7 @@
         "role": 9,
         "product": 0,
         "source": 2,
-        "recency": 0.49,
+        "recency": 0.47,
         "engagement": 0,
         "noise": 0
       }
@@ -750,7 +567,7 @@
       "url": "https://www.nytimes.com/2026/08/03/business/economy/ai-spending-tokenomics.html",
       "summary": "A new field of “tokenomics” has emerged to measure the return on all the money companies are pouring into artificial intelligence.",
       "publishedAt": "2026-08-03T18:56:22.000Z",
-      "score": 11.3,
+      "score": 11.16,
       "roles": [],
       "products": [
         "ai"
@@ -759,7 +576,7 @@
         "role": 0,
         "product": 5,
         "source": 2,
-        "recency": 4.3,
+        "recency": 4.16,
         "engagement": 0,
         "noise": 0
       }
@@ -771,9 +588,9 @@
       "url": "https://blog.exe.dev/devtools-must-be-open-source",
       "summary": "",
       "publishedAt": "2026-08-03T14:15:47.000Z",
-      "engagement": 487,
+      "engagement": 492,
       "commentsUrl": "https://news.ycombinator.com/item?id=49156111",
-      "score": 11.26,
+      "score": 11.16,
       "roles": [
         "developer"
       ],
@@ -782,7 +599,7 @@
         "role": 3,
         "product": 0,
         "source": 1,
-        "recency": 3.26,
+        "recency": 3.16,
         "engagement": 4,
         "noise": 0
       }
@@ -796,7 +613,7 @@
       "publishedAt": "2026-08-03T17:02:10.000Z",
       "engagement": 121,
       "commentsUrl": "https://news.ycombinator.com/item?id=49158474",
-      "score": 10.97,
+      "score": 10.85,
       "roles": [
         "developer"
       ],
@@ -805,29 +622,29 @@
         "role": 3,
         "product": 0,
         "source": 1,
-        "recency": 3.84,
+        "recency": 3.72,
         "engagement": 3.13,
         "noise": 0
       }
     },
     {
-      "id": "wcnnqu",
+      "id": "ou10yg",
       "source": "nyt",
       "subSource": "home",
-      "title": "ICE Killed Him. A.I. Helped Turn Him Into a Folk Ballad, Fast.",
-      "url": "https://www.nytimes.com/2026/08/03/us/ai-corridos-song-music-texas-ice-shooting.html",
-      "summary": "Artificial Intelligence is helping people write corridos within hours, accelerating a century-old tradition of memorializing tragedy through song.",
-      "publishedAt": "2026-08-03T16:07:10.000Z",
-      "score": 10.64,
-      "roles": [],
-      "products": [
-        "ai"
+      "title": "Cambridge Professor’s Jason Arday’s Work Challenged Ahead of Book Launch",
+      "url": "https://www.nytimes.com/2026/08/03/books/jason-arday-cambridge-plagiarism.html",
+      "summary": "A knife-wielding masked man. A pig’s head outside his parents’ door. Running 30 marathons in 35 days. The Cambridge professor Jason Arday, accused of plagiarism, says he’s been through it all. Not everyone believes him.",
+      "publishedAt": "2026-08-04T00:19:07.000Z",
+      "score": 10.71,
+      "roles": [
+        "pm"
       ],
+      "products": [],
       "scoreBreakdown": {
-        "role": 0,
-        "product": 5,
+        "role": 3,
+        "product": 0,
         "source": 2,
-        "recency": 3.64,
+        "recency": 5.71,
         "engagement": 0,
         "noise": 0
       }
@@ -840,7 +657,7 @@
       "url": "https://www.bbc.co.uk/news/articles/c70gjw60033o?at_medium=RSS&at_campaign=rss",
       "summary": "Boris Nadezhdin, who was recently designated as a foreign agent, posted a video in front of the Eiffel Tower.",
       "publishedAt": "2026-08-03T15:41:08.000Z",
-      "score": 10.55,
+      "score": 10.44,
       "roles": [],
       "products": [
         "ai"
@@ -849,61 +666,31 @@
         "role": 0,
         "product": 5,
         "source": 2,
-        "recency": 3.55,
+        "recency": 3.44,
         "engagement": 0,
         "noise": 0
       }
     },
     {
-      "id": "s0in2i",
+      "id": "7116t6",
       "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "alternatives to data migration",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1vbj3dv/alternatives_to_data_migration/",
-      "summary": "Hello. I’m not a data engineer, but my company uses various databases(and they are all different...), and I usually need to query them all at once. \n It seems difficult to create and use a separate API or something like this for each one, how do you guys usually handle situations like this?\n Do I need to migrate them?\n    submitted by    /u/ComprehensiveAsk8039  \n [link]   [comments]",
-      "publishedAt": "2026-07-31T06:42:35.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vbj3dv/alternatives_to_data_migration/",
-      "score": 10.53,
-      "roles": [
-        "developer"
-      ],
+      "subSource": "azure",
+      "title": "English?",
+      "url": "https://i.redd.it/yxe5blbkq5hh1.jpeg",
+      "summary": "i'm not sure whethether copilot or human responses are worse\n    submitted by    /u/Initial-Junket3749  \n [link]   [comments]",
+      "publishedAt": "2026-08-03T12:59:04.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1vecq80/english/",
+      "score": 10.43,
+      "roles": [],
       "products": [
-        "data-factory",
-        "dataflows",
-        "pipelines"
+        "ai",
+        "azure"
       ],
       "scoreBreakdown": {
-        "role": 3,
+        "role": 0,
         "product": 7.5,
         "source": 0,
-        "recency": 0.03,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "p87m13",
-      "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "When do you actually use ephemeral materialization in dbt?",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1vafayw/when_do_you_actually_use_ephemeral/",
-      "summary": "I’m trying to understand the practical use case for materialized='ephemeral'.\n It doesn’t create a table or view, which seems to make the model harder to inspect and debug. If the goal is simply to avoid creating another table, why not materialize the model as a view instead?\n What advantages does an ephemeral model provide over a view in a real production dbt project? Are there specific situation",
-      "publishedAt": "2026-07-30T01:20:48.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vafayw/when_do_you_actually_use_ephemeral/",
-      "score": 10.51,
-      "roles": [
-        "pm"
-      ],
-      "products": [
-        "data-factory",
-        "dataflows",
-        "pipelines"
-      ],
-      "scoreBreakdown": {
-        "role": 3,
-        "product": 7.5,
-        "source": 0,
-        "recency": 0.01,
+        "recency": 2.93,
         "engagement": 0,
         "noise": 0
       }
@@ -915,9 +702,9 @@
       "url": "https://github.com/MikeLuu99/searxng-rust",
       "summary": "",
       "publishedAt": "2026-08-03T16:41:40.000Z",
-      "engagement": 56,
+      "engagement": 57,
       "commentsUrl": "https://news.ycombinator.com/item?id=49158141",
-      "score": 10.4,
+      "score": 10.29,
       "roles": [
         "developer"
       ],
@@ -926,8 +713,8 @@
         "role": 3,
         "product": 0,
         "source": 1,
-        "recency": 3.77,
-        "engagement": 2.63,
+        "recency": 3.65,
+        "engagement": 2.65,
         "noise": 0
       }
     },
@@ -938,9 +725,9 @@
       "url": "https://blog.cloudflare.com/billable-usage-api/",
       "summary": "",
       "publishedAt": "2026-08-03T17:18:06.000Z",
-      "engagement": 42,
+      "engagement": 43,
       "commentsUrl": "https://news.ycombinator.com/item?id=49158714",
-      "score": 10.35,
+      "score": 10.25,
       "roles": [
         "developer"
       ],
@@ -949,8 +736,8 @@
         "role": 3,
         "product": 0,
         "source": 1,
-        "recency": 3.9,
-        "engagement": 2.45,
+        "recency": 3.78,
+        "engagement": 2.47,
         "noise": 0
       }
     },
@@ -961,7 +748,7 @@
       "url": "https://www.theguardian.com/technology/2026/aug/01/china-silicon-valley-white-house",
       "summary": "New AI models, advanced robots and specialty computer chips are unsettling markets and the US tech industry\nOver the past month, a series of advancements in China’s artificial intelligence, chip manufacturing and robotics technologies have rattled financial markets, caused divisions among US tech moguls and left the Trump administration scrambling to respond.\nSilicon Valley has long pointed to China’s tech industry as a competitive threat and used its growth as rationale for why US firms should not face regulatory oversight that could slow them down. In recent weeks, however, China’s progress has pushed US tech CEOs past vague warnings and into open disagreement over how to address Chinese-made products upending their industry.\n Continue reading...",
       "publishedAt": "2026-08-01T12:00:53.000Z",
-      "score": 10.17,
+      "score": 10.16,
       "roles": [
         "pm"
       ],
@@ -972,7 +759,7 @@
         "role": 3,
         "product": 5,
         "source": 2,
-        "recency": 0.17,
+        "recency": 0.16,
         "engagement": 0,
         "noise": 0
       }
@@ -1025,15 +812,61 @@
       }
     },
     {
+      "id": "2b2s2f",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "Free Post Fridays is now live, please follow these rules!",
+      "url": "https://www.reddit.com/r/AZURE/comments/1vbamnr/free_post_fridays_is_now_live_please_follow_these/",
+      "summary": "Under no circumstances does this mean you can post hateful, harmful, or distasteful content - most of us are still at work, let's keep it safe enough so none of us get fired.\n Do not post exam dumps, ads, or paid services.\n All \"free posts\" must have some sort of relationship to Azure. Relationship to Azure can be loose; however, it must be clear.\n It is okay to be meta with the posts and memes ar",
+      "publishedAt": "2026-07-31T00:01:08.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1vbamnr/free_post_fridays_is_now_live_please_follow_these/",
+      "score": 10.02,
+      "roles": [],
+      "products": [
+        "azure"
+      ],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 10,
+        "source": 0,
+        "recency": 0.02,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "j4wvk6",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "Free Post Fridays is now live, please follow these rules!",
+      "url": "https://www.reddit.com/r/AZURE/comments/1okfviv/free_post_fridays_is_now_live_please_follow_these/",
+      "summary": "Under no circumstances does this mean you can post hateful, harmful, or distasteful content - most of us are still at work, let's keep it safe enough so none of us get fired.\n Do not post exam dumps, ads, or paid services.\n All \"free posts\" must have some sort of relationship to Azure. Relationship to Azure can be loose; however, it must be clear.\n It is okay to be meta with the posts and memes ar",
+      "publishedAt": "2025-10-31T00:01:40.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1okfviv/free_post_fridays_is_now_live_please_follow_these/",
+      "score": 10,
+      "roles": [],
+      "products": [
+        "azure"
+      ],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 10,
+        "source": 0,
+        "recency": 0,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
       "id": "yqz7tv",
       "source": "hn",
       "title": "Bonsai: Janestreet's UI Library",
       "url": "https://github.com/janestreet/bonsai",
       "summary": "",
       "publishedAt": "2026-08-03T08:29:57.000Z",
-      "engagement": 296,
+      "engagement": 299,
       "commentsUrl": "https://news.ycombinator.com/item?id=49152842",
-      "score": 10.03,
+      "score": 9.97,
       "roles": [
         "developer"
       ],
@@ -1042,8 +875,8 @@
         "role": 3,
         "product": 0,
         "source": 1,
-        "recency": 2.33,
-        "engagement": 3.71,
+        "recency": 2.25,
+        "engagement": 3.72,
         "noise": 0
       }
     },
@@ -1054,17 +887,17 @@
       "url": "https://www.seangoedecke.com/llms-reward-expertise/",
       "summary": "",
       "publishedAt": "2026-08-03T21:13:53.000Z",
-      "engagement": 358,
+      "engagement": 388,
       "commentsUrl": "https://news.ycombinator.com/item?id=49161518",
-      "score": 9.75,
+      "score": 9.65,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 4.92,
-        "engagement": 3.83,
+        "recency": 4.76,
+        "engagement": 3.88,
         "noise": 0
       }
     },
@@ -1077,7 +910,7 @@
       "publishedAt": "2026-08-03T06:42:00.000Z",
       "engagement": 233,
       "commentsUrl": "https://news.ycombinator.com/item?id=49152023",
-      "score": 9.65,
+      "score": 9.58,
       "roles": [
         "developer"
       ],
@@ -1086,8 +919,31 @@
         "role": 3,
         "product": 0,
         "source": 1,
-        "recency": 2.09,
+        "recency": 2.03,
         "engagement": 3.55,
+        "noise": 0
+      }
+    },
+    {
+      "id": "797lqd",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "How does upgrading from free account work?",
+      "url": "https://www.reddit.com/r/AZURE/comments/1veow2s/how_does_upgrading_from_free_account_work/",
+      "summary": "I'm studying for a certification. When I signed up for Azure, I got $200 in credit. The 30 days is almost up and I still have most of the balance. I \"upgraded\" to pay as you go. Do I still get to continue using the credits? How do I know which services are free? How does all this work?\n    submitted by    /u/Excellent_Shine4875  \n [link]   [comments]",
+      "publishedAt": "2026-08-03T20:25:18.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1veow2s/how_does_upgrading_from_free_account_work/",
+      "score": 9.54,
+      "roles": [],
+      "products": [
+        "azure"
+      ],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 5,
+        "source": 0,
+        "recency": 4.54,
+        "engagement": 0,
         "noise": 0
       }
     },
@@ -1099,7 +955,7 @@
       "url": "https://www.bbc.co.uk/news/articles/c23579jzv08o?at_medium=RSS&at_campaign=rss",
       "summary": "Iran's remarks that there were no talks with the US prompts Donald Trump to issue a strong condemnation of its leadership.",
       "publishedAt": "2026-08-03T19:42:55.000Z",
-      "score": 9.5,
+      "score": 9.36,
       "roles": [
         "manager"
       ],
@@ -1108,7 +964,7 @@
         "role": 3,
         "product": 0,
         "source": 2,
-        "recency": 4.5,
+        "recency": 4.36,
         "engagement": 0,
         "noise": 0
       }
@@ -1122,7 +978,7 @@
       "publishedAt": "2026-08-03T08:04:04.000Z",
       "engagement": 118,
       "commentsUrl": "https://news.ycombinator.com/item?id=49152640",
-      "score": 9.38,
+      "score": 9.31,
       "roles": [
         "developer"
       ],
@@ -1131,7 +987,7 @@
         "role": 3,
         "product": 0,
         "source": 1,
-        "recency": 2.27,
+        "recency": 2.2,
         "engagement": 3.11,
         "noise": 0
       }
@@ -1168,7 +1024,7 @@
       "publishedAt": "2026-08-03T08:34:24.000Z",
       "engagement": 68,
       "commentsUrl": "https://news.ycombinator.com/item?id=49152871",
-      "score": 9.09,
+      "score": 9.02,
       "roles": [
         "developer"
       ],
@@ -1177,7 +1033,7 @@
         "role": 3,
         "product": 0,
         "source": 1,
-        "recency": 2.34,
+        "recency": 2.26,
         "engagement": 2.76,
         "noise": 0
       }
@@ -1189,17 +1045,17 @@
       "url": "https://openai.com/index/ten-advances-in-mathematics/",
       "summary": "",
       "publishedAt": "2026-08-03T16:27:12.000Z",
-      "engagement": 399,
+      "engagement": 417,
       "commentsUrl": "https://news.ycombinator.com/item?id=49157930",
-      "score": 8.62,
+      "score": 8.53,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 3.71,
-        "engagement": 3.9,
+        "recency": 3.6,
+        "engagement": 3.93,
         "noise": 0
       }
     },
@@ -1210,17 +1066,17 @@
       "url": "https://virtuallyfun.com/2026/08/03/windows-xp-2002-for-the-itanium-unbridled-rage/",
       "summary": "",
       "publishedAt": "2026-08-03T22:04:49.000Z",
-      "engagement": 42,
+      "engagement": 47,
       "commentsUrl": "https://news.ycombinator.com/item?id=49162086",
-      "score": 8.62,
+      "score": 8.53,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 5.17,
-        "engagement": 2.45,
+        "recency": 5.01,
+        "engagement": 2.52,
         "noise": 0
       }
     },
@@ -1232,7 +1088,7 @@
       "url": "https://www.bbc.co.uk/news/articles/cjrv0dy2e90o?at_medium=RSS&at_campaign=rss",
       "summary": "Fresh attacks on alternative shipping routes have left tankers facing an increasingly complex situation, analysts say.",
       "publishedAt": "2026-08-03T15:57:27.000Z",
-      "score": 8.61,
+      "score": 8.49,
       "roles": [
         "pm"
       ],
@@ -1241,7 +1097,7 @@
         "role": 3,
         "product": 0,
         "source": 2,
-        "recency": 3.61,
+        "recency": 3.49,
         "engagement": 0,
         "noise": 0
       }
@@ -1253,17 +1109,17 @@
       "url": "https://www.mcgill.ca/oss/article/critical-thinking/dunning-kruger-effect-probably-not-real",
       "summary": "",
       "publishedAt": "2026-08-03T19:39:34.000Z",
-      "engagement": 112,
+      "engagement": 117,
       "commentsUrl": "https://news.ycombinator.com/item?id=49160437",
-      "score": 8.56,
+      "score": 8.45,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 4.48,
-        "engagement": 3.08,
+        "recency": 4.34,
+        "engagement": 3.11,
         "noise": 0
       }
     },
@@ -1274,38 +1130,17 @@
       "url": "https://status.digdir.no/incidents/d7hvqmf2yr3l",
       "summary": "",
       "publishedAt": "2026-08-03T19:56:27.000Z",
-      "engagement": 80,
+      "engagement": 81,
       "commentsUrl": "https://news.ycombinator.com/item?id=49160631",
-      "score": 8.42,
+      "score": 8.29,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 4.56,
-        "engagement": 2.86,
-        "noise": 0
-      }
-    },
-    {
-      "id": "yr2zmd",
-      "source": "hn",
-      "title": "Smaller, faster, safer: running Kimi and GLM at scale",
-      "url": "https://blog.cloudflare.com/smaller-faster-safer-models/",
-      "summary": "",
-      "publishedAt": "2026-08-03T17:08:46.000Z",
-      "engagement": 135,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49158581",
-      "score": 8.07,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 3.87,
-        "engagement": 3.2,
+        "recency": 4.42,
+        "engagement": 2.87,
         "noise": 0
       }
     },
@@ -1353,14 +1188,14 @@
       }
     },
     {
-      "id": "yrico6",
+      "id": "yr2zmd",
       "source": "hn",
-      "title": "Seven Russian banks have moved to a certificate authority run by the state",
-      "url": "https://en.zona.media/article/2026/08/03/cert",
+      "title": "Smaller, faster, safer: running Kimi and GLM at scale",
+      "url": "https://blog.cloudflare.com/smaller-faster-safer-models/",
       "summary": "",
-      "publishedAt": "2026-08-03T21:33:34.000Z",
-      "engagement": 19,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49161733",
+      "publishedAt": "2026-08-03T17:08:46.000Z",
+      "engagement": 140,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49158581",
       "score": 7.97,
       "roles": [],
       "products": [],
@@ -1368,8 +1203,49 @@
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 5.01,
-        "engagement": 1.95,
+        "recency": 3.75,
+        "engagement": 3.22,
+        "noise": 0
+      }
+    },
+    {
+      "id": "lmlg72",
+      "source": "nyt",
+      "subSource": "home",
+      "title": "U.S. Sends Flight With Deportees to Venezuela for First Time Since Earthquakes",
+      "url": "https://www.nytimes.com/2026/08/03/world/americas/venezuela-us-deportation-flights-resume.html",
+      "summary": "A plane with 147 Venezuelans landed on Monday in the South American country amid criticism over the deaths of deportees housed in a collapsed building during June’s quakes.",
+      "publishedAt": "2026-08-04T00:55:34.000Z",
+      "score": 7.92,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 5.92,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "yrico6",
+      "source": "hn",
+      "title": "Seven Russian banks have moved to a certificate authority run by the state",
+      "url": "https://en.zona.media/article/2026/08/03/cert",
+      "summary": "",
+      "publishedAt": "2026-08-03T21:33:34.000Z",
+      "engagement": 22,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49161733",
+      "score": 7.9,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 4.86,
+        "engagement": 2.04,
         "noise": 0
       }
     },
@@ -1380,91 +1256,8 @@
       "url": "https://arstechnica.com/culture/2026/08/an-ai-supervised-remote-exam-went-so-badly-that-58000-students-must-retake-it/",
       "summary": "",
       "publishedAt": "2026-08-03T22:07:07.000Z",
-      "engagement": 13,
+      "engagement": 15,
       "commentsUrl": "https://news.ycombinator.com/item?id=49162105",
-      "score": 7.9,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 5.18,
-        "engagement": 1.72,
-        "noise": 0
-      }
-    },
-    {
-      "id": "ntjkir",
-      "source": "bbc",
-      "subSource": "business",
-      "title": "Why is Trump Media selling early access to Trump's Truth Social posts?",
-      "url": "https://www.bbc.co.uk/news/videos/c74g0q8eey9o?at_medium=RSS&at_campaign=rss",
-      "summary": "The service reportedly costs up to $100,000 (£74,170) per month and offers access to posts from influential accounts milliseconds before they appear online.",
-      "publishedAt": "2026-08-04T00:17:48.000Z",
-      "score": 7.89,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 5.89,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "yr1lrt",
-      "source": "hn",
-      "title": "Andy Pavlo joins ClickHouse to establish ClickHouse Labs",
-      "url": "https://clickhouse.com/blog/andy-pavlo-joins-clickhouse",
-      "summary": "",
-      "publishedAt": "2026-08-03T14:09:00.000Z",
-      "engagement": 265,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49156011",
-      "score": 7.88,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 3.24,
-        "engagement": 3.64,
-        "noise": 0
-      }
-    },
-    {
-      "id": "yrixjv",
-      "source": "hn",
-      "title": "Gmail support for sending from third-party email addresses ends January 2027",
-      "url": "https://support.google.com/mail/answer/17101213?hl=en",
-      "summary": "",
-      "publishedAt": "2026-08-03T22:55:34.000Z",
-      "engagement": 8,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49162481",
-      "score": 7.86,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 5.43,
-        "engagement": 1.43,
-        "noise": 0
-      }
-    },
-    {
-      "id": "yriwpr",
-      "source": "hn",
-      "title": "KDE Itinerary",
-      "url": "https://apps.kde.org/itinerary/",
-      "summary": "",
-      "publishedAt": "2026-08-03T22:35:09.000Z",
-      "engagement": 9,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49162342",
       "score": 7.83,
       "roles": [],
       "products": [],
@@ -1472,19 +1265,19 @@
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 5.33,
-        "engagement": 1.5,
+        "recency": 5.02,
+        "engagement": 1.81,
         "noise": 0
       }
     },
     {
-      "id": "bdjf5w",
+      "id": "23cudt",
       "source": "nyt",
       "subSource": "home",
-      "title": "Immigrant Held at Delaney Detention Center Has Died, Officials Say",
-      "url": "https://www.nytimes.com/2026/08/03/nyregion/ice-detention-center-death-delaney-hall-nj.html",
-      "summary": "The mayor of Newark identified the dead man as Edwin Lopez-Cornejo. The New Jersey center has been the focus of intense scrutiny for its treatment of detainees.",
-      "publishedAt": "2026-08-04T00:05:43.000Z",
+      "title": "‘A War Zone’: Spokane Wildfires Leave a Devastating Trail of Destruction",
+      "url": "https://www.nytimes.com/2026/08/03/us/spokane-wildfires-update.html",
+      "summary": "Despite the scale of the damage, there have been no reported fatalities in the fires that started over the weekend. Weather conditions have improved, allowing some evacuees to return.",
+      "publishedAt": "2026-08-04T00:38:59.000Z",
       "score": 7.82,
       "roles": [],
       "products": [],
@@ -1498,55 +1291,15 @@
       }
     },
     {
-      "id": "yridc8",
+      "id": "yr1lrt",
       "source": "hn",
-      "title": "ZX Spectrum System Tour: Text Mode",
-      "url": "https://bumbershootsoft.wordpress.com/2026/05/30/zx-spectrum-system-tour-text-mode/",
+      "title": "Andy Pavlo joins ClickHouse to establish ClickHouse Labs",
+      "url": "https://clickhouse.com/blog/andy-pavlo-joins-clickhouse",
       "summary": "",
-      "publishedAt": "2026-08-03T21:39:12.000Z",
-      "engagement": 14,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49161801",
-      "score": 7.81,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 5.04,
-        "engagement": 1.76,
-        "noise": 0
-      }
-    },
-    {
-      "id": "ve8opd",
-      "source": "guardian",
-      "title": "Beast of Reincarnation review – a taxing reflection of human-made damage",
-      "url": "https://www.theguardian.com/games/2026/aug/04/beast-of-reincarnation-review",
-      "summary": "PC, Xbox, PlayStation 5; Game Freak/Fictions\nGame Freak channels a post-apocalyptic reality that reflects our own repetitive erosion cycles, with a fair bit of hand-holding\nMost of your time in Beast of Reincarnation is spent collecting last words. You cross paths with robots lying on the ground, who muster whatever energy they have left to provide guidance. These interactions are fleeting. Attempt to talk to them a second time, and protagonist Emma makes their fates painfully clear: “They’ve already passed on.”\nThe latest detour by Game Freak, the studio best known as the primary developer of Pokémon games, is an action RPG set in a post-apocalyptic Japan. Taking cues from Sekiro: Shadows Die Twice, Final Fantasy VII Remake, and NieR: Automata, you wield the sword of an outcast accompanied by an ever-loyal canine. The pair embark on a taxing and often monotonous journey to defeat the titular beast, which nonetheless serves a thematic purpose to bolster a decaying reality, while reflecting a possible future for ours.\n Continue reading...",
-      "publishedAt": "2026-08-04T00:00:06.000Z",
+      "publishedAt": "2026-08-03T14:09:00.000Z",
+      "engagement": 269,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49156011",
       "score": 7.79,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 5.79,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "yr139j",
-      "source": "hn",
-      "title": "MiniMax H3 Day-0 Support in ComfyUI: Open Weights, Native Audio, and 2K Video",
-      "url": "https://blog.comfy.org/p/minimax-h3-day-0-support-in-comfyui",
-      "summary": "",
-      "publishedAt": "2026-08-03T13:34:43.000Z",
-      "engagement": 245,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49155629",
-      "score": 7.72,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
@@ -1554,43 +1307,80 @@
         "product": 0,
         "source": 1,
         "recency": 3.14,
-        "engagement": 3.59,
+        "engagement": 3.65,
         "noise": 0
       }
     },
     {
-      "id": "a44lph",
-      "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "Monthly General Discussion - Aug 2026",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1vcr3jf/monthly_general_discussion_aug_2026/",
-      "summary": "This thread is a place where you can share things that might not warrant their own thread. It is automatically posted each month and you can find previous threads in the collection.\n Examples:\n  \nWhat are you working on this month?\n What was something you accomplished?\n What was something you learned recently?\n What is something frustrating you currently?\n  \nAs always, sub rules apply. Please be r",
-      "publishedAt": "2026-08-01T16:00:24.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vcr3jf/monthly_general_discussion_aug_2026/",
-      "score": 7.71,
+      "id": "yridc8",
+      "source": "hn",
+      "title": "ZX Spectrum System Tour: Text Mode",
+      "url": "https://bumbershootsoft.wordpress.com/2026/05/30/zx-spectrum-system-tour-text-mode/",
+      "summary": "",
+      "publishedAt": "2026-08-03T21:39:12.000Z",
+      "engagement": 16,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49161801",
+      "score": 7.73,
       "roles": [],
-      "products": [
-        "data-factory",
-        "dataflows",
-        "pipelines"
-      ],
+      "products": [],
       "scoreBreakdown": {
         "role": 0,
-        "product": 7.5,
-        "source": 0,
-        "recency": 0.21,
+        "product": 0,
+        "source": 1,
+        "recency": 4.88,
+        "engagement": 1.85,
+        "noise": 0
+      }
+    },
+    {
+      "id": "yriwpr",
+      "source": "hn",
+      "title": "KDE Itinerary",
+      "url": "https://apps.kde.org/itinerary/",
+      "summary": "",
+      "publishedAt": "2026-08-03T22:35:09.000Z",
+      "engagement": 10,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49162342",
+      "score": 7.72,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 5.16,
+        "engagement": 1.56,
+        "noise": 0
+      }
+    },
+    {
+      "id": "ntjkir",
+      "source": "bbc",
+      "subSource": "business",
+      "title": "Why is Trump Media selling early access to Trump's Truth Social posts?",
+      "url": "https://www.bbc.co.uk/news/videos/c74g0q8eey9o?at_medium=RSS&at_campaign=rss",
+      "summary": "The service reportedly costs up to $100,000 (£74,170) per month and offers access to posts from influential accounts milliseconds before they appear online.",
+      "publishedAt": "2026-08-04T00:17:48.000Z",
+      "score": 7.7,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 5.7,
         "engagement": 0,
         "noise": 0
       }
     },
     {
-      "id": "q9kegh",
-      "source": "bbc",
-      "subSource": "business",
-      "title": "Half price rail travel extended to 18-year-olds",
-      "url": "https://www.bbc.co.uk/news/articles/cy0jyln07r7o?at_medium=RSS&at_campaign=rss",
-      "summary": "They'll be able to buy the 16-17 Saver railcard up until the day before they turn 18.",
-      "publishedAt": "2026-08-03T23:34:13.000Z",
+      "id": "bdjf5w",
+      "source": "nyt",
+      "subSource": "home",
+      "title": "Immigrant Held at Delaney Detention Center Has Died, Officials Say",
+      "url": "https://www.nytimes.com/2026/08/03/nyregion/ice-detention-center-death-delaney-hall-nj.html",
+      "summary": "The mayor of Newark identified the dead man as Edwin Lopez-Cornejo. The New Jersey center has been the focus of intense scrutiny for its treatment of detainees.",
+      "publishedAt": "2026-08-04T00:05:43.000Z",
       "score": 7.64,
       "roles": [],
       "products": [],
@@ -1604,241 +1394,74 @@
       }
     },
     {
+      "id": "yr139j",
+      "source": "hn",
+      "title": "MiniMax H3 Day-0 Support in ComfyUI: Open Weights, Native Audio, and 2K Video",
+      "url": "https://blog.comfy.org/p/minimax-h3-day-0-support-in-comfyui",
+      "summary": "",
+      "publishedAt": "2026-08-03T13:34:43.000Z",
+      "engagement": 248,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49155629",
+      "score": 7.63,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 3.04,
+        "engagement": 3.59,
+        "noise": 0
+      }
+    },
+    {
+      "id": "ve8opd",
+      "source": "guardian",
+      "title": "Beast of Reincarnation review – a taxing reflection of human-made damage",
+      "url": "https://www.theguardian.com/games/2026/aug/04/beast-of-reincarnation-review",
+      "summary": "PC, Xbox, PlayStation 5; Game Freak/Fictions\nGame Freak channels a post-apocalyptic reality that reflects our own repetitive erosion cycles, with a fair bit of hand-holding\nMost of your time in Beast of Reincarnation is spent collecting last words. You cross paths with robots lying on the ground, who muster whatever energy they have left to provide guidance. These interactions are fleeting. Attempt to talk to them a second time, and protagonist Emma makes their fates painfully clear: “They’ve already passed on.”\nThe latest detour by Game Freak, the studio best known as the primary developer of Pokémon games, is an action RPG set in a post-apocalyptic Japan. Taking cues from Sekiro: Shadows Die Twice, Final Fantasy VII Remake, and NieR: Automata, you wield the sword of an outcast accompanied by an ever-loyal canine. The pair embark on a taxing and often monotonous journey to defeat the titular beast, which nonetheless serves a thematic purpose to bolster a decaying reality, while reflecting a possible future for ours.\n Continue reading...",
+      "publishedAt": "2026-08-04T00:00:06.000Z",
+      "score": 7.61,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 5.61,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
       "id": "yr3pjs",
       "source": "hn",
       "title": "KisakCOD – open-source reimplementation of Call of Duty 4 Multiplayer",
       "url": "https://github.com/SwagSoftware/KisakCOD",
       "summary": "",
       "publishedAt": "2026-08-03T18:58:00.000Z",
-      "engagement": 34,
+      "engagement": 35,
       "commentsUrl": "https://news.ycombinator.com/item?id=49159970",
-      "score": 7.62,
+      "score": 7.5,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 4.3,
-        "engagement": 2.32,
+        "recency": 4.17,
+        "engagement": 2.33,
         "noise": 0
       }
     },
     {
-      "id": "yrictf",
-      "source": "hn",
-      "title": "Testing ultra-thin display film technology in Shenzhen",
-      "url": "https://twitter.com/Rainmaker1973/status/2083469397394374920",
-      "summary": "",
-      "publishedAt": "2026-08-03T21:38:48.000Z",
-      "engagement": 10,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49161796",
-      "score": 7.6,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 5.04,
-        "engagement": 1.56,
-        "noise": 0
-      }
-    },
-    {
-      "id": "xrzo99",
-      "source": "bbc",
-      "subSource": "tech",
-      "title": "Tokenomics: Why making AI pay is tricky",
-      "url": "https://www.bbc.co.uk/news/articles/c872r52x7jgo?at_medium=RSS&at_campaign=rss",
-      "summary": "Buyers of AI services are struggling to control costs and sellers are not sure how much to charge.",
-      "publishedAt": "2026-08-03T23:21:10.000Z",
-      "score": 7.57,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 5.57,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "wkhlxw",
+      "id": "q9kegh",
       "source": "bbc",
       "subSource": "business",
-      "title": "What heatwaves mean for summer weddings – and how to plan for one",
-      "url": "https://www.bbc.co.uk/news/articles/cgr7qrdx4qwo?at_medium=RSS&at_campaign=rss",
-      "summary": "The wedding industry is facing last-minute costs to cope with the heat and October bookings are up.",
-      "publishedAt": "2026-08-03T23:20:15.000Z",
-      "score": 7.57,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 5.57,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "j2fn7r",
-      "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "Data Migration Horror Stories: What's your worst nightmare?",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1vc4t1d/data_migration_horror_stories_whats_your_worst/",
-      "summary": "As we all know...data migrations can be a beast. But it's also a necessary evil. \n Tell me about the worst data migration you were on (or heard about) that would wake up even the most seasoned data engineer in a cold sweat\n    submitted by    /u/Oh-No-404  \n [link]   [comments]",
-      "publishedAt": "2026-07-31T22:04:13.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vc4t1d/data_migration_horror_stories_whats_your_worst/",
-      "score": 7.57,
-      "roles": [],
-      "products": [
-        "data-factory",
-        "dataflows",
-        "pipelines"
-      ],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 7.5,
-        "source": 0,
-        "recency": 0.07,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "w1ropc",
-      "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "Does anyone purposefully use category theory-based ideas in daily practice?",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1vbxots/does_anyone_purposefully_use_category_theorybased/",
-      "summary": "From time to time I get interested in functional programming, category theory and Haskell, but every time I've ever tried to go down the rabbit hole I give up pretty quickly because it just isn't clear that I would ever use these concepts anything other than by accident. For example, the concepts of Optics, Prisms, Lenses, etc sound pretty neat but also fairly daunting to learn. Is anyone here usi",
-      "publishedAt": "2026-07-31T17:35:38.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vbxots/does_anyone_purposefully_use_category_theorybased/",
-      "score": 7.56,
-      "roles": [],
-      "products": [
-        "data-factory",
-        "dataflows",
-        "pipelines"
-      ],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 7.5,
-        "source": 0,
-        "recency": 0.06,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "ct1xjo",
-      "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "Feels weird getting laid off",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1vbvipq/feels_weird_getting_laid_off/",
-      "summary": "I am getting laid off by the end of today. They told us 2 months in advance. I don’t want to be a data engineer anymore so I won’t be applying to new positions. I spent 4 years at this company from the very beginning of the contract to the very end. I went through all the management changes, employees leaving, getting laid off before us, new employees coming and going, and just random changes thro",
-      "publishedAt": "2026-07-31T16:17:28.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vbvipq/feels_weird_getting_laid_off/",
-      "score": 7.55,
-      "roles": [],
-      "products": [
-        "data-factory",
-        "dataflows",
-        "pipelines"
-      ],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 7.5,
-        "source": 0,
-        "recency": 0.05,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "6u0bpw",
-      "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "Advice on AI",
-      "url": "https://www.reddit.com/r/dataengineering/comments/1vbtlvt/advice_on_ai/",
-      "summary": "I am the only analytics engineer at my company. We are in the middle of transitioning to a cloud warehouse. The warehouse is mostly built (90% by me because we don't have data engineers or architects). \n I don't technically sit in IT, and they have been unwilling to share the logic they used to build the on premises warehouse. Recreating some of the tables has been a nightmare because I can't see ",
-      "publishedAt": "2026-07-31T15:08:43.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vbtlvt/advice_on_ai/",
-      "score": 7.55,
-      "roles": [],
-      "products": [
-        "data-factory",
-        "dataflows",
-        "pipelines"
-      ],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 7.5,
-        "source": 0,
-        "recency": 0.05,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "yr2xeg",
-      "source": "hn",
-      "title": "Use Task Runners for Common Coding Tasks",
-      "url": "https://hamvocke.com/blog/task-runners/",
-      "summary": "",
-      "publishedAt": "2026-08-03T16:51:51.000Z",
-      "engagement": 66,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49158287",
-      "score": 7.54,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 3.8,
-        "engagement": 2.74,
-        "noise": 0
-      }
-    },
-    {
-      "id": "ofrkz2",
-      "source": "reddit",
-      "subSource": "dataengineering",
-      "title": "How to Lead a Remote Data Team Effectively",
-      "url": "https://open.substack.com/pub/datagibberish/p/how-to-lead-a-remote-data-team-effectively?r=odlo3&amp;utm_campaign=post-expanded-share&amp;utm_medium=web",
-      "summary": "Last month I posted on LinkedIn about how much I love working remotely. Then, I got a few comments, and DMs telling me remote working doesn't really work.\n So, I decided to write this article, where I explain how a manger should lead a remote engineering team. The article is a bit long, but includes everything that came to my mind after practicing remote way of working for nearly a decade.\n I gues",
-      "publishedAt": "2026-07-31T13:20:49.000Z",
-      "commentsUrl": "https://www.reddit.com/r/dataengineering/comments/1vbqsem/how_to_lead_a_remote_data_team_effectively/",
-      "score": 7.54,
-      "roles": [],
-      "products": [
-        "data-factory",
-        "dataflows",
-        "pipelines"
-      ],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 7.5,
-        "source": 0,
-        "recency": 0.04,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "uue3zp",
-      "source": "nyt",
-      "subSource": "business",
-      "title": "Republicans Let Trump Keep Unparalleled Benefit: I.R.S. Immunity",
-      "url": "https://www.nytimes.com/2026/08/03/business/trump-irs-todd-blanche.html",
-      "summary": "The rebellion against Todd Blanche’s nomination to be attorney general, now seemingly contained, at no point fundamentally questioned President Trump’s new protections from the I.R.S.",
-      "publishedAt": "2026-08-03T23:02:29.000Z",
+      "title": "Half price rail travel extended to 18-year-olds",
+      "url": "https://www.bbc.co.uk/news/articles/cy0jyln07r7o?at_medium=RSS&at_campaign=rss",
+      "summary": "They'll be able to buy the 16-17 Saver railcard up until the day before they turn 18.",
+      "publishedAt": "2026-08-03T23:34:13.000Z",
       "score": 7.47,
       "roles": [],
       "products": [],
@@ -1852,63 +1475,107 @@
       }
     },
     {
-      "id": "yr3nbv",
+      "id": "yr2xeg",
       "source": "hn",
-      "title": "ZX Spectrum System Tour: Sound",
-      "url": "https://bumbershootsoft.wordpress.com/2026/08/01/zx-spectrum-system-tour-sound/",
+      "title": "Use Task Runners for Common Coding Tasks",
+      "url": "https://hamvocke.com/blog/task-runners/",
       "summary": "",
-      "publishedAt": "2026-08-03T18:32:06.000Z",
-      "engagement": 29,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49159676",
-      "score": 7.41,
+      "publishedAt": "2026-08-03T16:51:51.000Z",
+      "engagement": 67,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49158287",
+      "score": 7.43,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 4.2,
-        "engagement": 2.22,
+        "recency": 3.68,
+        "engagement": 2.75,
         "noise": 0
       }
     },
     {
-      "id": "yr2e4d",
-      "source": "hn",
-      "title": "What's the largest software project AI can complete on its own?",
-      "url": "https://epoch.ai/MirrorCode",
-      "summary": "",
-      "publishedAt": "2026-08-03T16:16:40.000Z",
-      "engagement": 64,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49157786",
-      "score": 7.39,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 3.67,
-        "engagement": 2.72,
-        "noise": 0
-      }
-    },
-    {
-      "id": "djh7um",
-      "source": "nyt",
-      "subSource": "home",
-      "title": "Senate Moves Ahead on Bill to Avert a Shutdown",
-      "url": "https://www.nytimes.com/2026/08/03/us/politics/senate-spending-bill-shutdown-midterms.html",
-      "summary": "Senators in both parties are eager to avoid another spending skirmish before the midterm elections, but the measure still must pass the House.",
-      "publishedAt": "2026-08-03T22:46:16.000Z",
-      "score": 7.38,
+      "id": "xrzo99",
+      "source": "bbc",
+      "subSource": "tech",
+      "title": "Tokenomics: Why making AI pay is tricky",
+      "url": "https://www.bbc.co.uk/news/articles/c872r52x7jgo?at_medium=RSS&at_campaign=rss",
+      "summary": "Buyers of AI services are struggling to control costs and sellers are not sure how much to charge.",
+      "publishedAt": "2026-08-03T23:21:10.000Z",
+      "score": 7.4,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 5.38,
+        "recency": 5.4,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "wwkt3z",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "How do you track Entra bypasses before they become permanent?",
+      "url": "https://www.reddit.com/r/AZURE/comments/1ve4hew/how_do_you_track_entra_bypasses_before_they/",
+      "summary": "We manage multiple Entra tenants for different clients. Common pattern: regional auth issues or MFA problems lead to temporary conditional access bypasses. Someone creates them under pressure, gives them a terrible name, and nobody ever looks at them again.\n Six months later the client's security team asks for a posture report. We are digging through policies that feel like archaeological layers o",
+      "publishedAt": "2026-08-03T05:34:59.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1ve4hew/how_do_you_track_entra_bypasses_before_they/",
+      "score": 7.4,
+      "roles": [
+        "sre"
+      ],
+      "products": [
+        "azure"
+      ],
+      "scoreBreakdown": {
+        "role": 3,
+        "product": 2.5,
+        "source": 0,
+        "recency": 1.9,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "wkhlxw",
+      "source": "bbc",
+      "subSource": "business",
+      "title": "What heatwaves mean for summer weddings – and how to plan for one",
+      "url": "https://www.bbc.co.uk/news/articles/cgr7qrdx4qwo?at_medium=RSS&at_campaign=rss",
+      "summary": "The wedding industry is facing last-minute costs to cope with the heat and October bookings are up.",
+      "publishedAt": "2026-08-03T23:20:15.000Z",
+      "score": 7.39,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 5.39,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "uue3zp",
+      "source": "nyt",
+      "subSource": "business",
+      "title": "Republicans Let Trump Keep Unparalleled Benefit: I.R.S. Immunity",
+      "url": "https://www.nytimes.com/2026/08/03/business/trump-irs-todd-blanche.html",
+      "summary": "The rebellion against Todd Blanche’s nomination to be attorney general, now seemingly contained, at no point fundamentally questioned President Trump’s new protections from the I.R.S.",
+      "publishedAt": "2026-08-03T23:02:29.000Z",
+      "score": 7.3,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 5.3,
         "engagement": 0,
         "noise": 0
       }
@@ -1920,76 +1587,78 @@
       "url": "https://pandoc.org/twenty-years-of-pandoc.html",
       "summary": "",
       "publishedAt": "2026-08-03T15:04:53.000Z",
-      "engagement": 90,
+      "engagement": 97,
       "commentsUrl": "https://news.ycombinator.com/item?id=49156750",
-      "score": 7.36,
+      "score": 7.3,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 3.43,
-        "engagement": 2.94,
+        "recency": 3.32,
+        "engagement": 2.99,
         "noise": 0
       }
     },
     {
-      "id": "dw0efa",
+      "id": "yr2e4d",
+      "source": "hn",
+      "title": "What's the largest software project AI can complete on its own?",
+      "url": "https://epoch.ai/MirrorCode",
+      "summary": "",
+      "publishedAt": "2026-08-03T16:16:40.000Z",
+      "engagement": 66,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49157786",
+      "score": 7.3,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 3.56,
+        "engagement": 2.74,
+        "noise": 0
+      }
+    },
+    {
+      "id": "yr3nbv",
+      "source": "hn",
+      "title": "ZX Spectrum System Tour: Sound",
+      "url": "https://bumbershootsoft.wordpress.com/2026/08/01/zx-spectrum-system-tour-sound/",
+      "summary": "",
+      "publishedAt": "2026-08-03T18:32:06.000Z",
+      "engagement": 30,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49159676",
+      "score": 7.3,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 4.07,
+        "engagement": 2.24,
+        "noise": 0
+      }
+    },
+    {
+      "id": "djh7um",
       "source": "nyt",
       "subSource": "home",
-      "title": "California Democrats Want to Tax Billionaires. They Can’t Agree on How.",
-      "url": "https://www.nytimes.com/2026/08/03/us/california-democrats-billionaire-tax.html",
-      "summary": "Leaders of the state Democratic Party endorsed the ballot measure slated for November, but the party remains far from united on the issue as Democrats nationwide grapple with a growing wealth gap.",
-      "publishedAt": "2026-08-03T22:31:50.000Z",
-      "score": 7.31,
+      "title": "Senate Moves Ahead on Bill to Avert a Shutdown",
+      "url": "https://www.nytimes.com/2026/08/03/us/politics/senate-spending-bill-shutdown-midterms.html",
+      "summary": "Senators in both parties are eager to avoid another spending skirmish before the midterm elections, but the measure still must pass the House.",
+      "publishedAt": "2026-08-03T22:46:16.000Z",
+      "score": 7.22,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 5.31,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "torfo8",
-      "source": "nyt",
-      "subSource": "home",
-      "title": "N.Y. Law Barring ICE Agents From Wearing Masks Is Blocked by Judge",
-      "url": "https://www.nytimes.com/2026/08/03/nyregion/ice-mask-ban-new-york.html",
-      "summary": "While the ruling dealt a blow to New York’s efforts to rein in ICE, a ban on formal cooperation with local police officers will move forward.",
-      "publishedAt": "2026-08-03T22:17:01.000Z",
-      "score": 7.23,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 5.23,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "8jdt93",
-      "source": "nyt",
-      "subSource": "home",
-      "title": "In Michigan’s 7th District’s Democratic Primary, a Centrist Split Boosts Progressive Hopes",
-      "url": "https://www.nytimes.com/2026/08/03/us/politics/democrats-michigan-house-primary-progressives-moderates.html",
-      "summary": "Unable to unite behind a single candidate in Michigan’s Seventh Congressional District, moderate Democrats worry that they’ve complicated their chances in a key November battleground.",
-      "publishedAt": "2026-08-03T22:11:32.000Z",
-      "score": 7.2,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 5.2,
+        "recency": 5.22,
         "engagement": 0,
         "noise": 0
       }
@@ -2017,41 +1686,21 @@
       }
     },
     {
-      "id": "wj7lmd",
+      "id": "dw0efa",
       "source": "nyt",
       "subSource": "home",
-      "title": "Wildfires Force 60,000 Evacuations in Spokane",
-      "url": "https://www.nytimes.com/2026/08/03/briefing/spokane-cyclosporiasis-blanche.html",
-      "summary": "Plus, two deaths are linked to cyclosporiasis. Here’s the latest at the end of Monday.",
-      "publishedAt": "2026-08-03T21:56:06.000Z",
-      "score": 7.13,
+      "title": "California Democrats Want to Tax Billionaires. They Can’t Agree on How.",
+      "url": "https://www.nytimes.com/2026/08/03/us/california-democrats-billionaire-tax.html",
+      "summary": "Leaders of the state Democratic Party endorsed the ballot measure slated for November, but the party remains far from united on the issue as Democrats nationwide grapple with a growing wealth gap.",
+      "publishedAt": "2026-08-03T22:31:51.000Z",
+      "score": 7.14,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 5.13,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "1ptn8i",
-      "source": "nyt",
-      "subSource": "home",
-      "title": "After Colleges Reject ‘Compact,’ Trump Officials Try a Letter",
-      "url": "https://www.nytimes.com/2026/08/03/us/trump-mcmahon-colleges-letter.html",
-      "summary": "The open letter from Education Secretary Linda McMahon fell far short of the attempt at a compact last year that dangled research money in return for embracing the Trump administration’s agenda.",
-      "publishedAt": "2026-08-03T21:51:44.000Z",
-      "score": 7.1,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 5.1,
+        "recency": 5.14,
         "engagement": 0,
         "noise": 0
       }
@@ -2064,7 +1713,7 @@
       "url": "https://www.nytimes.com/2026/07/31/business/situational-awareness-leopold-aschenbrenner.html",
       "summary": "Situational Awareness, led by a 24-year-old, exploded onto the artificial intelligence scene — and then nose-dived.",
       "publishedAt": "2026-07-31T22:18:59.000Z",
-      "score": 7.08,
+      "score": 7.07,
       "roles": [],
       "products": [
         "ai"
@@ -2073,19 +1722,19 @@
         "role": 0,
         "product": 5,
         "source": 2,
-        "recency": 0.08,
+        "recency": 0.07,
         "engagement": 0,
         "noise": 0
       }
     },
     {
-      "id": "vvrc04",
+      "id": "torfo8",
       "source": "nyt",
-      "subSource": "business",
-      "title": "Nanit and Other Baby-Tracking Start-Ups Eye Collecting Even More Data",
-      "url": "https://www.nytimes.com/2026/08/02/business/smart-baby-monitors-nanit-owlet.html",
-      "summary": "Nanit and other start-ups want to track your children through the night — and soon, for much longer than that.",
-      "publishedAt": "2026-08-03T21:45:25.000Z",
+      "subSource": "home",
+      "title": "N.Y. Law Barring ICE Agents From Wearing Masks Is Blocked by Judge",
+      "url": "https://www.nytimes.com/2026/08/03/nyregion/ice-mask-ban-new-york.html",
+      "summary": "While the ruling dealt a blow to New York’s efforts to rein in ICE, a ban on formal cooperation with local police officers will move forward.",
+      "publishedAt": "2026-08-03T22:17:01.000Z",
       "score": 7.07,
       "roles": [],
       "products": [],
@@ -2094,26 +1743,6 @@
         "product": 0,
         "source": 2,
         "recency": 5.07,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "cfad9",
-      "source": "bbc",
-      "subSource": "world",
-      "title": "EU calls for stronger borders after Ceuta migrant crossings",
-      "url": "https://www.bbc.co.uk/news/articles/cyvl84zmgyro?at_medium=RSS&at_campaign=rss",
-      "summary": "Ursula von der Leyen has called for action ahead of an urgent EU interior ministers meeting to discuss the issue.",
-      "publishedAt": "2026-08-03T21:43:10.000Z",
-      "score": 7.06,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 5.06,
         "engagement": 0,
         "noise": 0
       }
@@ -2141,44 +1770,22 @@
       }
     },
     {
-      "id": "yqylk7",
-      "source": "hn",
-      "title": "Don't be a meat proxy",
-      "url": "https://gruhn.me/blog/2026-08-03/",
-      "summary": "",
-      "publishedAt": "2026-08-03T06:28:01.000Z",
-      "engagement": 1693,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49151933",
-      "score": 7.06,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 2.06,
-        "engagement": 4,
-        "noise": 0
-      }
-    },
-    {
-      "id": "yr2y45",
-      "source": "hn",
-      "title": "ASCII Today",
-      "url": "https://ascii.today/",
-      "summary": "",
-      "publishedAt": "2026-08-03T16:56:18.000Z",
-      "engagement": 29,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49158372",
+      "id": "8jdt93",
+      "source": "nyt",
+      "subSource": "home",
+      "title": "In Michigan’s 7th District’s Democratic Primary, a Centrist Split Boosts Progressive Hopes",
+      "url": "https://www.nytimes.com/2026/08/03/us/politics/democrats-michigan-house-primary-progressives-moderates.html",
+      "summary": "Unable to unite behind a single candidate in Michigan’s Seventh Congressional District, moderate Democrats worry that they’ve complicated their chances in a key November battleground.",
+      "publishedAt": "2026-08-03T22:11:33.000Z",
       "score": 7.04,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
-        "source": 1,
-        "recency": 3.82,
-        "engagement": 2.22,
+        "source": 2,
+        "recency": 5.04,
+        "engagement": 0,
         "noise": 0
       }
     },
@@ -2424,28 +2031,6 @@
       }
     },
     {
-      "id": "20w4x0",
-      "source": "nyt",
-      "subSource": "tech",
-      "title": "OpenAI Close to Landing $500 Billion Data Center With Backing From Nvidia",
-      "url": "https://www.nytimes.com/2026/07/27/technology/openai-data-center-nvidia.html",
-      "summary": "The chipmaking giant is in talks with OpenAI to provide a $250 billion financial backstop for the project, which would be among the largest of the A.I. boom.",
-      "publishedAt": "2026-07-28T03:08:45.000Z",
-      "score": 7,
-      "roles": [],
-      "products": [
-        "ai"
-      ],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 5,
-        "source": 2,
-        "recency": 0,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
       "id": "p9dwhd",
       "source": "guardian",
       "title": "AI and artists can click – a new manifesto for modern creativity",
@@ -2467,13 +2052,57 @@
       }
     },
     {
-      "id": "wfms9d",
+      "id": "yqylk7",
+      "source": "hn",
+      "title": "Don't be a meat proxy",
+      "url": "https://gruhn.me/blog/2026-08-03/",
+      "summary": "",
+      "publishedAt": "2026-08-03T06:28:01.000Z",
+      "engagement": 1694,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49151933",
+      "score": 7,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 2,
+        "engagement": 4,
+        "noise": 0
+      }
+    },
+    {
+      "id": "5ptag",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "Сredits from Microsoft for Startups. Denial of a request to increase GPU limits",
+      "url": "https://www.reddit.com/r/AZURE/comments/1veong5/сredits_from_microsoft_for_startups_denial_of_a/",
+      "summary": "After filling out the startup form from Barclays Eagle Labs, I received a referral code for the Microsoft for Startups program. As a result, I was credited with $100,000. I’ve been emailing support for three days now, asking them to increase my limits for creating machines with GPUs. Support keeps lying to me and isn’t doing anything. They’re denying my requests to create machines with GPUs via em",
+      "publishedAt": "2026-08-03T20:16:24.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1veong5/сredits_from_microsoft_for_startups_denial_of_a/",
+      "score": 7,
+      "roles": [],
+      "products": [
+        "azure"
+      ],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 2.5,
+        "source": 0,
+        "recency": 4.5,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "wj7lmd",
       "source": "nyt",
-      "subSource": "business",
-      "title": "Education Dept. to Wipe Out Student Loans of 170,000 More Defrauded Borrowers",
-      "url": "https://www.nytimes.com/2026/08/03/business/student-loans-borrower-defense.html",
-      "summary": "The sprawling case, centered on students defrauded by for-profit schools, has now become the largest class-action settlement in American history.",
-      "publishedAt": "2026-08-03T21:24:03.000Z",
+      "subSource": "home",
+      "title": "Wildfires Force 60,000 Evacuations in Spokane",
+      "url": "https://www.nytimes.com/2026/08/03/briefing/spokane-cyclosporiasis-blanche.html",
+      "summary": "Plus, two deaths are linked to cyclosporiasis. Here’s the latest at the end of Monday.",
+      "publishedAt": "2026-08-03T21:56:06.000Z",
       "score": 6.97,
       "roles": [],
       "products": [],
@@ -2487,6 +2116,128 @@
       }
     },
     {
+      "id": "1ptn8i",
+      "source": "nyt",
+      "subSource": "home",
+      "title": "After Colleges Reject ‘Compact,’ Trump Officials Try a Letter",
+      "url": "https://www.nytimes.com/2026/08/03/us/trump-mcmahon-colleges-letter.html",
+      "summary": "The open letter from Education Secretary Linda McMahon fell far short of the attempt at a compact last year that dangled research money in return for embracing the Trump administration’s agenda.",
+      "publishedAt": "2026-08-03T21:51:44.000Z",
+      "score": 6.94,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 4.94,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "yr2y45",
+      "source": "hn",
+      "title": "ASCII Today",
+      "url": "https://ascii.today/",
+      "summary": "",
+      "publishedAt": "2026-08-03T16:56:18.000Z",
+      "engagement": 30,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49158372",
+      "score": 6.94,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 3.7,
+        "engagement": 2.24,
+        "noise": 0
+      }
+    },
+    {
+      "id": "vvrc04",
+      "source": "nyt",
+      "subSource": "business",
+      "title": "Nanit and Other Baby-Tracking Start-Ups Eye Collecting Even More Data",
+      "url": "https://www.nytimes.com/2026/08/02/business/smart-baby-monitors-nanit-owlet.html",
+      "summary": "Nanit and other start-ups want to track your children through the night — and soon, for much longer than that.",
+      "publishedAt": "2026-08-03T21:45:25.000Z",
+      "score": 6.91,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 4.91,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "cfad9",
+      "source": "bbc",
+      "subSource": "world",
+      "title": "EU calls for stronger borders after Ceuta migrant crossings",
+      "url": "https://www.bbc.co.uk/news/articles/cyvl84zmgyro?at_medium=RSS&at_campaign=rss",
+      "summary": "Ursula von der Leyen has called for action ahead of an urgent EU interior ministers meeting to discuss the issue.",
+      "publishedAt": "2026-08-03T21:43:10.000Z",
+      "score": 6.9,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 4.9,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "yqyk2u",
+      "source": "hn",
+      "title": "More German than many Germans",
+      "url": "https://mertbulan.com/more-german-than-many-germans/",
+      "summary": "",
+      "publishedAt": "2026-08-03T06:00:14.000Z",
+      "engagement": 396,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49151734",
+      "score": 6.84,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 1.95,
+        "engagement": 3.9,
+        "noise": 0
+      }
+    },
+    {
+      "id": "wfms9d",
+      "source": "nyt",
+      "subSource": "business",
+      "title": "Education Dept. to Wipe Out Student Loans of 170,000 More Defrauded Borrowers",
+      "url": "https://www.nytimes.com/2026/08/03/business/student-loans-borrower-defense.html",
+      "summary": "The sprawling case, centered on students defrauded by for-profit schools, has now become the largest class-action settlement in American history.",
+      "publishedAt": "2026-08-03T21:24:03.000Z",
+      "score": 6.81,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 4.81,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
       "id": "1k89z5",
       "source": "nyt",
       "subSource": "home",
@@ -2494,14 +2245,14 @@
       "url": "https://www.nytimes.com/2026/08/03/arts/dance/dudley-laufman-dead.html",
       "summary": "A farmer, poet and musician, he revitalized contra dancing in the 1960s and ’70s, bringing the tradition to a new generation.",
       "publishedAt": "2026-08-03T21:22:22.000Z",
-      "score": 6.96,
+      "score": 6.8,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 4.96,
+        "recency": 4.8,
         "engagement": 0,
         "noise": 0
       }
@@ -2514,14 +2265,14 @@
       "url": "https://www.nytimes.com/2026/08/03/us/politics/democratic-socialists-midterms-democrats-republicans.html",
       "summary": "After notching primary victories, D.S.A. members in Chicago debated whether socialist candidates should be free to distance themselves from goals like abolishing prisons as they chase more seats this fall.",
       "publishedAt": "2026-08-03T21:14:51.000Z",
-      "score": 6.92,
+      "score": 6.77,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 4.92,
+        "recency": 4.77,
         "engagement": 0,
         "noise": 0
       }
@@ -2534,55 +2285,14 @@
       "url": "https://www.nytimes.com/2026/08/03/us/brown-president-christina-paxson-resign.html",
       "summary": "The president, Christina H. Paxson, led the campus for over a decade, but in recent years faced protests, political pressure and a shooting that killed two students.",
       "publishedAt": "2026-08-03T21:14:49.000Z",
-      "score": 6.92,
+      "score": 6.77,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 4.92,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "yqyk2u",
-      "source": "hn",
-      "title": "More German than many Germans",
-      "url": "https://mertbulan.com/more-german-than-many-germans/",
-      "summary": "",
-      "publishedAt": "2026-08-03T06:00:14.000Z",
-      "engagement": 372,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49151734",
-      "score": 6.87,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 2.01,
-        "engagement": 3.86,
-        "noise": 0
-      }
-    },
-    {
-      "id": "6cj8cu",
-      "source": "nyt",
-      "subSource": "home",
-      "title": "House Ethics Panel Finds Rep. Chuck Edwards Likely Violated Sexual Harassment Rules",
-      "url": "https://www.nytimes.com/2026/08/03/us/politics/chuck-edwards-harrassment.html",
-      "summary": "The Ethics Committee called for the censure of Representative Chuck Edwards, Republican of North Carolina, who showered two female staffers with lavish gifts and affection.",
-      "publishedAt": "2026-08-03T20:58:51.000Z",
-      "score": 6.85,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 4.85,
+        "recency": 4.77,
         "engagement": 0,
         "noise": 0
       }
@@ -2595,7 +2305,7 @@
       "url": "https://www.bbc.co.uk/news/articles/c3w052le2elo?at_medium=RSS&at_campaign=rss",
       "summary": "The strong box office performance gives a boost to Disney ahead of the much-anticipated Avengers: Doomsday.",
       "publishedAt": "2026-08-03T04:10:16.000Z",
-      "score": 6.8,
+      "score": 6.75,
       "roles": [
         "developer"
       ],
@@ -2604,29 +2314,28 @@
         "role": 3,
         "product": 0,
         "source": 2,
-        "recency": 1.8,
+        "recency": 1.75,
         "engagement": 0,
         "noise": 0
       }
     },
     {
-      "id": "yr2da7",
-      "source": "hn",
-      "title": "Explanation of INT8 ConvRot (FP8 is no longer needed)",
-      "url": "https://note.com/hirorohi03/n/n047a8c5f7f8b?hl=en",
-      "summary": "",
-      "publishedAt": "2026-08-03T16:07:09.000Z",
-      "engagement": 25,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49157645",
-      "score": 6.76,
+      "id": "6cj8cu",
+      "source": "nyt",
+      "subSource": "home",
+      "title": "House Ethics Panel Finds Rep. Chuck Edwards Likely Violated Sexual Harassment Rules",
+      "url": "https://www.nytimes.com/2026/08/03/us/politics/chuck-edwards-harrassment.html",
+      "summary": "The Ethics Committee called for the censure of Representative Chuck Edwards, Republican of North Carolina, who showered two female staffers with lavish gifts and affection.",
+      "publishedAt": "2026-08-03T20:58:51.000Z",
+      "score": 6.69,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
-        "source": 1,
-        "recency": 3.64,
-        "engagement": 2.12,
+        "source": 2,
+        "recency": 4.69,
+        "engagement": 0,
         "noise": 0
       }
     },
@@ -2638,7 +2347,7 @@
       "url": "https://www.bbc.co.uk/news/articles/c5yvqk69enko?at_medium=RSS&at_campaign=rss",
       "summary": "The BBC gains unique access to Rawalakot, scene of violent clashes between security forces and protesters in Pakistan-administered Kashmir.",
       "publishedAt": "2026-08-03T03:32:21.000Z",
-      "score": 6.74,
+      "score": 6.68,
       "roles": [
         "sre"
       ],
@@ -2647,8 +2356,29 @@
         "role": 3,
         "product": 0,
         "source": 2,
-        "recency": 1.74,
+        "recency": 1.68,
         "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "yr2da7",
+      "source": "hn",
+      "title": "Explanation of INT8 ConvRot (FP8 is no longer needed)",
+      "url": "https://note.com/hirorohi03/n/n047a8c5f7f8b?hl=en",
+      "summary": "",
+      "publishedAt": "2026-08-03T16:07:09.000Z",
+      "engagement": 26,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49157645",
+      "score": 6.67,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 3.53,
+        "engagement": 2.15,
         "noise": 0
       }
     },
@@ -2660,15 +2390,36 @@
       "url": "https://www.nytimes.com/2026/08/02/business/oil-prices-plummet-iran-war.html",
       "summary": "The markets’ moves were the first since President Trump said he had halted a planned U.S. assault on Iran.",
       "publishedAt": "2026-08-03T20:29:53.000Z",
-      "score": 6.71,
+      "score": 6.56,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 4.71,
+        "recency": 4.56,
         "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "yqxuyk",
+      "source": "hn",
+      "title": "Qwen3.8-Max: A New Bar for Coding and Cowork",
+      "url": "https://qwen.ai/blog?id=qwen3.8",
+      "summary": "",
+      "publishedAt": "2026-08-03T02:16:09.000Z",
+      "engagement": 1050,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49150470",
+      "score": 6.56,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 1.56,
+        "engagement": 4,
         "noise": 0
       }
     },
@@ -2681,34 +2432,37 @@
       "publishedAt": "2026-08-03T13:34:25.000Z",
       "engagement": 47,
       "commentsUrl": "https://news.ycombinator.com/item?id=49155626",
-      "score": 6.66,
+      "score": 6.56,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 3.13,
+        "recency": 3.04,
         "engagement": 2.52,
         "noise": 0
       }
     },
     {
-      "id": "1th36u",
-      "source": "nyt",
-      "subSource": "tech",
-      "title": "When A.I. Invaded ‘Heated Rivalry’ Fan Fiction, the Meltdown Was Epic",
-      "url": "https://www.nytimes.com/2026/07/30/technology/ai-heated-rivalry-fan-fiction.html",
-      "summary": "An anonymous X account posted a detailed breakdown of chatbot text in 38 popular stories inspired by the hockey romance. The fandom spiraled.",
-      "publishedAt": "2026-08-03T20:10:18.000Z",
-      "score": 6.62,
+      "id": "mnscmv",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "Need advice for my brother (Desktop Engineer → Azure Cloud Admin). Please help.",
+      "url": "https://www.reddit.com/r/AZURE/comments/1ve0lpm/need_advice_for_my_brother_desktop_engineer_azure/",
+      "summary": "Hi everyone (help pannunga guys, read till end) ,\n I'm posting this because I genuinely don't know how to help my brother anymore.\n My brother completed a Mechanical Engineering degree. After graduation, he tried many different jobs, but nothing worked out. He even started a small tea shop, but it had to shut down because of bus stand renovation.\n I'm a software developer, so I suggested that he c",
+      "publishedAt": "2026-08-03T02:16:18.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1ve0lpm/need_advice_for_my_brother_desktop_engineer_azure/",
+      "score": 6.56,
       "roles": [],
-      "products": [],
+      "products": [
+        "azure"
+      ],
       "scoreBreakdown": {
         "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 4.62,
+        "product": 5,
+        "source": 0,
+        "recency": 1.56,
         "engagement": 0,
         "noise": 0
       }
@@ -2722,36 +2476,35 @@
       "publishedAt": "2026-08-03T09:29:46.000Z",
       "engagement": 125,
       "commentsUrl": "https://news.ycombinator.com/item?id=49153361",
-      "score": 6.62,
+      "score": 6.54,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 2.47,
+        "recency": 2.39,
         "engagement": 3.15,
         "noise": 0
       }
     },
     {
-      "id": "yqxuyk",
-      "source": "hn",
-      "title": "Qwen3.8-Max: A New Bar for Coding and Cowork",
-      "url": "https://qwen.ai/blog?id=qwen3.8",
-      "summary": "",
-      "publishedAt": "2026-08-03T02:16:09.000Z",
-      "engagement": 1049,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49150470",
-      "score": 6.61,
+      "id": "1th36u",
+      "source": "nyt",
+      "subSource": "tech",
+      "title": "When A.I. Invaded ‘Heated Rivalry’ Fan Fiction, the Meltdown Was Epic",
+      "url": "https://www.nytimes.com/2026/07/30/technology/ai-heated-rivalry-fan-fiction.html",
+      "summary": "An anonymous X account posted a detailed breakdown of chatbot text in 38 popular stories inspired by the hockey romance. The fandom spiraled.",
+      "publishedAt": "2026-08-03T20:10:18.000Z",
+      "score": 6.48,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
-        "source": 1,
-        "recency": 1.61,
-        "engagement": 4,
+        "source": 2,
+        "recency": 4.48,
+        "engagement": 0,
         "noise": 0
       }
     },
@@ -2763,14 +2516,14 @@
       "url": "https://www.bbc.co.uk/news/articles/c2k7px317eeo?at_medium=RSS&at_campaign=rss",
       "summary": "The illness caused by parasitic infection that spreads through contaminated food or water is not generally life-threatening, health officials say.",
       "publishedAt": "2026-08-03T20:05:46.000Z",
-      "score": 6.6,
+      "score": 6.46,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 4.6,
+        "recency": 4.46,
         "engagement": 0,
         "noise": 0
       }
@@ -2783,14 +2536,37 @@
       "url": "https://www.nytimes.com/2026/08/03/opinion/ai-hype-tech-layoffs.html",
       "summary": "The A.I. revolution is stalling because companies don’t want to admit that integrating the technology is expensive and slow and requires human effort.",
       "publishedAt": "2026-08-03T20:05:28.000Z",
-      "score": 6.6,
+      "score": 6.45,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 4.6,
+        "recency": 4.45,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "t583aw",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "AVD issues Since July 2026 update",
+      "url": "/r/AzureVirtualDesktop/comments/1vekte7/avd_issues_since_july_2026_update/",
+      "summary": "submitted by    /u/rdaniels16  \n [link]   [comments]",
+      "publishedAt": "2026-08-03T17:58:03.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1veku20/avd_issues_since_july_2026_update/",
+      "score": 6.43,
+      "roles": [],
+      "products": [
+        "azure"
+      ],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 2.5,
+        "source": 0,
+        "recency": 3.93,
         "engagement": 0,
         "noise": 0
       }
@@ -2802,36 +2578,39 @@
       "url": "https://admiralcloudberg.medium.com/reaping-the-whirlwind-inside-the-potomac-river-midair-collision-0475416f2b0f",
       "summary": "",
       "publishedAt": "2026-08-03T11:41:26.000Z",
-      "engagement": 61,
+      "engagement": 62,
       "commentsUrl": "https://news.ycombinator.com/item?id=49154441",
-      "score": 6.49,
+      "score": 6.42,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 2.81,
-        "engagement": 2.69,
+        "recency": 2.72,
+        "engagement": 2.7,
         "noise": 0
       }
     },
     {
-      "id": "qtk5mw",
-      "source": "nyt",
-      "subSource": "business",
-      "title": "‘Spider-Man: Brand New Day’ Heads for $875 Million Opening at Global Box Office",
-      "url": "https://www.nytimes.com/2026/08/01/business/media/spider-man-box-office-superhero.html",
-      "summary": "The Sony Pictures movie, the 11th big-budget Spider-Man blockbuster since 2002, had one of the biggest domestic first weekends ever.",
-      "publishedAt": "2026-08-03T19:35:25.000Z",
-      "score": 6.47,
+      "id": "ck5htj",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "Standard Service Endpoint Overview",
+      "url": "https://www.reddit.com/r/AZURE/comments/1vekfg0/standard_service_endpoint_overview/",
+      "summary": "New video diving into STANDARD service endpoints!\n https://youtu.be/HK6irXQNv2o\n 00:00 - Introduction\n 00:19 - Compute and PaaS\n 02:18 - VNet to PaaS communication\n 03:04 - Service endpoints\n 06:16 - Scale and complexity issues\n 06:57 - Standard service endpoints\n 07:12 - Network Identifier\n 08:26 - Network identifier association to subnet\n 09:07 - Enable NID with a service endpoint\n 09:39 - Detai",
+      "publishedAt": "2026-08-03T17:43:35.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1vekfg0/standard_service_endpoint_overview/",
+      "score": 6.38,
       "roles": [],
-      "products": [],
+      "products": [
+        "azure"
+      ],
       "scoreBreakdown": {
         "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 4.47,
+        "product": 2.5,
+        "source": 0,
+        "recency": 3.88,
         "engagement": 0,
         "noise": 0
       }
@@ -2845,15 +2624,35 @@
       "publishedAt": "2026-08-03T13:30:53.000Z",
       "engagement": 35,
       "commentsUrl": "https://news.ycombinator.com/item?id=49155579",
-      "score": 6.46,
+      "score": 6.36,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 3.12,
+        "recency": 3.03,
         "engagement": 2.33,
+        "noise": 0
+      }
+    },
+    {
+      "id": "qtk5mw",
+      "source": "nyt",
+      "subSource": "business",
+      "title": "‘Spider-Man: Brand New Day’ Heads for $875 Million Opening at Global Box Office",
+      "url": "https://www.nytimes.com/2026/08/01/business/media/spider-man-box-office-superhero.html",
+      "summary": "The Sony Pictures movie, the 11th big-budget Spider-Man blockbuster since 2002, had one of the biggest domestic first weekends ever.",
+      "publishedAt": "2026-08-03T19:35:25.000Z",
+      "score": 6.33,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 4.33,
+        "engagement": 0,
         "noise": 0
       }
     },
@@ -2865,34 +2664,14 @@
       "url": "https://www.nytimes.com/2026/08/02/business/pool-problems.html",
       "summary": "What to do when the boys at the pool aren’t pulling their weight.",
       "publishedAt": "2026-08-03T19:09:51.000Z",
-      "score": 6.35,
+      "score": 6.22,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 4.35,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "t043gg",
-      "source": "nyt",
-      "subSource": "business",
-      "title": "How a Top Law Firm Went From Standing Up to Trump to Bending the Knee",
-      "url": "https://www.nytimes.com/2026/08/02/us/politics/paul-weiss-trump.html",
-      "summary": "Paul Weiss was a progressive stalwart for decades and led the legal resistance against President Trump in his first term. Then it surrendered without a fight. This is the inside story of its transformation.",
-      "publishedAt": "2026-08-03T18:54:06.000Z",
-      "score": 6.29,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 4.29,
+        "recency": 4.22,
         "engagement": 0,
         "noise": 0
       }
@@ -2921,23 +2700,22 @@
       }
     },
     {
-      "id": "yqz8n6",
-      "source": "hn",
-      "title": "The true power of regular expressions (2012)",
-      "url": "https://www.npopov.com/2012/06/15/The-true-power-of-regular-expressions.html",
-      "summary": "",
-      "publishedAt": "2026-08-03T08:47:23.000Z",
-      "engagement": 74,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49152973",
-      "score": 6.18,
+      "id": "t043gg",
+      "source": "nyt",
+      "subSource": "business",
+      "title": "How a Top Law Firm Went From Standing Up to Trump to Bending the Knee",
+      "url": "https://www.nytimes.com/2026/08/02/us/politics/paul-weiss-trump.html",
+      "summary": "Paul Weiss was a progressive stalwart for decades and led the legal resistance against President Trump in his first term. Then it surrendered without a fight. This is the inside story of its transformation.",
+      "publishedAt": "2026-08-03T18:54:06.000Z",
+      "score": 6.15,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
-        "source": 1,
-        "recency": 2.37,
-        "engagement": 2.81,
+        "source": 2,
+        "recency": 4.15,
+        "engagement": 0,
         "noise": 0
       }
     },
@@ -2948,36 +2726,62 @@
       "url": "https://bjorg.bjornroche.com/management/ai-productivity-gap/",
       "summary": "",
       "publishedAt": "2026-08-03T07:07:20.000Z",
-      "engagement": 103,
+      "engagement": 105,
       "commentsUrl": "https://news.ycombinator.com/item?id=49152222",
-      "score": 6.17,
+      "score": 6.12,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 2.14,
-        "engagement": 3.03,
+        "recency": 2.08,
+        "engagement": 3.04,
         "noise": 0
       }
     },
     {
-      "id": "7o04b1",
-      "source": "nyt",
-      "subSource": "business",
-      "title": "Boeing’s Smallest 737 Jet Wins F.A.A. Approval",
-      "url": "https://www.nytimes.com/2026/08/03/business/boeing-737-max.html",
-      "summary": "After years of delays, the Federal Aviation Administration has certified the Boeing 737 Max 7, the smallest version of the company’s best-selling plane.",
-      "publishedAt": "2026-08-03T18:05:26.000Z",
-      "score": 6.09,
+      "id": "yqz8n6",
+      "source": "hn",
+      "title": "The true power of regular expressions (2012)",
+      "url": "https://www.npopov.com/2012/06/15/The-true-power-of-regular-expressions.html",
+      "summary": "",
+      "publishedAt": "2026-08-03T08:47:23.000Z",
+      "engagement": 75,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49152973",
+      "score": 6.11,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
-        "source": 2,
-        "recency": 4.09,
+        "source": 1,
+        "recency": 2.29,
+        "engagement": 2.82,
+        "noise": 0
+      }
+    },
+    {
+      "id": "954rht",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "Student Subscription issue",
+      "url": "https://www.reddit.com/r/AZURE/comments/1vddw6t/student_subscription_issue/",
+      "summary": "im using a student subscription\n this is my Allowed resource deployment regions : [\"polandcentral\",\"switzerlandnorth\",\"spaincentral\",\"austriaeast\",\"swedencentral\"]\n when trying to create a VM non of these regions appear in regions list except the north switzerland\n and even if i chose north switzerland all the sizes are not available as shown in image\n any solutions ?\n https://preview.redd.it/p8us",
+      "publishedAt": "2026-08-02T09:48:27.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1vddw6t/student_subscription_issue/",
+      "score": 6.09,
+      "roles": [
+        "pm"
+      ],
+      "products": [
+        "azure"
+      ],
+      "scoreBreakdown": {
+        "role": 3,
+        "product": 2.5,
+        "source": 0,
+        "recency": 0.59,
         "engagement": 0,
         "noise": 0
       }
@@ -2990,34 +2794,34 @@
       "url": "https://www.bbc.co.uk/news/articles/cr7kmnyrdn7o?at_medium=RSS&at_campaign=rss",
       "summary": "Three children were killed when the drone crashed at a popular resort on the Black Sea.",
       "publishedAt": "2026-08-03T18:04:30.000Z",
-      "score": 6.08,
+      "score": 5.96,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 4.08,
+        "recency": 3.96,
         "engagement": 0,
         "noise": 0
       }
     },
     {
-      "id": "6xlqf",
+      "id": "7o04b1",
       "source": "nyt",
-      "subSource": "home",
-      "title": "Meet the Bee Vet, Now Making Hive Calls",
-      "url": "https://www.nytimes.com/2026/08/03/science/honeybees-veterinary-medicine.html",
-      "summary": "Veterinarians are gingerly embracing the honeybee, a vital pollinator for agriculture but one that’s in increasing danger.",
-      "publishedAt": "2026-08-03T17:37:52.000Z",
-      "score": 5.98,
+      "subSource": "business",
+      "title": "Boeing’s Smallest 737 Jet Wins F.A.A. Approval",
+      "url": "https://www.nytimes.com/2026/08/03/business/boeing-737-max.html",
+      "summary": "After years of delays, the Federal Aviation Administration has certified the Boeing 737 Max 7, the smallest version of the company’s best-selling plane.",
+      "publishedAt": "2026-08-03T18:05:26.000Z",
+      "score": 5.96,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 3.98,
+        "recency": 3.96,
         "engagement": 0,
         "noise": 0
       }
@@ -3031,34 +2835,37 @@
       "publishedAt": "2026-08-03T00:23:21.000Z",
       "engagement": 171,
       "commentsUrl": "https://news.ycombinator.com/item?id=49149805",
-      "score": 5.8,
+      "score": 5.75,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 1.44,
+        "recency": 1.4,
         "engagement": 3.35,
         "noise": 0
       }
     },
     {
-      "id": "mo20o3",
-      "source": "bbc",
-      "subSource": "world",
-      "title": "Rhine falls to record low levels as drought strains Europe's rivers",
-      "url": "https://www.bbc.co.uk/news/articles/c78gn8zvrx4o?at_medium=RSS&at_campaign=rss",
-      "summary": "Low water levels in the Rhine, Danube and Po have curtailed the transport of goods and reduced electricity output.",
-      "publishedAt": "2026-08-03T16:27:43.000Z",
+      "id": "dy6sq9",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "Workplace Ninjas US 2027: New Speakers Announced (Round 6)",
+      "url": "/r/Intune/comments/1vef289/workplace_ninjas_us_2027_new_speakers_announced/",
+      "summary": "submitted by    /u/Electronic-Bite-8884  \n [link]   [comments]",
+      "publishedAt": "2026-08-03T14:30:36.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1vef2y2/workplace_ninjas_us_2027_new_speakers_announced/",
       "score": 5.71,
       "roles": [],
-      "products": [],
+      "products": [
+        "azure"
+      ],
       "scoreBreakdown": {
         "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 3.71,
+        "product": 2.5,
+        "source": 0,
+        "recency": 3.21,
         "engagement": 0,
         "noise": 0
       }
@@ -3070,16 +2877,16 @@
       "url": "https://ykvm.com/2026/07/swiftui-a-story-of-mediocrity/",
       "summary": "",
       "publishedAt": "2026-08-02T18:59:05.000Z",
-      "engagement": 262,
+      "engagement": 263,
       "commentsUrl": "https://news.ycombinator.com/item?id=49147263",
-      "score": 5.68,
+      "score": 5.65,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 1.05,
+        "recency": 1.02,
         "engagement": 3.63,
         "noise": 0
       }
@@ -3093,15 +2900,35 @@
       "publishedAt": "2026-08-03T00:12:16.000Z",
       "engagement": 143,
       "commentsUrl": "https://news.ycombinator.com/item?id=49149746",
-      "score": 5.67,
+      "score": 5.62,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 1.43,
+        "recency": 1.38,
         "engagement": 3.24,
+        "noise": 0
+      }
+    },
+    {
+      "id": "mo20o3",
+      "source": "bbc",
+      "subSource": "world",
+      "title": "Rhine falls to record low levels as drought strains Europe's rivers",
+      "url": "https://www.bbc.co.uk/news/articles/c78gn8zvrx4o?at_medium=RSS&at_campaign=rss",
+      "summary": "Low water levels in the Rhine, Danube and Po have curtailed the transport of goods and reduced electricity output.",
+      "publishedAt": "2026-08-03T16:27:43.000Z",
+      "score": 5.6,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 3.6,
+        "engagement": 0,
         "noise": 0
       }
     },
@@ -3114,15 +2941,38 @@
       "publishedAt": "2026-08-03T03:06:12.000Z",
       "engagement": 87,
       "commentsUrl": "https://news.ycombinator.com/item?id=49150773",
-      "score": 5.61,
+      "score": 5.56,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 1.69,
+        "recency": 1.64,
         "engagement": 2.92,
+        "noise": 0
+      }
+    },
+    {
+      "id": "oha9le",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "Naming resources in Log Analytics workspace",
+      "url": "https://www.reddit.com/r/AZURE/comments/1vedgsl/naming_resources_in_log_analytics_workspace/",
+      "summary": "How should I name various resources on LAW is there a standard? Microsofts documentation doesnt seem too helpful.\n    submitted by    /u/Forsaken-Ad-1179  \n [link]   [comments]",
+      "publishedAt": "2026-08-03T13:29:01.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1vedgsl/naming_resources_in_log_analytics_workspace/",
+      "score": 5.52,
+      "roles": [],
+      "products": [
+        "azure"
+      ],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 2.5,
+        "source": 0,
+        "recency": 3.02,
+        "engagement": 0,
         "noise": 0
       }
     },
@@ -3134,14 +2984,14 @@
       "url": "https://www.nytimes.com/2026/08/03/us/politics/transgender-troops-ban.html",
       "summary": "The Pentagon is relying on closed-door hearings to kick out transgender service members. An Army Reserve lawyer is one of the few who have seen how they really work.",
       "publishedAt": "2026-08-03T15:48:34.000Z",
-      "score": 5.57,
+      "score": 5.46,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 3.57,
+        "recency": 3.46,
         "engagement": 0,
         "noise": 0
       }
@@ -3154,74 +3004,14 @@
       "url": "https://www.nytimes.com/2026/08/03/business/us-japan-yen-intervention.html",
       "summary": "The U.S. Treasury joined efforts in Tokyo to stem the yen’s slide against the dollar, highlighting the broader risks posed by turmoil in Japanese markets.",
       "publishedAt": "2026-08-03T15:42:08.000Z",
-      "score": 5.55,
+      "score": 5.44,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 3.55,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "t8v5ds",
-      "source": "bbc",
-      "subSource": "business",
-      "title": "Derelict former BHS site a 'continuing nightmare'",
-      "url": "https://www.bbc.co.uk/news/videos/cwympl4021lo?at_medium=RSS&at_campaign=rss",
-      "summary": "The former department store closed in 2016.",
-      "publishedAt": "2026-08-03T15:15:48.000Z",
-      "score": 5.46,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 3.46,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "ssvw8v",
-      "source": "nyt",
-      "subSource": "home",
-      "title": "Author of Democrats’ 2024 Autopsy Says Party Left Out Key Chapter",
-      "url": "https://www.nytimes.com/2026/08/03/us/politics/democrats-autopsy-2024-election-dnc.html",
-      "summary": "A dispute over the chapter between the author and the Democratic National Committee has added to the party’s turmoil as it tries to look forward, not backward.",
-      "publishedAt": "2026-08-03T15:16:24.000Z",
-      "score": 5.46,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 3.46,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "irryhd",
-      "source": "nyt",
-      "subSource": "tech",
-      "title": "SpaceX’s Stock Lockup Is Expiring. Prepare for a Bumpy Ride.",
-      "url": "https://www.nytimes.com/2026/08/03/technology/spacex-lockup-stock-market.html",
-      "summary": "On Thursday, employees and other insiders at Elon Musk’s rocket company will be released from their first stock “lockup” and can start selling some of their shares.",
-      "publishedAt": "2026-08-03T15:10:56.000Z",
-      "score": 5.45,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 3.45,
+        "recency": 3.44,
         "engagement": 0,
         "noise": 0
       }
@@ -3235,35 +3025,15 @@
       "publishedAt": "2026-08-02T15:41:08.000Z",
       "engagement": 243,
       "commentsUrl": "https://news.ycombinator.com/item?id=49145590",
-      "score": 5.45,
+      "score": 5.42,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 0.86,
+        "recency": 0.84,
         "engagement": 3.58,
-        "noise": 0
-      }
-    },
-    {
-      "id": "oa4wvu",
-      "source": "nyt",
-      "subSource": "business",
-      "title": "Former ’60 Minutes’ Correspondents Sharyn Alfonsi, Scott Pelley Will Teach At Columbia",
-      "url": "https://www.nytimes.com/2026/08/03/business/media/sharyn-alfonsi-scott-pelley-columbia-journalism-school.html",
-      "summary": "Sharyn Alfonsi and Scott Pelley, who exited the show after clashing with executives at CBS News, will teach reporting skills.",
-      "publishedAt": "2026-08-03T15:07:38.000Z",
-      "score": 5.43,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 3.43,
-        "engagement": 0,
         "noise": 0
       }
     },
@@ -3276,15 +3046,118 @@
       "publishedAt": "2026-08-03T00:38:10.000Z",
       "engagement": 93,
       "commentsUrl": "https://news.ycombinator.com/item?id=49149898",
-      "score": 5.42,
+      "score": 5.38,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 1.46,
+        "recency": 1.42,
         "engagement": 2.96,
+        "noise": 0
+      }
+    },
+    {
+      "id": "ssvw8v",
+      "source": "nyt",
+      "subSource": "home",
+      "title": "Author of Democrats’ 2024 Autopsy Says Party Left Out Key Chapter",
+      "url": "https://www.nytimes.com/2026/08/03/us/politics/democrats-autopsy-2024-election-dnc.html",
+      "summary": "A dispute over the chapter between the author and the Democratic National Committee has added to the party’s turmoil as it tries to look forward, not backward.",
+      "publishedAt": "2026-08-03T15:16:24.000Z",
+      "score": 5.36,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 3.36,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "t8v5ds",
+      "source": "bbc",
+      "subSource": "business",
+      "title": "Derelict former BHS site a 'continuing nightmare'",
+      "url": "https://www.bbc.co.uk/news/videos/cwympl4021lo?at_medium=RSS&at_campaign=rss",
+      "summary": "The former department store closed in 2016.",
+      "publishedAt": "2026-08-03T15:15:48.000Z",
+      "score": 5.35,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 3.35,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "2vkeun",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "Passed MS-102",
+      "url": "https://i.redd.it/v326tqnxl5hh1.jpeg",
+      "summary": "submitted by    /u/Rough-Veterinarian60  \n [link]   [comments]",
+      "publishedAt": "2026-08-03T12:30:54.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1vec3fs/passed_ms102/",
+      "score": 5.35,
+      "roles": [],
+      "products": [
+        "azure"
+      ],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 2.5,
+        "source": 0,
+        "recency": 2.85,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "irryhd",
+      "source": "nyt",
+      "subSource": "tech",
+      "title": "SpaceX’s Stock Lockup Is Expiring. Prepare for a Bumpy Ride.",
+      "url": "https://www.nytimes.com/2026/08/03/technology/spacex-lockup-stock-market.html",
+      "summary": "On Thursday, employees and other insiders at Elon Musk’s rocket company will be released from their first stock “lockup” and can start selling some of their shares.",
+      "publishedAt": "2026-08-03T15:10:56.000Z",
+      "score": 5.34,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 3.34,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "oa4wvu",
+      "source": "nyt",
+      "subSource": "business",
+      "title": "Former ’60 Minutes’ Correspondents Sharyn Alfonsi, Scott Pelley Will Teach At Columbia",
+      "url": "https://www.nytimes.com/2026/08/03/business/media/sharyn-alfonsi-scott-pelley-columbia-journalism-school.html",
+      "summary": "Sharyn Alfonsi and Scott Pelley, who exited the show after clashing with executives at CBS News, will teach reporting skills.",
+      "publishedAt": "2026-08-03T15:07:38.000Z",
+      "score": 5.33,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 3.33,
+        "engagement": 0,
         "noise": 0
       }
     },
@@ -3296,14 +3169,14 @@
       "url": "https://www.nytimes.com/2026/08/02/technology/google-earth-ai-satellite-images.html",
       "summary": "A new Google Earth tool allowed the creation of A.I. deepfake maps. The company quickly pulled it back after users noted there were no safeguards to prevent content that could be harmful.",
       "publishedAt": "2026-08-03T14:31:11.000Z",
-      "score": 5.31,
+      "score": 5.21,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 3.31,
+        "recency": 3.21,
         "engagement": 0,
         "noise": 0
       }
@@ -3316,55 +3189,36 @@
       "url": "https://www.bbc.co.uk/news/articles/c1e1d5j6660o?at_medium=RSS&at_campaign=rss",
       "summary": "Photos newly released by Myanmar's military government show Suu Kyi meeting with an ICRC official.",
       "publishedAt": "2026-08-03T14:20:56.000Z",
-      "score": 5.28,
+      "score": 5.18,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 3.28,
+        "recency": 3.18,
         "engagement": 0,
         "noise": 0
       }
     },
     {
-      "id": "3kuvot",
-      "source": "nyt",
-      "subSource": "business",
-      "title": "More Young College Graduates Are Living At Home. Is That a Bad Thing?",
-      "url": "https://www.nytimes.com/2026/08/02/business/college-graduates-living-at-home.html",
-      "summary": "More young adults are living with their parents. The development suggests that they face a weak job market, but also that fewer face stigma in returning to the roost.",
-      "publishedAt": "2026-08-03T14:01:18.000Z",
-      "score": 5.22,
+      "id": "yr12lb",
+      "source": "hn",
+      "title": "Frame selection is the whole game: notes on making LLMs watch video",
+      "url": "https://leoaido.com/how-llms-watch-video/",
+      "summary": "",
+      "publishedAt": "2026-08-03T13:28:10.000Z",
+      "engagement": 5,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49155555",
+      "score": 5.18,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
-        "source": 2,
-        "recency": 3.22,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "esone1",
-      "source": "nyt",
-      "subSource": "home",
-      "title": "Gen Z Can’t Afford a First Date",
-      "url": "https://www.nytimes.com/2026/08/03/nyregion/gen-z-dating-too-expensive-cost.html",
-      "summary": "From $130 dinners to expensive cocktails and even exorbitant movie tickets, a crushing economy in New York City is creating a fresh barrier to love.",
-      "publishedAt": "2026-08-03T14:02:46.000Z",
-      "score": 5.22,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 3.22,
-        "engagement": 0,
+        "source": 1,
+        "recency": 3.02,
+        "engagement": 1.17,
         "noise": 0
       }
     },
@@ -3377,7 +3231,7 @@
       "publishedAt": "2026-08-02T12:01:00.000Z",
       "engagement": 1,
       "commentsUrl": "https://news.ycombinator.com/item?id=49143683",
-      "score": 5.15,
+      "score": 5.13,
       "roles": [
         "manager"
       ],
@@ -3386,48 +3240,47 @@
         "role": 3,
         "product": 0,
         "source": 1,
-        "recency": 0.7,
+        "recency": 0.68,
         "engagement": 0.45,
         "noise": 0
       }
     },
     {
-      "id": "yqhzyz",
-      "source": "hn",
-      "title": "The myth of Snow Leopard",
-      "url": "https://www.rubenerd.au/the-myth-of-snow-leopard/",
-      "summary": "",
-      "publishedAt": "2026-08-02T18:21:45.000Z",
-      "engagement": 120,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49146960",
-      "score": 5.14,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 1.01,
-        "engagement": 3.12,
-        "noise": 0
-      }
-    },
-    {
-      "id": "3mhrig",
+      "id": "3kuvot",
       "source": "nyt",
-      "subSource": "tech",
-      "title": "Plug-In Solar Panels Are Starting to Sprout in U.S. Backyards",
-      "url": "https://www.nytimes.com/2026/07/31/business/energy-environment/plug-in-balcony-solar.html",
-      "summary": "Ten U.S. states have legalized systems that can be plugged into standard wall outlets. The technology typically does not require permits or electricians.",
-      "publishedAt": "2026-08-03T13:34:17.000Z",
-      "score": 5.13,
+      "subSource": "business",
+      "title": "More Young College Graduates Are Living At Home. Is That a Bad Thing?",
+      "url": "https://www.nytimes.com/2026/08/02/business/college-graduates-living-at-home.html",
+      "summary": "More young adults are living with their parents. The development suggests that they face a weak job market, but also that fewer face stigma in returning to the roost.",
+      "publishedAt": "2026-08-03T14:01:18.000Z",
+      "score": 5.12,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 3.13,
+        "recency": 3.12,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "esone1",
+      "source": "nyt",
+      "subSource": "home",
+      "title": "Gen Z Can’t Afford a First Date",
+      "url": "https://www.nytimes.com/2026/08/03/nyregion/gen-z-dating-too-expensive-cost.html",
+      "summary": "From $130 dinners to expensive cocktails and even exorbitant movie tickets, a crushing economy in New York City is creating a fresh barrier to love.",
+      "publishedAt": "2026-08-03T14:02:46.000Z",
+      "score": 5.12,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 3.12,
         "engagement": 0,
         "noise": 0
       }
@@ -3450,6 +3303,47 @@
         "product": 0,
         "source": 2,
         "recency": 0.1,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "yqhzyz",
+      "source": "hn",
+      "title": "The myth of Snow Leopard",
+      "url": "https://www.rubenerd.au/the-myth-of-snow-leopard/",
+      "summary": "",
+      "publishedAt": "2026-08-02T18:21:45.000Z",
+      "engagement": 120,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49146960",
+      "score": 5.1,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 0.98,
+        "engagement": 3.12,
+        "noise": 0
+      }
+    },
+    {
+      "id": "3mhrig",
+      "source": "nyt",
+      "subSource": "tech",
+      "title": "Plug-In Solar Panels Are Starting to Sprout in U.S. Backyards",
+      "url": "https://www.nytimes.com/2026/07/31/business/energy-environment/plug-in-balcony-solar.html",
+      "summary": "Ten U.S. states have legalized systems that can be plugged into standard wall outlets. The technology typically does not require permits or electricians.",
+      "publishedAt": "2026-08-03T13:34:17.000Z",
+      "score": 5.04,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 3.04,
         "engagement": 0,
         "noise": 0
       }
@@ -3547,14 +3441,14 @@
       "url": "https://www.nytimes.com/2026/08/03/business/dealbook/trump-iran-deal-oil-market.html",
       "summary": "Bullish investors are out in force on Monday despite more mixed messages about potential U.S.-Iran peace talks.",
       "publishedAt": "2026-08-03T12:27:00.000Z",
-      "score": 4.93,
+      "score": 4.84,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 2.93,
+        "recency": 2.84,
         "engagement": 0,
         "noise": 0
       }
@@ -3567,26 +3461,6 @@
       "url": "https://www.bbc.co.uk/news/articles/cy8mrrlkjppo?at_medium=RSS&at_campaign=rss",
       "summary": "Incidents of fuel being taken without payment have risen by a fifth in five months, according to industry analysis.",
       "publishedAt": "2026-08-03T11:49:41.000Z",
-      "score": 4.83,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 2.83,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "za2a",
-      "source": "bbc",
-      "subSource": "tech",
-      "title": "Xbox Series X price hiked by £170 due to rising memory chip costs",
-      "url": "https://www.bbc.co.uk/news/articles/czjlvrd9e43o?at_medium=RSS&at_campaign=rss",
-      "summary": "Xbox consoles now cost significantly more in the UK, with one model increasing in price by 43%.",
-      "publishedAt": "2026-08-03T11:18:10.000Z",
       "score": 4.74,
       "roles": [],
       "products": [],
@@ -3600,6 +3474,47 @@
       }
     },
     {
+      "id": "za2a",
+      "source": "bbc",
+      "subSource": "tech",
+      "title": "Xbox Series X price hiked by £170 due to rising memory chip costs",
+      "url": "https://www.bbc.co.uk/news/articles/czjlvrd9e43o?at_medium=RSS&at_campaign=rss",
+      "summary": "Xbox consoles now cost significantly more in the UK, with one model increasing in price by 43%.",
+      "publishedAt": "2026-08-03T11:18:10.000Z",
+      "score": 4.66,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 2.66,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "ypvni5",
+      "source": "hn",
+      "title": "200 Milliseconds",
+      "url": "https://200ms.thenodebook.com",
+      "summary": "",
+      "publishedAt": "2026-08-01T10:17:06.000Z",
+      "engagement": 181,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49132992",
+      "score": 4.54,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 0.15,
+        "engagement": 3.39,
+        "noise": 0
+      }
+    },
+    {
       "id": "mj3eb9",
       "source": "bbc",
       "subSource": "world",
@@ -3607,26 +3522,6 @@
       "url": "https://www.bbc.co.uk/news/articles/ce85097leydo?at_medium=RSS&at_campaign=rss",
       "summary": "The army has not commented on claims that civilians died in the attack on a paramilitary-held village.",
       "publishedAt": "2026-08-03T10:29:24.000Z",
-      "score": 4.61,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 2.61,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "4g9dkf",
-      "source": "bbc",
-      "subSource": "business",
-      "title": "It may be easier to get your first mortgage than you think - here's why",
-      "url": "https://www.bbc.co.uk/news/articles/cp3rkzpl7ngo?at_medium=RSS&at_campaign=rss",
-      "summary": "More relaxed mortgage regulation opens the door for some first-time buyers, but it comes with risk.",
-      "publishedAt": "2026-08-03T09:55:36.000Z",
       "score": 4.53,
       "roles": [],
       "products": [],
@@ -3640,34 +3535,13 @@
       }
     },
     {
-      "id": "ypvni5",
-      "source": "hn",
-      "title": "200 Milliseconds",
-      "url": "https://200ms.thenodebook.com",
-      "summary": "",
-      "publishedAt": "2026-08-01T10:17:06.000Z",
-      "engagement": 174,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49132992",
-      "score": 4.52,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 0.15,
-        "engagement": 3.36,
-        "noise": 0
-      }
-    },
-    {
       "id": "ypdlve",
       "source": "hn",
       "title": "Decades-old fish sauce at abandoned factory in Canada finally being removed",
       "url": "https://defector.com/abandoned-fish-sauce-canada-interview",
       "summary": "",
       "publishedAt": "2026-07-31T16:23:10.000Z",
-      "engagement": 191,
+      "engagement": 193,
       "commentsUrl": "https://news.ycombinator.com/item?id=49125168",
       "score": 4.48,
       "roles": [],
@@ -3677,7 +3551,7 @@
         "product": 0,
         "source": 1,
         "recency": 0.05,
-        "engagement": 3.42,
+        "engagement": 3.43,
         "noise": 0
       }
     },
@@ -3703,21 +3577,21 @@
       }
     },
     {
-      "id": "ossw9w",
-      "source": "nyt",
-      "subSource": "tech",
-      "title": "If You Can’t Beat A.I., Outdress It, Tech Firms and Their Swag Say",
-      "url": "https://www.nytimes.com/2026/08/03/technology/ai-tech-firms-swag-merchandise.html",
-      "summary": "Over the years, tech workers have proudly worn nerdy company-branded gear. But this generation of hot companies is getting fancy with its merch.",
-      "publishedAt": "2026-08-03T09:00:31.000Z",
-      "score": 4.4,
+      "id": "4g9dkf",
+      "source": "bbc",
+      "subSource": "business",
+      "title": "It may be easier to get your first mortgage than you think - here's why",
+      "url": "https://www.bbc.co.uk/news/articles/cp3rkzpl7ngo?at_medium=RSS&at_campaign=rss",
+      "summary": "More relaxed mortgage regulation opens the door for some first-time buyers, but it comes with risk.",
+      "publishedAt": "2026-08-03T09:55:36.000Z",
+      "score": 4.45,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 2.4,
+        "recency": 2.45,
         "engagement": 0,
         "noise": 0
       }
@@ -3744,35 +3618,15 @@
       }
     },
     {
-      "id": "dtgybm",
-      "source": "bbc",
-      "subSource": "world",
-      "title": "Two workers killed in blast after re-entering quake-hit Japan mall on boss' order",
-      "url": "https://www.bbc.co.uk/news/articles/c24mr09r99eo?at_medium=RSS&at_campaign=rss",
-      "summary": "The two women's employer has apologised for sending them back to Aeon Mall to secure cash.",
-      "publishedAt": "2026-08-03T08:40:22.000Z",
-      "score": 4.35,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 2.35,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
       "id": "ybkzxq",
       "source": "hn",
       "title": "How Hollywood stopped making movies in Hollywood",
       "url": "https://www.statsignificant.com/p/how-hollywood-stopped-making-movies",
       "summary": "",
       "publishedAt": "2026-07-28T12:41:00.000Z",
-      "engagement": 163,
+      "engagement": 164,
       "commentsUrl": "https://news.ycombinator.com/item?id=49082937",
-      "score": 4.32,
+      "score": 4.33,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
@@ -3780,7 +3634,47 @@
         "product": 0,
         "source": 1,
         "recency": 0,
-        "engagement": 3.32,
+        "engagement": 3.33,
+        "noise": 0
+      }
+    },
+    {
+      "id": "ossw9w",
+      "source": "nyt",
+      "subSource": "tech",
+      "title": "If You Can’t Beat A.I., Outdress It, Tech Firms and Their Swag Say",
+      "url": "https://www.nytimes.com/2026/08/03/technology/ai-tech-firms-swag-merchandise.html",
+      "summary": "Over the years, tech workers have proudly worn nerdy company-branded gear. But this generation of hot companies is getting fancy with its merch.",
+      "publishedAt": "2026-08-03T09:00:31.000Z",
+      "score": 4.32,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 2.32,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "dtgybm",
+      "source": "bbc",
+      "subSource": "world",
+      "title": "Two workers killed in blast after re-entering quake-hit Japan mall on boss' order",
+      "url": "https://www.bbc.co.uk/news/articles/c24mr09r99eo?at_medium=RSS&at_campaign=rss",
+      "summary": "The two women's employer has apologised for sending them back to Aeon Mall to secure cash.",
+      "publishedAt": "2026-08-03T08:40:22.000Z",
+      "score": 4.28,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 2.28,
+        "engagement": 0,
         "noise": 0
       }
     },
@@ -3793,14 +3687,14 @@
       "publishedAt": "2026-08-02T20:19:16.000Z",
       "engagement": 27,
       "commentsUrl": "https://news.ycombinator.com/item?id=49147907",
-      "score": 4.31,
+      "score": 4.27,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 1.14,
+        "recency": 1.1,
         "engagement": 2.17,
         "noise": 0
       }
@@ -3814,7 +3708,7 @@
       "publishedAt": "2026-07-31T23:31:28.000Z",
       "engagement": 134,
       "commentsUrl": "https://news.ycombinator.com/item?id=49129676",
-      "score": 4.28,
+      "score": 4.27,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
@@ -3827,64 +3721,6 @@
       }
     },
     {
-      "id": "la9mlf",
-      "source": "guardian",
-      "title": "Greens senator brands Pauline Hanson a ‘political coward’ over press conference bans – as it happened",
-      "url": "https://www.theguardian.com/australia-news/live/2026/aug/03/australia-news-live-fuel-excise-cut-jim-chalmers-cost-of-living-anthony-albanese-labor-angus-taylor-coalition-one-nation-pauline-hanson-ntwnfb",
-      "summary": "This blog is now closed\nAngus Taylor and Anthony Albanese on leave this week\nThe opposition leader, Angus Taylor, is on leave for most of this week, his office has announced, with the deputy leader, Jane Hume, acting in his stead.\nNSWRL owes a massive debt of gratitude to Laurie for the service he has given to his state as both a player and a coach.\nHe has also led NSW to arguably two of the greatest Origin series wins of all time as a coach, after ending Queensland’s eight-year winning streak in 2014 and overcoming adversity to steer the Blues home in 2026.\n Continue reading...",
-      "publishedAt": "2026-08-03T07:59:47.000Z",
-      "score": 4.26,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 2.26,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "8eb196",
-      "source": "guardian",
-      "title": "The end of the world: how players mourn the death of their favourite online games",
-      "url": "https://www.theguardian.com/games/2026/aug/03/the-end-of-the-world-how-players-mourn-the-death-of-their-favourite-online-games",
-      "summary": "Online multiplayer changed the trajectory of games, but the cost of keeping servers running means every virtual world is doomed to die – sooner or later\nNevan Hagarty had an idea. If he and other Halo 3 players stayed online the night of 13 January 2022, they could delay the impending server shutdown. Players knew this was coming: it had happened to Halo 2 when its Xbox Live servers were turned off in 2010, and a group managed to stay logged into the multiplayer servers for weeks.\nAnd so, players gathered online before the server shutdown to pay homage and to mourn the game they loved so dearly. And, maybe, to keep it online for a little longer. “I must have played ’til about 4am the night of the shutdown, trading stories with so many players about their love of the game and their experiences over the last 15 years,” says Hagarty, 22. “It was a really wholesome experience I won’t forget.”\n Continue reading...",
-      "publishedAt": "2026-08-03T08:00:45.000Z",
-      "score": 4.26,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 2.26,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "yob7jl",
-      "source": "bbc",
-      "subSource": "world",
-      "title": "Infantino opponents threaten 'non co-operation' with Fifa",
-      "url": "https://www.bbc.co.uk/sport/football/articles/cp30vg829nxo?at_medium=RSS&at_campaign=rss",
-      "summary": "Opponents of Fifa president Gianni Infantino are threatening \"non co-operation\" with the governing body unless he steps down, according to senior Uefa sources.",
-      "publishedAt": "2026-08-03T07:49:33.000Z",
-      "score": 4.24,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 2.24,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
       "id": "ypbslc",
       "source": "hn",
       "title": "Autoregressive Language Model on the 6502 Processor",
@@ -3893,7 +3729,7 @@
       "publishedAt": "2026-07-31T13:08:30.000Z",
       "engagement": 131,
       "commentsUrl": "https://news.ycombinator.com/item?id=49122655",
-      "score": 4.23,
+      "score": 4.22,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
@@ -3906,13 +3742,12 @@
       }
     },
     {
-      "id": "3cfjc3",
-      "source": "bbc",
-      "subSource": "world",
-      "title": "US and Japan take action to prop up yen in rare joint move",
-      "url": "https://www.bbc.co.uk/news/articles/cglj1pr0wjwo?at_medium=RSS&at_campaign=rss",
-      "summary": "Both countries have said that they will not hesitate to conduct joint interventions in the future.",
-      "publishedAt": "2026-08-03T07:30:52.000Z",
+      "id": "la9mlf",
+      "source": "guardian",
+      "title": "Greens senator brands Pauline Hanson a ‘political coward’ over press conference bans – as it happened",
+      "url": "https://www.theguardian.com/australia-news/live/2026/aug/03/australia-news-live-fuel-excise-cut-jim-chalmers-cost-of-living-anthony-albanese-labor-angus-taylor-coalition-one-nation-pauline-hanson-ntwnfb",
+      "summary": "This blog is now closed\nAngus Taylor and Anthony Albanese on leave this week\nThe opposition leader, Angus Taylor, is on leave for most of this week, his office has announced, with the deputy leader, Jane Hume, acting in his stead.\nNSWRL owes a massive debt of gratitude to Laurie for the service he has given to his state as both a player and a coach.\nHe has also led NSW to arguably two of the greatest Origin series wins of all time as a coach, after ending Queensland’s eight-year winning streak in 2014 and overcoming adversity to steer the Blues home in 2026.\n Continue reading...",
+      "publishedAt": "2026-08-03T07:59:47.000Z",
       "score": 4.19,
       "roles": [],
       "products": [],
@@ -3921,6 +3756,65 @@
         "product": 0,
         "source": 2,
         "recency": 2.19,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "8eb196",
+      "source": "guardian",
+      "title": "The end of the world: how players mourn the death of their favourite online games",
+      "url": "https://www.theguardian.com/games/2026/aug/03/the-end-of-the-world-how-players-mourn-the-death-of-their-favourite-online-games",
+      "summary": "Online multiplayer changed the trajectory of games, but the cost of keeping servers running means every virtual world is doomed to die – sooner or later\nNevan Hagarty had an idea. If he and other Halo 3 players stayed online the night of 13 January 2022, they could delay the impending server shutdown. Players knew this was coming: it had happened to Halo 2 when its Xbox Live servers were turned off in 2010, and a group managed to stay logged into the multiplayer servers for weeks.\nAnd so, players gathered online before the server shutdown to pay homage and to mourn the game they loved so dearly. And, maybe, to keep it online for a little longer. “I must have played ’til about 4am the night of the shutdown, trading stories with so many players about their love of the game and their experiences over the last 15 years,” says Hagarty, 22. “It was a really wholesome experience I won’t forget.”\n Continue reading...",
+      "publishedAt": "2026-08-03T08:00:45.000Z",
+      "score": 4.19,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 2.19,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "yob7jl",
+      "source": "bbc",
+      "subSource": "world",
+      "title": "Infantino opponents threaten 'non co-operation' with Fifa",
+      "url": "https://www.bbc.co.uk/sport/football/articles/cp30vg829nxo?at_medium=RSS&at_campaign=rss",
+      "summary": "Opponents of Fifa president Gianni Infantino are threatening \"non co-operation\" with the governing body unless he steps down, according to senior Uefa sources.",
+      "publishedAt": "2026-08-03T07:49:33.000Z",
+      "score": 4.17,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 2.17,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "3cfjc3",
+      "source": "bbc",
+      "subSource": "world",
+      "title": "US and Japan take action to prop up yen in rare joint move",
+      "url": "https://www.bbc.co.uk/news/articles/cglj1pr0wjwo?at_medium=RSS&at_campaign=rss",
+      "summary": "Both countries have said that they will not hesitate to conduct joint interventions in the future.",
+      "publishedAt": "2026-08-03T07:30:52.000Z",
+      "score": 4.13,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 2.13,
         "engagement": 0,
         "noise": 0
       }
@@ -3947,67 +3841,6 @@
       }
     },
     {
-      "id": "abkafr",
-      "source": "nyt",
-      "subSource": "business",
-      "title": "U.S. and Japan Coordinated to Help Stabilize the Yen",
-      "url": "https://www.nytimes.com/2026/08/02/business/us-japan-yen.html",
-      "summary": "U.S. and Japanese officials confirmed that the Treasury Department had moved last week to prop up the currency, which had been trading near four-decade lows.",
-      "publishedAt": "2026-08-03T05:50:38.000Z",
-      "score": 3.99,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 1.99,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "yqh74k",
-      "source": "hn",
-      "title": "Finding zombies in our systems: A real-world story of CPU bottlenecks",
-      "url": "https://medium.com/pinterest-engineering/finding-zombies-in-our-systems-a-real-world-story-of-cpu-bottlenecks-ea4722e552eb",
-      "summary": "",
-      "publishedAt": "2026-08-02T14:50:48.000Z",
-      "engagement": 26,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49145193",
-      "score": 3.97,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 0.82,
-        "engagement": 2.15,
-        "noise": 0
-      }
-    },
-    {
-      "id": "w5q3n8",
-      "source": "bbc",
-      "subSource": "world",
-      "title": "'Your legacy will live forever': Nepal mourns climber Nirmal Purja ",
-      "url": "https://www.bbc.co.uk/news/articles/c07rvy4e7mno?at_medium=RSS&at_campaign=rss",
-      "summary": "Tributes are pouring out across Nepal after an avalanche killed some of the country's best mountaineers.",
-      "publishedAt": "2026-08-03T05:31:55.000Z",
-      "score": 3.95,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 1.95,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
       "id": "ypczi4",
       "source": "hn",
       "title": "Massively Parallel Postgres Backups",
@@ -4029,23 +3862,84 @@
       }
     },
     {
-      "id": "ypcbr3",
+      "id": "yqh74k",
       "source": "hn",
-      "title": "Kelly Criterion Simulator",
-      "url": "https://kellysimulator.com/",
+      "title": "Finding zombies in our systems: A real-world story of CPU bottlenecks",
+      "url": "https://medium.com/pinterest-engineering/finding-zombies-in-our-systems-a-real-world-story-of-cpu-bottlenecks-ea4722e552eb",
       "summary": "",
-      "publishedAt": "2026-07-31T13:47:58.000Z",
-      "engagement": 53,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49123105",
-      "score": 3.64,
+      "publishedAt": "2026-08-02T14:50:48.000Z",
+      "engagement": 26,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49145193",
+      "score": 3.94,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 0.05,
-        "engagement": 2.6,
+        "recency": 0.8,
+        "engagement": 2.15,
+        "noise": 0
+      }
+    },
+    {
+      "id": "abkafr",
+      "source": "nyt",
+      "subSource": "business",
+      "title": "U.S. and Japan Coordinated to Help Stabilize the Yen",
+      "url": "https://www.nytimes.com/2026/08/02/business/us-japan-yen.html",
+      "summary": "U.S. and Japanese officials confirmed that the Treasury Department had moved last week to prop up the currency, which had been trading near four-decade lows.",
+      "publishedAt": "2026-08-03T05:50:38.000Z",
+      "score": 3.93,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 1.93,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "w5q3n8",
+      "source": "bbc",
+      "subSource": "world",
+      "title": "'Your legacy will live forever': Nepal mourns climber Nirmal Purja ",
+      "url": "https://www.bbc.co.uk/news/articles/c07rvy4e7mno?at_medium=RSS&at_campaign=rss",
+      "summary": "Tributes are pouring out across Nepal after an avalanche killed some of the country's best mountaineers.",
+      "publishedAt": "2026-08-03T05:31:55.000Z",
+      "score": 3.89,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 1.89,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "ypcbr3",
+      "source": "hn",
+      "title": "Kelly Criterion Simulator",
+      "url": "https://kellysimulator.com/",
+      "summary": "",
+      "publishedAt": "2026-07-31T13:47:58.000Z",
+      "engagement": 55,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49123105",
+      "score": 3.67,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 0.04,
+        "engagement": 2.62,
         "noise": 0
       }
     },
@@ -4077,9 +3971,9 @@
       "url": "https://ei3lh.eu/2025/11/20/replacing-the-kobo-libra-h2o-battery/",
       "summary": "",
       "publishedAt": "2026-07-30T07:15:33.000Z",
-      "engagement": 43,
+      "engagement": 44,
       "commentsUrl": "https://news.ycombinator.com/item?id=49106935",
-      "score": 3.47,
+      "score": 3.49,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
@@ -4087,7 +3981,7 @@
         "product": 0,
         "source": 1,
         "recency": 0.01,
-        "engagement": 2.47,
+        "engagement": 2.48,
         "noise": 0
       }
     },
@@ -4113,6 +4007,29 @@
       }
     },
     {
+      "id": "vw9w46",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "What should I learn in networking as a beginner.",
+      "url": "https://www.reddit.com/r/AZURE/comments/1vdlfc8/what_should_i_learn_in_networking_as_a_beginner/",
+      "summary": "Hi, I want to confirm that what I must know about networking that will help me in cloud, also if you can share a useful course or a document that covers it all, Kindly share it\n    submitted by    /u/Hassan_121  \n [link]   [comments]",
+      "publishedAt": "2026-08-02T15:46:01.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1vdlfc8/what_should_i_learn_in_networking_as_a_beginner/",
+      "score": 3.34,
+      "roles": [],
+      "products": [
+        "azure"
+      ],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 2.5,
+        "source": 0,
+        "recency": 0.84,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
       "id": "owfbv2",
       "source": "bbc",
       "subSource": "world",
@@ -4120,15 +4037,36 @@
       "url": "https://www.bbc.co.uk/news/articles/crl7jl1d95eo?at_medium=RSS&at_campaign=rss",
       "summary": "Two families reveal the human toll of India's medical entrance examination paper  leak.",
       "publishedAt": "2026-08-02T23:35:54.000Z",
-      "score": 3.38,
+      "score": 3.33,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 1.38,
+        "recency": 1.33,
         "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "yoqmcc",
+      "source": "hn",
+      "title": "Boarding China's Last Bus",
+      "url": "https://asteriskmag.com/issues/15/chinas-last-bus",
+      "summary": "",
+      "publishedAt": "2026-07-30T14:00:53.000Z",
+      "engagement": 34,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49110166",
+      "score": 3.33,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 0.01,
+        "engagement": 2.32,
         "noise": 0
       }
     },
@@ -4140,14 +4078,14 @@
       "url": "https://www.nytimes.com/2026/08/02/business/family-offices-miami.html",
       "summary": "Tax incentives, among other benefits, have drawn the ultrawealthy to the city. And they need space for the firms that manage their money.",
       "publishedAt": "2026-08-02T21:25:25.000Z",
-      "score": 3.21,
+      "score": 3.17,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 1.21,
+        "recency": 1.17,
         "engagement": 0,
         "noise": 0
       }
