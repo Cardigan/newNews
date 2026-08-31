@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-31T21:25:21.932Z",
-  "count": 181,
+  "generatedAt": "2026-08-31T21:42:58.293Z",
+  "count": 184,
   "articles": [
     {
       "id": "yg6uf8",
@@ -9,9 +9,9 @@
       "url": "https://github.com/Hebbian-Robotics/hflow",
       "summary": "Hi HN, we’re Brandon and Kingston, the founders of Hebbian Robotics. We built HFlow (<a href=\"https:&#x2F;&#x2F;github.com&#x2F;Hebbian-Robotics&#x2F;hflow\" rel=\"nofollow\">https:&#x2F;&#x2F;github.com&#x2F;Hebbian-Robotics&#x2F;hflow</a>), an SDK that turns multimodal recordings from robots and human operators into standardized, quality-checked episodes and queryable dataset manifests. A recording can contain synchronized video, joint states, actions, timestamps, and metadata, and HFlow processes those streams together.<p>Here’s a demo of HFlow in action: <a href=\"https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=xni0GwV-xAw\" rel=\"nofollow\">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=xni0GwV-xAw</a><p>Robotics data pipelines often begin as scripts: one transcodes video, another checks timestamps, another adds labels, and another copies selected recordings into a training set. This works until the corpus grows. Then it becomes difficult to know which code ran, why an episode was excluded, or whether a dataset can be reproduced. The first pain is usually quality control because frozen cameras, missing topics, timestamp drift, and duplicate recordings can quietly enter training data.<p>Brandon first encountered this while training embodied AI models for two-arm industrial cleaning robots. Kingston had run into related problems while building high-throughput infrastructure at Jane Street. Later, while speaking with robotics data providers, we kept seeing teams rebuild similar processing and quality-control infrastructure. We learnt that processing robotics data is itself one of the bottlenecks to improving robotics models.<p>An HFlow pipeline consists of transformations, checks, labels, and enrichments. The SDK exposes them as plain Python functions that receive an episode and return measurements, artifacts, or transformed data. During development, the functions can run in-process. For scheduled corpus processing, HFlow packages the same registered steps as Airflow 3 DAGs, where teams can inspect task status, logs, retries, and reruns.<p>HFlow currently accepts one MCAP file per episode. MCAP (<a href=\"https:&#x2F;&#x2F;mcap.dev&#x2F;\" rel=\"nofollow\">https:&#x2F;&#x2F;mcap.dev&#x2F;</a>) is an open container format by Foxglove for timestamped multimodal recordings, similar in purpose to a ROS bag. It lets video, robot state, actions, and other sensor streams remain synchronized in one file. We use it because HFlow needs to process these streams together, and because the resulting recordings remain compatible with Foxglove and Rerun. HFlow writes a canonical MCAP with in-band H.264 video, grouped camera and state chunks, and provenance describing how the output was produced. Each step has an explicit behavior version, and catalog records connect its measurements and artifacts to the source episode and pipeline run.<p>Quality checks store reusable evidence rather than imposing one universal definition of good data. Some failures, including black frames, frozen video, missing topics, timestamp drift, and impossible joint movements, can be measured deterministically without training a model. Others might be detected using VLMs and other models like MediaPipe Hands. But their meaning depends on the task. A smooth trajectory might indicate a successful demonstration in one setting and a stalled robot in another.<p>HFlow writes measurements, metadata, version stamps, and artifact locations to an append-only Parquet catalog. Teams query it with DuckDB SQL and produce a version-pinned manifest without opening the recordings again. Critical checks can quarantine an episode, but HFlow does not delete data. This separates the evidence from the policy used to assemble a particular dataset.<p>We did not want to replace the tools robotics teams already use. HFlow connects MCAP for synchronized recordings, Airflow for scheduled execution, Parquet for catalog data, and DuckDB for curation. Compared with a general workflow orchestrator, it adds contracts for robotics episodes, processing provenance, quality evidence, quarantine, and dataset manifests. Compared with a training dataset format, it operates earlier and stops at curated episodes plus a manifest.<p>Here are three examples of teams that would use HFlow:\n1. A data vendor or marketplace collecting egocentric recordings. They could use HFlow to detect black or frozen video, duplicate recordings, hand-object interaction, and other quality metrics before delivering the data, while retaining evidence of which checks ran on every episode.\n2. A robotics team collecting teleoperated demonstrations for its own models. They could use HFlow to standardize recordings, add labels and enrichments, and produce a reproducible training manifest.\n3. A team operating robots in the field. It could process incoming logs, quarantine incomplete or corrupted episodes, and query the catalog for particular robot versions, environments, or failure conditions.<p>The project is pre-v1, but the core lifecycle works end to end. You can try it without an account, Docker, or robot hardware by cloning the repository and following the quickstart.<p>HFlow is free under the Apache-2.0 license. The open source deployment is currently a single-tenant workspace, and we have not built the hosted, multi-tenant control plane yet. We are considering making money through managed workspaces and enterprise support for teams that do not want to operate the runtime themselves.<p>Because this processing layer is software and data, people can contribute without owning a robot. We would especially like feedback from people who have built pipelines for robotics, video, or other sensor-heavy systems. We are curious where our data model is wrong, which integrations are missing, and what would fail first on your workloads.",
       "publishedAt": "2026-08-31T15:02:41.000Z",
-      "engagement": 32,
+      "engagement": 33,
       "commentsUrl": "https://news.ycombinator.com/item?id=49510632",
-      "score": 69.4,
+      "score": 69.35,
       "roles": [
         "manager",
         "developer",
@@ -26,8 +26,8 @@
         "role": 27,
         "product": 35,
         "source": 1,
-        "recency": 4.12,
-        "engagement": 2.28,
+        "recency": 4.05,
+        "engagement": 2.3,
         "noise": 0
       }
     },
@@ -38,9 +38,9 @@
       "url": "https://usealmanac.com/",
       "summary": "Hi HN, I&#x27;m Kushagra, one of three founders of Almanac, a Hermes with a brain that knows everything about your company.<p>We started our journey with setting up Hermes for our company, thinking it must be easy. We wanted an agent that would know every context about our company, so we could ask questions and get context-appropriate responses to.<p>This started a very annoying and difficult journey. Setting up Hermes, getting it to talk right, building OAuth apps for every connector myself, then feeding it context myself, and ultimately struggling with Hermes&#x27;s default memory. At the same time, we saw our YC batchmates struggling with the same problem, and we saw an opportunity.<p>So we built Almanac. This is how it works. You sign up, you get a Hermes agent straight out of the box. You have a one-click connect to any account (Gmail, Calendar, Granola, PostHog, etc). You have personal accounts (only accessible by you) and also shared accounts (accessible by everyone in the company). The consequence being I can never see my cofounders&#x27; accounts.<p>The “brain” of this agent is wikis. We pull in information from your connected sources, and start organizing this information in two wikis. A personal one, for you, which understands who you are, what your preferences are, the people in your life, and the things going on in your life. The second wiki is a company wiki, which includes what the company is, what you’re working on, what the roadmap is, and what the blockers of the company are. Your agent ultimately has access to these two wikis and the original accounts, which invoke the feeling of “it just knows you.”<p>Here’s a demo: <a href=\"https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=ajXP5PHuK18\" rel=\"nofollow\">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=ajXP5PHuK18</a><p>We&#x27;re three cofounders, Rohan, Kushagra, and Divit, and we&#x27;ve been friends for 11 years, since studying for the IIT-JEE. We all did Electrical Engineering (Rohan at IIT Delhi, me at IIT Kharagpur, Divit at BITS Pilani, Hyderabad), and Rohan and I later went to Harvard, where this pre-compilation layer became our capstone thesis. We have built multiple products around the idea of a pre-compiled knowledge layer.<p>Our main differentiating point is the way we approach memory and context in general. Most AI assistant tools treat memory as an afterthought. We have worked on wikis for AI for more than a year now, building products for Harvard and NASA. The one thing we have learnt is that one needs to spend a lot more compute upfront, in the pre-compilation of this knowledge base, to get it right.<p>Having this pre-compiled knowledge base enables a lot of interesting ideas. First is a proactive agent. Since I have compiled what’s going on in both my company and my current life, Almanac can start completing tasks on its own. Concretely, we run a background worker which takes a look at tasks that could be completed, pings the main agent, who then pings me, suggesting which tasks it could automate. As a result, I wake up to proactive notifications which look like “I already prepared a draft of your fundraising pitch deck, want to take a look?”<p>Second, long-horizon tasks. In our wikis, we maintain a section on ongoing projects, so Almanac can pick a task back up days later without losing the thread. Most agents are session-bound: they run once, finish, and forget. But a lot of real work isn&#x27;t one shot; it plays out over hours and days with people in the loop. The clearest example is anything that involves waiting on a human, like scheduling a meeting, following up on a sales thread, or chasing a document. Almanac can send an email on your behalf, and because it&#x27;s always on and remembers the project, it notices the reply four hours later and drafts the right follow-up in context.<p>Since launching, we&#x27;ve seen a lot of use cases for Almanac. One person runs her dog-rescue operation through it: finding available fosters, tracking pickups, and sending reminders for consent forms. Another researches Polymarket strategies with Almanac, where its memory holds what past strategies were, proposes new ones, and compares them against what went right or wrong last time. Another builds marketing campaigns on it without having to re-explain the business and the whole campaign every single time.<p>Regarding privacy and security, Almanac only accesses accounts you explicitly connect. Your OAuth credentials are held by our connection provider, not in Almanac’s database. We only store the wiki and the source behind its citations. So an email used as a citation may be retained as Markdown.<p>We’re live: <a href=\"https:&#x2F;&#x2F;usealmanac.com\">https:&#x2F;&#x2F;usealmanac.com</a>. We have a 7-day trial on all of our plans. Happy to hear if people have done similar setups, and what new features they’d like in Almanac. If you’re a company that wants to get an agent that actually gets tasks done, I would love to talk: <a href=\"https:&#x2F;&#x2F;cal.com&#x2F;team&#x2F;almanac&#x2F;demo\" rel=\"nofollow\">https:&#x2F;&#x2F;cal.com&#x2F;team&#x2F;almanac&#x2F;demo</a>.",
       "publishedAt": "2026-08-31T15:34:34.000Z",
-      "engagement": 31,
+      "engagement": 33,
       "commentsUrl": "https://news.ycombinator.com/item?id=49511007",
-      "score": 65.51,
+      "score": 65.48,
       "roles": [
         "manager",
         "developer",
@@ -55,8 +55,8 @@
         "role": 18,
         "product": 40,
         "source": 1,
-        "recency": 4.25,
-        "engagement": 2.26,
+        "recency": 4.18,
+        "engagement": 2.3,
         "noise": 0
       }
     },
@@ -69,7 +69,7 @@
       "summary": "Did you know that you can automate Azure diagrams from Bicep using GitHub Copilot CLI Custom Agents? In this video, I will show you how to generate architecture diagrams directly from your Bicep files, reducing manual work and keeping your documentation in sync with your code. https://www.youtube.com/watch?v=xOrlC0hRwe8\n    submitted by    /u/brianveldman  \n [link]   [comments]",
       "publishedAt": "2026-08-30T09:30:06.000Z",
       "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w2cyf6/automating_azure_diagrams_from_bicep_using_github/",
-      "score": 57.73,
+      "score": 57.71,
       "roles": [
         "developer"
       ],
@@ -81,7 +81,7 @@
         "role": 12,
         "product": 45,
         "source": 0,
-        "recency": 0.73,
+        "recency": 0.71,
         "engagement": 0,
         "noise": 0
       }
@@ -93,9 +93,9 @@
       "url": "https://github.com/glukicov/slideops",
       "summary": "I kept generating slide decks about my codebases with an agent, and weeks later they would go stale. Updating them was quite costly (time &amp; tokens), as the agent would have to re-scan the whole repo to re-generate the slides. So I made the slide deck carry its own provenance: SlideOps skill turns a repo into a slide deck, with all references to files carrying exact line range and a hash.<p>Checking is done with standard-library Python: no model calls, no network, and very fast. For example, it distinguishes MOVED (the code shifted) from CHANGED (the content differs). Updating the slides costs tokens, but now the checking part has already given the agent just the relevant context on what exactly needs to be repaired.<p>SlideOps ships as a Claude Code plugin and runs as a plain agent skill in Codex, Copilot CLI and OpenCode.<p>Longer write-up: <a href=\"https:&#x2F;&#x2F;medium.com&#x2F;@lukicov&#x2F;your-documentation-is-a-build-artifact-start-treating-it-like-one-ab48df61b1e0\" rel=\"nofollow\">https:&#x2F;&#x2F;medium.com&#x2F;@lukicov&#x2F;your-documentation-is-a-build-ar...</a><p>GitHub repo: <a href=\"https:&#x2F;&#x2F;github.com&#x2F;glukicov&#x2F;slideops\" rel=\"nofollow\">https:&#x2F;&#x2F;github.com&#x2F;glukicov&#x2F;slideops</a>",
       "publishedAt": "2026-08-31T12:15:10.000Z",
-      "engagement": 15,
+      "engagement": 16,
       "commentsUrl": "https://news.ycombinator.com/item?id=49508735",
-      "score": 54.3,
+      "score": 54.28,
       "roles": [
         "developer"
       ],
@@ -106,8 +106,8 @@
         "role": 18,
         "product": 30,
         "source": 1,
-        "recency": 3.5,
-        "engagement": 1.81,
+        "recency": 3.44,
+        "engagement": 1.85,
         "noise": 0
       }
     },
@@ -120,7 +120,7 @@
       "summary": "Okay so MS has a reference implementation in Learn about container app jobs -based agents that scale on demand at https://learn.microsoft.com/en-us/azure/container-apps/tutorial-ci-cd-runners-jobs?tabs=bash&pivots=container-apps-jobs-self-hosted-ci-cd-azure-pipelines#create-a-self-hosted-agent-as-an-event-driven-job\n Whenever the agent pool has (devops)jobs in queue, KEDA azure-pipelines scaler wi",
       "publishedAt": "2026-08-31T17:17:16.000Z",
       "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w3k9bt/container_job_devops_agents_with_keda/",
-      "score": 49.7,
+      "score": 49.62,
       "roles": [],
       "products": [
         "pipelines",
@@ -131,7 +131,7 @@
         "role": 0,
         "product": 45,
         "source": 0,
-        "recency": 4.7,
+        "recency": 4.62,
         "engagement": 0,
         "noise": 0
       }
@@ -145,7 +145,7 @@
       "summary": "Has anyone found a way to make the azure gov cloud AI good? The only thing I've used to make it better is MCP.\n    submitted by    /u/TheSmashingChamp  \n [link]   [comments]",
       "publishedAt": "2026-08-31T01:50:05.000Z",
       "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w2zycu/making_the_azure_gov_cloud_ai_not_suck/",
-      "score": 36.9,
+      "score": 36.86,
       "roles": [],
       "products": [
         "azure",
@@ -156,7 +156,7 @@
         "role": 0,
         "product": 35,
         "source": 0,
-        "recency": 1.9,
+        "recency": 1.86,
         "engagement": 0,
         "noise": 0
       }
@@ -170,7 +170,7 @@
       "summary": "Azure weekly update #34 is here. This time updates focus on strengthening secure cloud operations, Kubernetes networking and storage, sovereign-cloud support, and large-scale infrastructure performance.\n Detailed list:\n  \nLaunched | Generally Available: Workload identity support for Azure Files CSI driver (SMB) in Azure. AKS now supports workload identity for pod-level authentication to Azure File",
       "publishedAt": "2026-08-30T18:37:12.000Z",
       "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w2pihe/azure_weekly_highlights_34/",
-      "score": 32.24,
+      "score": 32.22,
       "roles": [
         "developer",
         "sre"
@@ -182,7 +182,7 @@
         "role": 6,
         "product": 25,
         "source": 0,
-        "recency": 1.24,
+        "recency": 1.22,
         "engagement": 0,
         "noise": 0
       }
@@ -196,7 +196,7 @@
       "summary": "I’m looking for the best way to allow my company’s current ERP system to continue operation while creating a real time copy of our locally hosted sql server and Microsoft share drive. This would be 1 step in a larger move to a platform to host internal applications on azure gov cloud. I want to avoid microservices/vpns if possible and be able to have applications pull info from a sql server that i",
       "publishedAt": "2026-08-30T01:46:00.000Z",
       "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w24cus/raiding_a_share_drive_and_sql_server_hosted/",
-      "score": 25.46,
+      "score": 25.45,
       "roles": [],
       "products": [
         "azure",
@@ -206,7 +206,7 @@
         "role": 0,
         "product": 25,
         "source": 0,
-        "recency": 0.46,
+        "recency": 0.45,
         "engagement": 0,
         "noise": 0
       }
@@ -220,7 +220,7 @@
       "summary": "With Azure Linux 4.0 Microsoft ❤️ Linux even more! In this video I look at what's new and where we can use it.\n https://youtu.be/_9C1d4PZ2Lc\n ALSO don't forget today's AMA at 10:00 AM PST, hope to see you there - https://youtube.com/live/hXRPm7r4Q14?feature=share\n 00:00 - Introduction\n 00:12 - History\n 02:42 - Why Azure Linux?\n 05:28 - Architecture\n 08:24 - Where can be used\n 09:01 - Lifecycle\n 09",
       "publishedAt": "2026-08-31T10:51:31.000Z",
       "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w3a8hr/azure_linux_40_overview/",
-      "score": 21.22,
+      "score": 21.17,
       "roles": [
         "pm"
       ],
@@ -231,7 +231,7 @@
         "role": 3,
         "product": 15,
         "source": 0,
-        "recency": 3.22,
+        "recency": 3.17,
         "engagement": 0,
         "noise": 0
       }
@@ -245,7 +245,7 @@
       "summary": "Hello everyone,\n I currently work as a Microsoft365/Exchange on-prem Administrator, primarily focusing on Entra ID, with some experience in Intune administration as well.\n In addition, I manage a small NGO Microsoft 365 tenant that includes a limited amount of Azure credits (around $1,000). I'd like to use this environment to expand my Azure knowledge through hands-on projects and real-world scena",
       "publishedAt": "2026-08-30T13:13:13.000Z",
       "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w2h8o4/how_to_learn_azure/",
-      "score": 20.9,
+      "score": 20.89,
       "roles": [],
       "products": [
         "azure"
@@ -254,7 +254,7 @@
         "role": 0,
         "product": 20,
         "source": 0,
-        "recency": 0.9,
+        "recency": 0.89,
         "engagement": 0,
         "noise": 0
       }
@@ -268,7 +268,7 @@
       "summary": "A few months have passed since Global Azure 2026, but we finally have the chance to share the official recap video of our event in Veneto, Italy! 🇮🇹\n It was an amazing day: hundreds of attendees, dozens of speakers and sessions, multiple tracks, and most importantly, a great community of people passionate about Microsoft Azure and cloud technologies.\n A huge thank you to all the speakers who sha",
       "publishedAt": "2026-08-31T18:16:15.000Z",
       "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w3m1cz/global_azure_2026_in_veneto_italy_event_recap/",
-      "score": 19.98,
+      "score": 19.9,
       "roles": [],
       "products": [
         "azure"
@@ -277,7 +277,7 @@
         "role": 0,
         "product": 15,
         "source": 0,
-        "recency": 4.98,
+        "recency": 4.9,
         "engagement": 0,
         "noise": 0
       }
@@ -291,7 +291,7 @@
       "summary": "We are a ZIA/ZPA shop, roughly 4,000 seats, renewal in about seven months. Not shopping for the sake of it, but the AI requirements landed after our last contract and I want to know whether we are better off expanding here or looking at Cato.\n Where we are with Zscaler on the AI side: SSL inspection is solid, the AI app category exists, DLP works about as well as our policies deserve. What I am le",
       "publishedAt": "2026-08-31T14:14:48.000Z",
       "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w3f2e5/zscaler_vs_cato_best_sase_platform_for_enterprise/",
-      "score": 17.43,
+      "score": 17.37,
       "roles": [
         "manager",
         "sre"
@@ -304,7 +304,7 @@
         "role": 6,
         "product": 7.5,
         "source": 0,
-        "recency": 3.93,
+        "recency": 3.87,
         "engagement": 0,
         "noise": 0
       }
@@ -318,7 +318,7 @@
       "summary": "I am setting up Azure APIM instance behind a Azure Application gateway. Developer portal will be exposed so external customers will be able to subscribe to products containing the APIs and obtain the subscription key that way. There will be approvals required for subscription.\n I want to setup OIDC on top of the subscription key validation. For that I believe I have to setup a Validate JWT policy ",
       "publishedAt": "2026-08-30T03:06:42.000Z",
       "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w25z3o/how_to_setup_customer_to_obtain_aadb2c_token_for/",
-      "score": 16.5,
+      "score": 16.49,
       "roles": [
         "developer",
         "pm"
@@ -330,7 +330,7 @@
         "role": 6,
         "product": 10,
         "source": 0,
-        "recency": 0.5,
+        "recency": 0.49,
         "engagement": 0,
         "noise": 0
       }
@@ -344,7 +344,7 @@
       "summary": "a bit new to azure and all the different components and services. I have extensive experience with on prep services/devices etc. Typically we would name objects/resources based on their location, type (physical vs virtual) and role. \n Can you recommend or give insight into how you are naming your Azure resources for clarity and documentation?\n    submitted by    /u/_SleezyPMartini_  \n [link]   [co",
       "publishedAt": "2026-08-31T20:25:06.000Z",
       "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w3ptjh/how_did_you_plan_your_naming_convention/",
-      "score": 15.66,
+      "score": 15.56,
       "roles": [],
       "products": [
         "azure"
@@ -353,7 +353,7 @@
         "role": 0,
         "product": 10,
         "source": 0,
-        "recency": 5.66,
+        "recency": 5.56,
         "engagement": 0,
         "noise": 0
       }
@@ -365,7 +365,7 @@
       "url": "https://www.theguardian.com/business/2026/aug/31/aanthropic-sued-alleged-theft-songs-ai-train-claude",
       "summary": "AI company faces multibillion dollar lawsuit over misuse of copyrighted songs to train Claude models\nAll AI wants for Christmas is a vast back catalogue of songs without paying for it, according to a multibillion-dollar lawsuit against the startup behind the Claude chatbot.\nSony Music Publishing and Warner Chappell, music publishers who manage the copyright of songs on behalf of songwriters and composers, are seeking damages for alleged misuse of “tens of thousands” of copyrighted works by Anthropic.\n Continue reading...",
       "publishedAt": "2026-08-31T12:42:05.000Z",
-      "score": 15.59,
+      "score": 15.53,
       "roles": [],
       "products": [
         "ai"
@@ -374,7 +374,7 @@
         "role": 0,
         "product": 10,
         "source": 2,
-        "recency": 3.59,
+        "recency": 3.53,
         "engagement": 0,
         "noise": 0
       }
@@ -388,7 +388,7 @@
       "publishedAt": "2026-08-31T21:00:09.000Z",
       "engagement": 1,
       "commentsUrl": "https://news.ycombinator.com/item?id=49514781",
-      "score": 15.31,
+      "score": 15.2,
       "roles": [
         "manager"
       ],
@@ -399,31 +399,8 @@
         "role": 3,
         "product": 5,
         "source": 1,
-        "recency": 5.85,
+        "recency": 5.75,
         "engagement": 0.45,
-        "noise": 0
-      }
-    },
-    {
-      "id": "n9cujo",
-      "source": "reddit",
-      "subSource": "azure",
-      "title": "Set up p2 license",
-      "url": "https://www.reddit.com/r/AZURE/comments/1w3i3pt/set_up_p2_license/",
-      "summary": "Having trouble getting Entra ID P2/ Microsoft 365 P2 for SC-300 training\n I'm working through the SC-300 training and need access to the P2 features for the labs. I have a reqular Gmail /Microsoft account that I've been using for the Microsoft Learn stuff, and I have some Azure subscriptions showing up under it. The problem is I'm just having trouble finding where to get a P2 license/subscription ",
-      "publishedAt": "2026-08-31T16:03:03.000Z",
-      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w3i3pt/set_up_p2_license/",
-      "score": 14.37,
-      "roles": [],
-      "products": [
-        "azure"
-      ],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 10,
-        "source": 0,
-        "recency": 4.37,
-        "engagement": 0,
         "noise": 0
       }
     },
@@ -453,6 +430,52 @@
       }
     },
     {
+      "id": "n9cujo",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "Set up p2 license",
+      "url": "https://www.reddit.com/r/AZURE/comments/1w3i3pt/set_up_p2_license/",
+      "summary": "Having trouble getting Entra ID P2/ Microsoft 365 P2 for SC-300 training\n I'm working through the SC-300 training and need access to the P2 features for the labs. I have a reqular Gmail /Microsoft account that I've been using for the Microsoft Learn stuff, and I have some Azure subscriptions showing up under it. The problem is I'm just having trouble finding where to get a P2 license/subscription ",
+      "publishedAt": "2026-08-31T16:03:03.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w3i3pt/set_up_p2_license/",
+      "score": 14.3,
+      "roles": [],
+      "products": [
+        "azure"
+      ],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 10,
+        "source": 0,
+        "recency": 4.3,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "fyocup",
+      "source": "bbc",
+      "subSource": "tech",
+      "title": "Amazon rigged billions in ad pricing, lawsuit from states and US watchdog alleges",
+      "url": "https://www.bbc.co.uk/news/articles/cvgy91nvy27o?at_medium=RSS&at_campaign=rss",
+      "summary": "Amazon responded to the lawsuit, arguing the US Federal Trade Commission \"misunderstands\" their ad market.",
+      "publishedAt": "2026-08-31T21:28:49.000Z",
+      "score": 13.92,
+      "roles": [
+        "manager",
+        "pm"
+      ],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 6,
+        "product": 0,
+        "source": 2,
+        "recency": 5.92,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
       "id": "72tj6y",
       "source": "nyt",
       "subSource": "business",
@@ -460,7 +483,7 @@
       "url": "https://www.nytimes.com/2026/08/31/business/dealbook/together-ai-humain-saudi-arabia-data-center.html",
       "summary": "Together AI, which serves open-source artificial intelligence models, announced a deal to use compute from Humain in Saudi Arabia, where it can bypass U.S. backlash over data centers.",
       "publishedAt": "2026-08-31T14:19:11.000Z",
-      "score": 13.95,
+      "score": 13.88,
       "roles": [
         "manager"
       ],
@@ -471,7 +494,7 @@
         "role": 3,
         "product": 5,
         "source": 2,
-        "recency": 3.95,
+        "recency": 3.88,
         "engagement": 0,
         "noise": 0
       }
@@ -483,9 +506,9 @@
       "url": "https://codex-tool-reference.simonw.chatgpt.site/",
       "summary": "",
       "publishedAt": "2026-08-31T14:07:15.000Z",
-      "engagement": 152,
+      "engagement": 156,
       "commentsUrl": "https://news.ycombinator.com/item?id=49510000",
-      "score": 13.18,
+      "score": 13.13,
       "roles": [],
       "products": [
         "ai"
@@ -494,8 +517,8 @@
         "role": 0,
         "product": 5,
         "source": 1,
-        "recency": 3.9,
-        "engagement": 3.28,
+        "recency": 3.84,
+        "engagement": 3.29,
         "noise": 0
       }
     },
@@ -530,9 +553,9 @@
       "url": "https://calpaterson.com/memoryfields.html",
       "summary": "",
       "publishedAt": "2026-08-31T11:17:25.000Z",
-      "engagement": 147,
+      "engagement": 148,
       "commentsUrl": "https://news.ycombinator.com/item?id=49508317",
-      "score": 12.56,
+      "score": 12.51,
       "roles": [],
       "products": [
         "ai"
@@ -541,7 +564,7 @@
         "role": 0,
         "product": 5,
         "source": 1,
-        "recency": 3.31,
+        "recency": 3.25,
         "engagement": 3.26,
         "noise": 0
       }
@@ -553,9 +576,9 @@
       "url": "https://embracethered.com/blog/posts/2026/breaking-claude-code-opus-5-and-automode/",
       "summary": "",
       "publishedAt": "2026-08-31T07:49:18.000Z",
-      "engagement": 319,
+      "engagement": 321,
       "commentsUrl": "https://news.ycombinator.com/item?id=49506819",
-      "score": 12.45,
+      "score": 12.41,
       "roles": [],
       "products": [
         "ai"
@@ -564,7 +587,7 @@
         "role": 0,
         "product": 5,
         "source": 1,
-        "recency": 2.7,
+        "recency": 2.65,
         "engagement": 3.76,
         "noise": 0
       }
@@ -576,9 +599,9 @@
       "url": "https://jasontucker.blog/how-i-turned-my-security-cameras-into-an-automatic-bird-identification-system-with-birdnet-go/",
       "summary": "",
       "publishedAt": "2026-08-31T16:47:11.000Z",
-      "engagement": 278,
+      "engagement": 286,
       "commentsUrl": "https://news.ycombinator.com/item?id=49511856",
-      "score": 12.24,
+      "score": 12.18,
       "roles": [
         "sre"
       ],
@@ -587,8 +610,8 @@
         "role": 3,
         "product": 0,
         "source": 1,
-        "recency": 4.57,
-        "engagement": 3.67,
+        "recency": 4.49,
+        "engagement": 3.69,
         "noise": 0
       }
     },
@@ -599,9 +622,9 @@
       "url": "https://simonwillison.net/2026/Aug/30/understanding-chatgpt-work/",
       "summary": "",
       "publishedAt": "2026-08-31T01:28:22.000Z",
-      "engagement": 311,
+      "engagement": 312,
       "commentsUrl": "https://news.ycombinator.com/item?id=49504625",
-      "score": 11.6,
+      "score": 11.57,
       "roles": [],
       "products": [
         "ai"
@@ -610,7 +633,7 @@
         "role": 0,
         "product": 5,
         "source": 1,
-        "recency": 1.86,
+        "recency": 1.82,
         "engagement": 3.74,
         "noise": 0
       }
@@ -624,7 +647,7 @@
       "summary": "I'm not that familiar with Azure Storage options. What's the simplest and most effective way to save the state of a variable between runs of a webjob?\n My first attempt was to just save it to a file in the process, but I found out you cannot write to the file.\n    submitted by    /u/hold_me_beer_m8  \n [link]   [comments]",
       "publishedAt": "2026-08-30T19:24:49.000Z",
       "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w2qs3j/azure_storage/",
-      "score": 11.3,
+      "score": 11.28,
       "roles": [],
       "products": [
         "azure"
@@ -633,7 +656,7 @@
         "role": 0,
         "product": 10,
         "source": 0,
-        "recency": 1.3,
+        "recency": 1.28,
         "engagement": 0,
         "noise": 0
       }
@@ -667,9 +690,9 @@
       "url": "https://iggy.apache.org/blogs/2026/08/24/apache-iggy-top-level-project-tlp-graduation/",
       "summary": "",
       "publishedAt": "2026-08-31T14:54:20.000Z",
-      "engagement": 90,
+      "engagement": 91,
       "commentsUrl": "https://news.ycombinator.com/item?id=49510540",
-      "score": 11.03,
+      "score": 10.97,
       "roles": [
         "developer"
       ],
@@ -678,8 +701,8 @@
         "role": 3,
         "product": 0,
         "source": 1,
-        "recency": 4.09,
-        "engagement": 2.94,
+        "recency": 4.02,
+        "engagement": 2.95,
         "noise": 0
       }
     },
@@ -690,9 +713,9 @@
       "url": "https://www.cppstories.com/2026/hardening-experiments/",
       "summary": "",
       "publishedAt": "2026-08-31T14:52:24.000Z",
-      "engagement": 75,
+      "engagement": 76,
       "commentsUrl": "https://news.ycombinator.com/item?id=49510511",
-      "score": 10.9,
+      "score": 10.84,
       "roles": [
         "developer"
       ],
@@ -701,8 +724,8 @@
         "role": 3,
         "product": 0,
         "source": 1,
-        "recency": 4.08,
-        "engagement": 2.82,
+        "recency": 4.01,
+        "engagement": 2.83,
         "noise": 0
       }
     },
@@ -714,7 +737,7 @@
       "url": "https://www.nytimes.com/2026/08/30/business/forward-deployed-ai.html",
       "summary": "Start-ups are using the military-derived term to glorify customer-facing work as clients seek people to help set up artificial intelligence tools.",
       "publishedAt": "2026-08-30T09:00:55.000Z",
-      "score": 10.7,
+      "score": 10.69,
       "roles": [
         "pm"
       ],
@@ -725,7 +748,7 @@
         "role": 3,
         "product": 5,
         "source": 2,
-        "recency": 0.7,
+        "recency": 0.69,
         "engagement": 0,
         "noise": 0
       }
@@ -739,7 +762,7 @@
       "publishedAt": "2026-08-31T11:13:17.000Z",
       "engagement": 176,
       "commentsUrl": "https://news.ycombinator.com/item?id=49508290",
-      "score": 10.66,
+      "score": 10.61,
       "roles": [
         "sre"
       ],
@@ -748,7 +771,7 @@
         "role": 3,
         "product": 0,
         "source": 1,
-        "recency": 3.29,
+        "recency": 3.24,
         "engagement": 3.37,
         "noise": 0
       }
@@ -762,7 +785,7 @@
       "summary": "I'm not sure if it is just coincidence with the current Exchange Online issues, but everything that's in Universal Print is no longer working. Even going to the Universal Print portal gives an Error Code 500.\n All the printers show the following in Event Viewer and when you try to print you are met with \"Error\".\n IPP Printer Get-Printer-Attributes Request failed with IPP Status Code 0x500\n I teste",
       "publishedAt": "2026-08-31T18:01:37.000Z",
       "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w3lll8/universal_print_outage/",
-      "score": 10.41,
+      "score": 10.33,
       "roles": [
         "sre"
       ],
@@ -773,7 +796,7 @@
         "role": 3,
         "product": 2.5,
         "source": 0,
-        "recency": 4.91,
+        "recency": 4.83,
         "engagement": 0,
         "noise": 0
       }
@@ -787,7 +810,7 @@
       "summary": "Hi there,\n So small problem, a friend of mine was trying to add a school-account to microsoft (for college). After clicking \"yes\" to the \"allow your organization to manage your device\" question she got stuck at the 'device managment cannot be enabeled\" screen.\n Is there a fix? (preferably not reseting the whole laptop)\n printscreen (in Dutch but you can translate it :p ) \n https://preview.redd.it/",
       "publishedAt": "2026-08-31T17:49:54.000Z",
       "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w3l8ng/need_help_device_management_cannot_be_enabled/",
-      "score": 10.36,
+      "score": 10.27,
       "roles": [
         "pm"
       ],
@@ -798,7 +821,7 @@
         "role": 3,
         "product": 2.5,
         "source": 0,
-        "recency": 4.86,
+        "recency": 4.77,
         "engagement": 0,
         "noise": 0
       }
@@ -880,7 +903,7 @@
       "url": "https://www.theguardian.com/business/2026/aug/31/advanced-frontier-ai-financial-stability-andrew-bailey-g20",
       "summary": "Andrew Bailey, in role as financial stability watchdog chief, warns advanced models risk destabilising system\nThe Bank of England’s governor, Andrew Bailey, has joined the throng of figures warning about the global risks posed by the most advanced artificial intelligence technology.\nIn a two-page letter sent to international finance ministers and central bank governors as part of his role as chair of the international Financial Stability Board (FSB), Bailey said “frontier” AI models were “showing increasingly sophisticated autonomy and problem-solving abilities, as well as threat capabilities”.\n Continue reading...",
       "publishedAt": "2026-08-31T09:00:47.000Z",
-      "score": 9.89,
+      "score": 9.84,
       "roles": [],
       "products": [
         "ai"
@@ -889,7 +912,7 @@
         "role": 0,
         "product": 5,
         "source": 2,
-        "recency": 2.89,
+        "recency": 2.84,
         "engagement": 0,
         "noise": 0
       }
@@ -903,7 +926,7 @@
       "summary": "We’re happy to announce our next local event sponsored by ControlUp with Workplace Ninjas US Miami, which will take place at the ControlUp offices in Fort Lauderdale.\n The event will be October 26th from 10-4 PM.\n The Call for Papers is now officially open:\n https://sessionize.com/workplace-ninjas-us-Miami/\n Signup to attend here:\n https://www.eventbrite.com/e/workplace-ninjas-us-miami-meetup-tick",
       "publishedAt": "2026-08-31T15:54:24.000Z",
       "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w3huk5/workplace_ninjas_us_miami_october_26/",
-      "score": 9.84,
+      "score": 9.76,
       "roles": [
         "manager"
       ],
@@ -914,7 +937,7 @@
         "role": 3,
         "product": 2.5,
         "source": 0,
-        "recency": 4.34,
+        "recency": 4.26,
         "engagement": 0,
         "noise": 0
       }
@@ -928,7 +951,7 @@
       "publishedAt": "2026-08-28T17:36:55.000Z",
       "engagement": 34,
       "commentsUrl": "https://news.ycombinator.com/item?id=49481918",
-      "score": 9.39,
+      "score": 9.38,
       "roles": [
         "manager"
       ],
@@ -943,38 +966,15 @@
       }
     },
     {
-      "id": "t75su0",
-      "source": "reddit",
-      "subSource": "azure",
-      "title": "Accidentally got ₹22,000+ Azure charges while testing a personal project. Any chance Microsoft will waive it?",
-      "url": "/r/developersIndia/comments/1w3hfoo/accidentally_got_22000_azure_charges_while/",
-      "summary": "submitted by    /u/Active-Enthusiasm657  \n [link]   [comments]",
-      "publishedAt": "2026-08-31T16:03:21.000Z",
-      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w3i415/accidentally_got_22000_azure_charges_while/",
-      "score": 9.38,
-      "roles": [],
-      "products": [
-        "azure"
-      ],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 5,
-        "source": 0,
-        "recency": 4.38,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
       "id": "ygnj3b",
       "source": "hn",
       "title": "Transfer files over an Ethernet patch cable",
       "url": "https://maurycyz.com/misc/etherfiles/",
       "summary": "",
       "publishedAt": "2026-08-31T03:19:42.000Z",
-      "engagement": 151,
+      "engagement": 152,
       "commentsUrl": "https://news.ycombinator.com/item?id=49505217",
-      "score": 9.34,
+      "score": 9.31,
       "roles": [
         "sre"
       ],
@@ -983,8 +983,52 @@
         "role": 3,
         "product": 0,
         "source": 1,
-        "recency": 2.07,
-        "engagement": 3.27,
+        "recency": 2.03,
+        "engagement": 3.28,
+        "noise": 0
+      }
+    },
+    {
+      "id": "t75su0",
+      "source": "reddit",
+      "subSource": "azure",
+      "title": "Accidentally got ₹22,000+ Azure charges while testing a personal project. Any chance Microsoft will waive it?",
+      "url": "/r/developersIndia/comments/1w3hfoo/accidentally_got_22000_azure_charges_while/",
+      "summary": "submitted by    /u/Active-Enthusiasm657  \n [link]   [comments]",
+      "publishedAt": "2026-08-31T16:03:21.000Z",
+      "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w3i415/accidentally_got_22000_azure_charges_while/",
+      "score": 9.3,
+      "roles": [],
+      "products": [
+        "azure"
+      ],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 5,
+        "source": 0,
+        "recency": 4.3,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "yg48w4",
+      "source": "hn",
+      "title": "Google Has Removed MV2 Extensions from the Chrome Web Store, Including UBO",
+      "url": "https://webiterate.dev/google-removed-extensions-ublock-origin-108/",
+      "summary": "",
+      "publishedAt": "2026-08-31T21:10:58.000Z",
+      "engagement": 42,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49514878",
+      "score": 9.26,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 5.81,
+        "engagement": 2.45,
         "noise": 0
       }
     },
@@ -995,17 +1039,17 @@
       "url": "https://www.youtube.com/watch?v=3YtygAx_C6A",
       "summary": "<i>ASCII City: Traffic and Detail Update</i> - <a href=\"https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=DSRooHo_HSI\" rel=\"nofollow\">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=DSRooHo_HSI</a><p><i>ASCII City Update: Interiors, Elevation and Skyscrapers</i> - <a href=\"https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=UCKEDWowc0o\" rel=\"nofollow\">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=UCKEDWowc0o</a>",
       "publishedAt": "2026-08-31T18:21:33.000Z",
-      "engagement": 130,
+      "engagement": 136,
       "commentsUrl": "https://news.ycombinator.com/item?id=49512975",
-      "score": 9.19,
+      "score": 9.13,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 5.01,
-        "engagement": 3.18,
+        "recency": 4.92,
+        "engagement": 3.21,
         "noise": 0
       }
     },
@@ -1017,7 +1061,7 @@
       "url": "https://www.bbc.co.uk/news/articles/c1mv5ggg1l8o?at_medium=RSS&at_campaign=rss",
       "summary": "Ayten and Hayri Bicer's two young children are among 20 missing in an incident that killed eight people.",
       "publishedAt": "2026-08-31T14:50:36.000Z",
-      "score": 9.07,
+      "score": 9,
       "roles": [
         "sre"
       ],
@@ -1026,7 +1070,7 @@
         "role": 3,
         "product": 0,
         "source": 2,
-        "recency": 4.07,
+        "recency": 4,
         "engagement": 0,
         "noise": 0
       }
@@ -1038,17 +1082,17 @@
       "url": "https://playaphone.com/",
       "summary": "",
       "publishedAt": "2026-08-31T14:52:26.000Z",
-      "engagement": 404,
+      "engagement": 413,
       "commentsUrl": "https://news.ycombinator.com/item?id=49510514",
-      "score": 8.99,
+      "score": 8.94,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 4.08,
-        "engagement": 3.91,
+        "recency": 4.01,
+        "engagement": 3.93,
         "noise": 0
       }
     },
@@ -1059,9 +1103,9 @@
       "url": "https://floe.audio/",
       "summary": "I&#x27;m Sam, I make sample libraries (as FrozenPlain). These sample libraries run inside Floe, my audio plugin for Linux, macOS and Windows. It&#x27;s designed for musicians, composers and producers - typically people involved with film&#x2F;TV&#x2F;game scoring or ambient music. I open-sourced it primarily because I&#x27;m very fond of this philosophy and I want to open the door for serving a wider audience than just my own libraries.<p>It&#x27;s totally free, no sign-ups. You&#x27;ll need a DAW. To try it:\n- Download and install Floe: <a href=\"https:&#x2F;&#x2F;floe.audio\" rel=\"nofollow\">https:&#x2F;&#x2F;floe.audio</a>\n- Download your choice of free packages: https:floe.audio&#x2F;packages#community-packages or <a href=\"https:&#x2F;&#x2F;www.frozenplain.com&#x2F;product&#x2F;music-box-suite-free\" rel=\"nofollow\">https:&#x2F;&#x2F;www.frozenplain.com&#x2F;product&#x2F;music-box-suite-free</a>\n- Install the packages using Floe&#x27;s &#x27;Install Package&#x27; button. <a href=\"https:&#x2F;&#x2F;floe.audio&#x2F;docs&#x2F;installation&#x2F;install-packages\" rel=\"nofollow\">https:&#x2F;&#x2F;floe.audio&#x2F;docs&#x2F;installation&#x2F;install-packages</a><p>I&#x27;m curious about HN&#x27;s thoughts regarding the open-source nature, directions I could take for expanding the audience, and the Lua based sample-library it has (<a href=\"https:&#x2F;&#x2F;floe.audio&#x2F;docs&#x2F;develop&#x2F;develop-libraries\" rel=\"nofollow\">https:&#x2F;&#x2F;floe.audio&#x2F;docs&#x2F;develop&#x2F;develop-libraries</a>). Thanks.",
       "publishedAt": "2026-08-31T10:11:39.000Z",
-      "engagement": 16,
+      "engagement": 17,
       "commentsUrl": "https://news.ycombinator.com/item?id=49507908",
-      "score": 8.95,
+      "score": 8.93,
       "roles": [
         "developer"
       ],
@@ -1070,8 +1114,8 @@
         "role": 3,
         "product": 0,
         "source": 1,
-        "recency": 3.1,
-        "engagement": 1.85,
+        "recency": 3.05,
+        "engagement": 1.88,
         "noise": 0
       }
     },
@@ -1082,17 +1126,17 @@
       "url": "https://www.heise.de/en/news/Zuse-Computer-Museum-ZCOM-in-Hoyerswerda-faces-closure-11344513.html",
       "summary": "<a href=\"https:&#x2F;&#x2F;www.mdr.de&#x2F;nachrichten&#x2F;sachsen&#x2F;bautzen&#x2F;bautzen-hoyerswerda-kamenz&#x2F;computer-museum-schliesst-,konrad-zuse-kultur-news-100.html\" rel=\"nofollow\">https:&#x2F;&#x2F;www.mdr.de&#x2F;nachrichten&#x2F;sachsen&#x2F;bautzen&#x2F;bautzen-hoyer...</a> (auf Deutsch)",
       "publishedAt": "2026-08-31T16:52:35.000Z",
-      "engagement": 133,
+      "engagement": 139,
       "commentsUrl": "https://news.ycombinator.com/item?id=49511917",
-      "score": 8.78,
+      "score": 8.73,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 4.59,
-        "engagement": 3.19,
+        "recency": 4.51,
+        "engagement": 3.22,
         "noise": 0
       }
     },
@@ -1103,17 +1147,38 @@
       "url": "https://ravynos.com/",
       "summary": "",
       "publishedAt": "2026-08-31T16:19:36.000Z",
-      "engagement": 121,
+      "engagement": 125,
       "commentsUrl": "https://news.ycombinator.com/item?id=49511534",
-      "score": 8.58,
+      "score": 8.52,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 4.45,
-        "engagement": 3.13,
+        "recency": 4.37,
+        "engagement": 3.15,
+        "noise": 0
+      }
+    },
+    {
+      "id": "yg5iwy",
+      "source": "hn",
+      "title": "The safest job from AI may be writing",
+      "url": "http://muratbuffalo.blogspot.com/2026/08/the-safest-job-from-ai-may-be-writing.html",
+      "summary": "",
+      "publishedAt": "2026-08-31T18:12:20.000Z",
+      "engagement": 46,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49512856",
+      "score": 8.39,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 4.88,
+        "engagement": 2.51,
         "noise": 0
       }
     },
@@ -1126,14 +1191,14 @@
       "publishedAt": "2026-08-31T20:26:07.000Z",
       "engagement": 15,
       "commentsUrl": "https://news.ycombinator.com/item?id=49514471",
-      "score": 8.47,
+      "score": 8.37,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 5.66,
+        "recency": 5.56,
         "engagement": 1.81,
         "noise": 0
       }
@@ -1145,17 +1210,17 @@
       "url": "https://smallpotatoes.paulbloom.net/p/kids-these-days",
       "summary": "",
       "publishedAt": "2026-08-31T17:50:37.000Z",
-      "engagement": 42,
+      "engagement": 45,
       "commentsUrl": "https://news.ycombinator.com/item?id=49512618",
-      "score": 8.31,
+      "score": 8.27,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 4.86,
-        "engagement": 2.45,
+        "recency": 4.78,
+        "engagement": 2.49,
         "noise": 0
       }
     },
@@ -1168,14 +1233,14 @@
       "publishedAt": "2026-08-31T16:36:32.000Z",
       "engagement": 71,
       "commentsUrl": "https://news.ycombinator.com/item?id=49511720",
-      "score": 8.31,
+      "score": 8.23,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 4.52,
+        "recency": 4.44,
         "engagement": 2.79,
         "noise": 0
       }
@@ -1187,29 +1252,8 @@
       "url": "https://www.macrumors.com/2026/08/30/apple-unexpected-mac-mini-and-studio-demand/",
       "summary": "",
       "publishedAt": "2026-08-31T12:41:22.000Z",
-      "engagement": 219,
+      "engagement": 226,
       "commentsUrl": "https://news.ycombinator.com/item?id=49508982",
-      "score": 8.1,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 3.59,
-        "engagement": 3.51,
-        "noise": 0
-      }
-    },
-    {
-      "id": "yg5mq0",
-      "source": "hn",
-      "title": "'Stunning' percolation proof solves decades-old puzzle about phase transitions",
-      "url": "https://www.quantamagazine.org/stunning-percolation-proof-solves-decades-old-puzzle-about-phase-transitions-20260831/",
-      "summary": "",
-      "publishedAt": "2026-08-31T17:22:43.000Z",
-      "engagement": 35,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49512311",
       "score": 8.06,
       "roles": [],
       "products": [],
@@ -1217,8 +1261,8 @@
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 4.73,
-        "engagement": 2.33,
+        "recency": 3.53,
+        "engagement": 3.53,
         "noise": 0
       }
     },
@@ -1229,16 +1273,16 @@
       "url": "https://www.openshot.org/blog/2026/08/30/openshot-40-record-edit-color-like-never-before/",
       "summary": "",
       "publishedAt": "2026-08-31T09:59:05.000Z",
-      "engagement": 493,
+      "engagement": 496,
       "commentsUrl": "https://news.ycombinator.com/item?id=49507822",
-      "score": 8.06,
+      "score": 8.01,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 3.06,
+        "recency": 3.01,
         "engagement": 4,
         "noise": 0
       }
@@ -1310,23 +1354,105 @@
       }
     },
     {
-      "id": "yg4cqr",
+      "id": "yg5mq0",
       "source": "hn",
-      "title": "Tim Cook's Last Day as CEO of Apple",
-      "url": "https://twitter.com/tim_cook/status/2094448088199078236",
+      "title": "'Stunning' percolation proof solves decades-old puzzle about phase transitions",
+      "url": "https://www.quantamagazine.org/stunning-percolation-proof-solves-decades-old-puzzle-about-phase-transitions-20260831/",
       "summary": "",
-      "publishedAt": "2026-08-31T20:10:24.000Z",
-      "engagement": 7,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49514318",
-      "score": 7.93,
+      "publishedAt": "2026-08-31T17:22:43.000Z",
+      "engagement": 35,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49512311",
+      "score": 7.98,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 5.57,
-        "engagement": 1.35,
+        "recency": 4.65,
+        "engagement": 2.33,
+        "noise": 0
+      }
+    },
+    {
+      "id": "aie9qq",
+      "source": "bbc",
+      "subSource": "world",
+      "title": "US Supreme Court clears way for Trump to keep building White House ballroom",
+      "url": "https://www.bbc.co.uk/news/articles/c9w457e7ydlo?at_medium=RSS&at_campaign=rss",
+      "summary": "But Chief Justice John Roberts dissents, writing that \"construction is likely unlawful\".",
+      "publishedAt": "2026-08-31T21:38:42.000Z",
+      "score": 7.97,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 5.97,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "yg3rxk",
+      "source": "hn",
+      "title": "Google Maps Now Shows 'Lake America' in US, Not 'Lake Ontario'",
+      "url": "https://www.reuters.com/world/us/google-maps-will-show-lake-america-us-not-lake-ontario-2026-08-30/",
+      "summary": "",
+      "publishedAt": "2026-08-31T21:29:03.000Z",
+      "engagement": 4,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49515039",
+      "score": 7.97,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 5.92,
+        "engagement": 1.05,
+        "noise": 0
+      }
+    },
+    {
+      "id": "ecpvf2",
+      "source": "nyt",
+      "subSource": "tech",
+      "title": "FTC and 22 States Sue Amazon Over Advertising Practices",
+      "url": "https://www.nytimes.com/2026/08/31/technology/ftc-amazon-lawsuit-ad-prices.html",
+      "summary": "Regulators say the e-commerce giant forced more than a million advertisers to pay more than they should have. The company denies the claims.",
+      "publishedAt": "2026-08-31T21:35:54.000Z",
+      "score": 7.96,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 5.96,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "yg4cqr",
+      "source": "hn",
+      "title": "Tim Cook's Last Day as CEO of Apple",
+      "url": "https://twitter.com/tim_cook/status/2094448088199078236",
+      "summary": "",
+      "publishedAt": "2026-08-31T20:10:24.000Z",
+      "engagement": 8,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49514318",
+      "score": 7.91,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 5.48,
+        "engagement": 1.43,
         "noise": 0
       }
     },
@@ -1338,7 +1464,7 @@
       "url": "https://www.nytimes.com/2026/08/31/business/chinese-cars-us-sales-ban.html",
       "summary": "The Times test-drove a stunning crossover from Geely that would cost under half of what its rivals charge. Two senators and many experts point to security and economic concerns as reasons for a ban.",
       "publishedAt": "2026-08-31T09:00:54.000Z",
-      "score": 7.89,
+      "score": 7.84,
       "roles": [
         "sre"
       ],
@@ -1347,27 +1473,7 @@
         "role": 3,
         "product": 0,
         "source": 2,
-        "recency": 2.89,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "v1ajs2",
-      "source": "bbc",
-      "subSource": "world",
-      "title": "Two dead and more than a dozen missing after 'terrifying' flash flood hits Grand Canyon",
-      "url": "https://www.bbc.co.uk/news/articles/clylkjyez1do?at_medium=RSS&at_campaign=rss",
-      "summary": "\"It was a beautiful day - and then people were screaming,\" one hiker tells the BBC, as 14 people are missing.",
-      "publishedAt": "2026-08-31T20:47:38.000Z",
-      "score": 7.78,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 5.78,
+        "recency": 2.84,
         "engagement": 0,
         "noise": 0
       }
@@ -1379,36 +1485,59 @@
       "url": "https://signalandsilence.substack.com/p/i-think-someone-hacked-the-commissary",
       "summary": "",
       "publishedAt": "2026-08-31T11:45:48.000Z",
-      "engagement": 178,
+      "engagement": 189,
       "commentsUrl": "https://news.ycombinator.com/item?id=49508506",
-      "score": 7.78,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 3.4,
-        "engagement": 3.38,
-        "noise": 0
-      }
-    },
-    {
-      "id": "aie9qq",
-      "source": "bbc",
-      "subSource": "world",
-      "title": "US Supreme Court clears way for Trump to keep building White House ballroom",
-      "url": "https://www.bbc.co.uk/news/articles/c9w457e7ydlo?at_medium=RSS&at_campaign=rss",
-      "summary": "But Chief Justice John Roberts dissents, writing that \"construction is likely unlawful\".",
-      "publishedAt": "2026-08-31T20:43:25.000Z",
       "score": 7.76,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
+        "source": 1,
+        "recency": 3.34,
+        "engagement": 3.42,
+        "noise": 0
+      }
+    },
+    {
+      "id": "yw49cw",
+      "source": "hn",
+      "title": "I built a forgetting curve for an agent with one user",
+      "url": "https://eris-system.dev/blog/forgetting-curve",
+      "summary": "",
+      "publishedAt": "2026-08-25T10:32:15.000Z",
+      "engagement": 13,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49431546",
+      "score": 7.72,
+      "roles": [],
+      "products": [
+        "ai"
+      ],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 5,
+        "source": 1,
+        "recency": 0,
+        "engagement": 1.72,
+        "noise": 0
+      }
+    },
+    {
+      "id": "ktsd94",
+      "source": "nyt",
+      "subSource": "home",
+      "title": "Nepal Puts Cost of Disaster at $5 Billion, Blaming Climate Change",
+      "url": "https://www.nytimes.com/2026/08/31/climate/nepal-disaster-cost-climate.html",
+      "summary": "The country is seeking urgent help from a special U.N. climate fund, but the program lacks money because the United States and others have been reluctant to contribute.",
+      "publishedAt": "2026-08-31T20:48:16.000Z",
+      "score": 7.69,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
         "source": 2,
-        "recency": 5.76,
+        "recency": 5.69,
         "engagement": 0,
         "noise": 0
       }
@@ -1420,17 +1549,37 @@
       "url": "https://aeon.co/essays/at-the-heart-of-the-snow-leavis-two-cultures-clash",
       "summary": "",
       "publishedAt": "2026-08-31T14:50:24.000Z",
-      "engagement": 59,
+      "engagement": 61,
       "commentsUrl": "https://news.ycombinator.com/item?id=49510489",
-      "score": 7.74,
+      "score": 7.69,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 4.07,
-        "engagement": 2.67,
+        "recency": 4,
+        "engagement": 2.69,
+        "noise": 0
+      }
+    },
+    {
+      "id": "v1ajs2",
+      "source": "bbc",
+      "subSource": "world",
+      "title": "Two dead and more than a dozen missing after 'terrifying' flash flood hits Grand Canyon",
+      "url": "https://www.bbc.co.uk/news/articles/clylkjyez1do?at_medium=RSS&at_campaign=rss",
+      "summary": "\"It was a beautiful day - and then people were screaming,\" one hiker tells the BBC, as 14 people are missing.",
+      "publishedAt": "2026-08-31T20:47:38.000Z",
+      "score": 7.68,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 5.68,
+        "engagement": 0,
         "noise": 0
       }
     },
@@ -1443,7 +1592,7 @@
       "summary": "submitted by    /u/WASSIDI  \n [link]   [comments]",
       "publishedAt": "2026-08-31T18:57:04.000Z",
       "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w3n8qc/ai103_hack/",
-      "score": 7.69,
+      "score": 7.6,
       "roles": [],
       "products": [
         "azure"
@@ -1452,7 +1601,7 @@
         "role": 0,
         "product": 2.5,
         "source": 0,
-        "recency": 5.19,
+        "recency": 5.1,
         "engagement": 0,
         "noise": 0
       }
@@ -1465,57 +1614,14 @@
       "url": "https://www.nytimes.com/2026/08/31/arts/music/daisy-chain-fields-olivia-rodrigo.html",
       "summary": "At the first Daisy Chain Fields festival, the 23-year-old pop star presented a cross-generational vision of female empowerment. (With Taco Bell activations, too.)",
       "publishedAt": "2026-08-31T20:27:33.000Z",
-      "score": 7.67,
+      "score": 7.57,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 5.67,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "yw49cw",
-      "source": "hn",
-      "title": "I built a forgetting curve for an agent with one user",
-      "url": "https://eris-system.dev/blog/forgetting-curve",
-      "summary": "",
-      "publishedAt": "2026-08-25T10:32:15.000Z",
-      "engagement": 12,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49431546",
-      "score": 7.67,
-      "roles": [],
-      "products": [
-        "ai"
-      ],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 5,
-        "source": 1,
-        "recency": 0,
-        "engagement": 1.67,
-        "noise": 0
-      }
-    },
-    {
-      "id": "aqckw1",
-      "source": "nyt",
-      "subSource": "home",
-      "title": "Study A.I. Consciousness? The Bots Would Like a Word With You.",
-      "url": "https://www.nytimes.com/2026/08/31/science/ai-consciousness-agents-email.html",
-      "summary": "Given access to email, A.I. agents have started reaching out to the philosophers and researchers exploring deep questions about them.",
-      "publishedAt": "2026-08-31T20:21:06.000Z",
-      "score": 7.63,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 5.63,
+        "recency": 5.57,
         "engagement": 0,
         "noise": 0
       }
@@ -1529,86 +1635,26 @@
       "publishedAt": "2026-08-31T16:08:08.000Z",
       "engagement": 30,
       "commentsUrl": "https://news.ycombinator.com/item?id=49511400",
-      "score": 7.63,
+      "score": 7.56,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 4.4,
+        "recency": 4.32,
         "engagement": 2.24,
         "noise": 0
       }
     },
     {
-      "id": "fyjg6s",
+      "id": "aqckw1",
       "source": "nyt",
       "subSource": "home",
-      "title": "Death Toll Rises in Grand Canyon Flood as Search Continues",
-      "url": "https://www.nytimes.com/2026/08/31/us/grand-canyon-floods.html",
-      "summary": "Officials announced a second death and said that more than a dozen people remain unaccounted for after heavy rain.",
-      "publishedAt": "2026-08-31T20:17:10.000Z",
-      "score": 7.61,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 5.61,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "cg9sfs",
-      "source": "nyt",
-      "subSource": "home",
-      "title": "Summit With Russia, India and Iran Shows Leverage Wars Have Given Xi of China",
-      "url": "https://www.nytimes.com/2026/08/31/world/asia/putin-xi-modi-sco.html",
-      "summary": "A two-day conference of the 10-nation Shanghai Cooperation Organization in Kyrgyzstan shows the limits of U.S. economic warfare.",
-      "publishedAt": "2026-08-31T20:11:10.000Z",
-      "score": 7.58,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 5.58,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "ecpvf2",
-      "source": "nyt",
-      "subSource": "tech",
-      "title": "FTC and 22 States Sue Amazon Over Advertising Practices",
-      "url": "https://www.nytimes.com/2026/08/31/technology/ftc-amazon-lawsuit-ad-prices.html",
-      "summary": "Regulators say the e-commerce giant forced millions of advertisers to pay more than they should have. The company denies the claims.",
-      "publishedAt": "2026-08-31T20:05:56.000Z",
-      "score": 7.55,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 5.55,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "r1b382",
-      "source": "nyt",
-      "subSource": "business",
-      "title": "Global Oil Price Rises to $90 a Barrel After U.S. and Iran Trade Attacks",
-      "url": "https://www.nytimes.com/2026/08/31/business/oil-prices-iran-war.html",
-      "summary": "The first attacks in a month jolted energy markets. The average U.S. gasoline price remained 37 percent higher since the war began.",
-      "publishedAt": "2026-08-31T20:04:53.000Z",
+      "title": "Study A.I. Consciousness? The Bots Would Like a Word With You.",
+      "url": "https://www.nytimes.com/2026/08/31/science/ai-consciousness-agents-email.html",
+      "summary": "Given access to email, A.I. agents have started reaching out to the philosophers and researchers exploring deep questions about them.",
+      "publishedAt": "2026-08-31T20:21:06.000Z",
       "score": 7.54,
       "roles": [],
       "products": [],
@@ -1622,6 +1668,86 @@
       }
     },
     {
+      "id": "fyjg6s",
+      "source": "nyt",
+      "subSource": "home",
+      "title": "Death Toll Rises in Grand Canyon Flood as Search Continues",
+      "url": "https://www.nytimes.com/2026/08/31/us/grand-canyon-floods.html",
+      "summary": "Officials announced a second death and said that more than a dozen people remain unaccounted for after heavy rain.",
+      "publishedAt": "2026-08-31T20:17:10.000Z",
+      "score": 7.52,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 5.52,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "nw58gd",
+      "source": "nyt",
+      "subSource": "home",
+      "title": "What to Know About Hiking in Areas Prone to Flash Floods",
+      "url": "https://www.nytimes.com/2026/08/31/travel/flash-floods-hiking-what-to-know.html",
+      "summary": "Canyons, small streams and dry creek beds in the West can be deceptively dangerous, trapping hikers when rainfall upstream causes rapidly rising water.",
+      "publishedAt": "2026-08-31T20:15:19.000Z",
+      "score": 7.51,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 5.51,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "cg9sfs",
+      "source": "nyt",
+      "subSource": "home",
+      "title": "Summit With Russia, India and Iran Shows Leverage Wars Have Given Xi of China",
+      "url": "https://www.nytimes.com/2026/08/31/world/asia/putin-xi-modi-sco.html",
+      "summary": "A two-day conference of the 10-nation Shanghai Cooperation Organization in Kyrgyzstan shows the limits of U.S. economic warfare.",
+      "publishedAt": "2026-08-31T20:11:10.000Z",
+      "score": 7.48,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 5.48,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "r1b382",
+      "source": "nyt",
+      "subSource": "business",
+      "title": "Global Oil Price Rises to $90 a Barrel After U.S. and Iran Trade Attacks",
+      "url": "https://www.nytimes.com/2026/08/31/business/oil-prices-iran-war.html",
+      "summary": "The first attacks in a month jolted energy markets. The average U.S. gasoline price remained 37 percent higher since the war began.",
+      "publishedAt": "2026-08-31T20:04:53.000Z",
+      "score": 7.45,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 5.45,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
       "id": "h4akja",
       "source": "nyt",
       "subSource": "home",
@@ -1629,14 +1755,14 @@
       "url": "https://www.nytimes.com/2026/08/31/us/justice-department-subpoena-james-comey-richman-trump.html",
       "summary": "The subpoena of Daniel C. Richman is the latest move in a persistent campaign to go after James B. Comey, one of President Trump’s most reviled political adversaries who has already been indicted twice.",
       "publishedAt": "2026-08-31T19:32:37.000Z",
-      "score": 7.37,
+      "score": 7.28,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 5.37,
+        "recency": 5.28,
         "engagement": 0,
         "noise": 0
       }
@@ -1649,14 +1775,14 @@
       "url": "https://www.nytimes.com/2026/08/31/style/john-galliano-met-gala-canceled.html",
       "summary": "Donors, politicians and Jewish leaders questioned the Met’s decision to honor Galliano, a fashion designer who was found guilty of a hate crime for his antisemitic outbursts.",
       "publishedAt": "2026-08-31T19:30:08.000Z",
-      "score": 7.36,
+      "score": 7.27,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 5.36,
+        "recency": 5.27,
         "engagement": 0,
         "noise": 0
       }
@@ -1669,87 +1795,6 @@
       "url": "https://www.nytimes.com/2026/08/31/business/irs-audit-revenue.html",
       "summary": "The I.R.S. lost roughly a quarter of its employees since President Trump took office, hampering the agency’s ability to conduct audits.",
       "publishedAt": "2026-08-31T19:29:09.000Z",
-      "score": 7.35,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 5.35,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "cvrkmu",
-      "source": "nyt",
-      "subSource": "home",
-      "title": "Democrats Have a Trump Card for Attacks On Wokeness",
-      "url": "https://www.nytimes.com/2026/08/31/opinion/democrats-wokeness-republicans.html",
-      "summary": "The party that capitulated to Trump has the most to answer for",
-      "publishedAt": "2026-08-31T19:20:31.000Z",
-      "score": 7.31,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 5.31,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "c2027v",
-      "source": "nyt",
-      "subSource": "home",
-      "title": "A Principal Saved 900 Students Before His School Was Washed Away in Nepal",
-      "url": "https://www.nytimes.com/2026/08/31/world/asia/nepal-floods-teacher.html",
-      "summary": "Rajendra Dawadi had less than 15 minutes to act on a warning of approaching floodwaters. His swift evacuation plan saved hundreds of lives.",
-      "publishedAt": "2026-08-31T19:16:35.000Z",
-      "score": 7.29,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 5.29,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "ygmwol",
-      "source": "hn",
-      "title": "A 12TB Steam “teraleak” spills more than a decade of lost PC gaming history",
-      "url": "https://arstechnica.com/gaming/2026/08/a-12tb-steam-teraleak-spills-more-than-a-decade-of-lost-pc-gaming-history/",
-      "summary": "",
-      "publishedAt": "2026-08-31T06:10:44.000Z",
-      "engagement": 353,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49506182",
-      "score": 7.27,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 2.45,
-        "engagement": 3.82,
-        "noise": 0
-      }
-    },
-    {
-      "id": "miz6mc",
-      "source": "bbc",
-      "subSource": "world",
-      "title": "Across Latin America, 'aura battles' burst onto the scene",
-      "url": "https://www.bbc.co.uk/news/videos/c158z7g23zqo?at_medium=RSS&at_campaign=rss",
-      "summary": "Young people across Latin America are taking part in the contests where participants compete to prove who has the most charisma.",
-      "publishedAt": "2026-08-31T19:11:57.000Z",
       "score": 7.26,
       "roles": [],
       "products": [],
@@ -1763,33 +1808,34 @@
       }
     },
     {
-      "id": "9nmraz",
-      "source": "nyt",
-      "subSource": "business",
-      "title": "Europe Protests as U.S. Invites Russian Minister to G20 Finance Meeting",
-      "url": "https://www.nytimes.com/2026/08/31/business/g20-finance-iran-bessent.html",
-      "summary": "The meeting, which China and Russia are attending, is focused on the ongoing economic shock from the war in Iran, which has driven up oil prices globally.",
-      "publishedAt": "2026-08-31T19:04:43.000Z",
+      "id": "ygmwol",
+      "source": "hn",
+      "title": "A 12TB Steam “teraleak” spills more than a decade of lost PC gaming history",
+      "url": "https://arstechnica.com/gaming/2026/08/a-12tb-steam-teraleak-spills-more-than-a-decade-of-lost-pc-gaming-history/",
+      "summary": "",
+      "publishedAt": "2026-08-31T06:10:44.000Z",
+      "engagement": 355,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49506182",
       "score": 7.23,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
-        "source": 2,
-        "recency": 5.23,
-        "engagement": 0,
+        "source": 1,
+        "recency": 2.41,
+        "engagement": 3.83,
         "noise": 0
       }
     },
     {
-      "id": "7b999d",
+      "id": "cvrkmu",
       "source": "nyt",
-      "subSource": "business",
-      "title": "Kalshi Permanently Bars George Santos From the Platform",
-      "url": "https://www.nytimes.com/2026/08/31/business/kalshi-bans-george-santos.html",
-      "summary": "The prediction market said it had barred George Santos, the former congressman from New York, and fined him $71,356 over evidence he engaged in insider trading.",
-      "publishedAt": "2026-08-31T19:02:44.000Z",
+      "subSource": "home",
+      "title": "Democrats Have a Trump Card for Attacks On Wokeness",
+      "url": "https://www.nytimes.com/2026/08/31/opinion/democrats-wokeness-republicans.html",
+      "summary": "The party that capitulated to Trump has the most to answer for",
+      "publishedAt": "2026-08-31T19:20:31.000Z",
       "score": 7.22,
       "roles": [],
       "products": [],
@@ -1803,6 +1849,106 @@
       }
     },
     {
+      "id": "c2027v",
+      "source": "nyt",
+      "subSource": "home",
+      "title": "A Principal Saved 900 Students Before His School Was Washed Away in Nepal",
+      "url": "https://www.nytimes.com/2026/08/31/world/asia/nepal-floods-teacher.html",
+      "summary": "Rajendra Dawadi had less than 15 minutes to act on a warning of approaching floodwaters. His swift evacuation plan saved hundreds of lives.",
+      "publishedAt": "2026-08-31T19:16:35.000Z",
+      "score": 7.2,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 5.2,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "ohcj13",
+      "source": "nyt",
+      "subSource": "home",
+      "title": "What to Know About the Grand Canyon Flooding",
+      "url": "https://www.nytimes.com/2026/08/31/us/grand-canyon-flash-floods.html",
+      "summary": "The bodies of at least two people were found and more than a dozen were missing. Further storms could hinder rescue efforts on Monday.",
+      "publishedAt": "2026-08-31T19:12:15.000Z",
+      "score": 7.18,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 5.18,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "miz6mc",
+      "source": "bbc",
+      "subSource": "world",
+      "title": "Across Latin America, 'aura battles' burst onto the scene",
+      "url": "https://www.bbc.co.uk/news/videos/c158z7g23zqo?at_medium=RSS&at_campaign=rss",
+      "summary": "Young people across Latin America are taking part in the contests where participants compete to prove who has the most charisma.",
+      "publishedAt": "2026-08-31T19:11:57.000Z",
+      "score": 7.17,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 5.17,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "9nmraz",
+      "source": "nyt",
+      "subSource": "business",
+      "title": "Europe Protests as U.S. Invites Russian Minister to G20 Finance Meeting",
+      "url": "https://www.nytimes.com/2026/08/31/business/g20-finance-iran-bessent.html",
+      "summary": "The meeting, which China and Russia are attending, is focused on the ongoing economic shock from the war in Iran, which has driven up oil prices globally.",
+      "publishedAt": "2026-08-31T19:04:43.000Z",
+      "score": 7.14,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 5.14,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "7b999d",
+      "source": "nyt",
+      "subSource": "business",
+      "title": "Kalshi Permanently Bars George Santos From the Platform",
+      "url": "https://www.nytimes.com/2026/08/31/business/kalshi-bans-george-santos.html",
+      "summary": "The prediction market said it had barred George Santos, the former congressman from New York, and fined him $71,356 over evidence he engaged in insider trading.",
+      "publishedAt": "2026-08-31T19:02:44.000Z",
+      "score": 7.13,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 5.13,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
       "id": "yglnim",
       "source": "hn",
       "title": "Malleable software = solid bases and custom code",
@@ -1811,35 +1957,38 @@
       "publishedAt": "2026-08-31T10:36:43.000Z",
       "engagement": 91,
       "commentsUrl": "https://news.ycombinator.com/item?id=49508059",
-      "score": 7.12,
+      "score": 7.07,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 3.18,
+        "recency": 3.12,
         "engagement": 2.95,
         "noise": 0
       }
     },
     {
-      "id": "8g8tw8",
-      "source": "nyt",
-      "subSource": "home",
-      "title": "Lionel Messi’s Retirement From Soccer Sparks Heartbreak Across Argentina",
-      "url": "https://www.nytimes.com/2026/08/31/world/americas/lionel-messi-retirement-soccer-argentina.html",
-      "summary": "Lionel Messi’s retirement from the national soccer team, though widely expected, sparked fears of a diminished squad, and heartbreak over the departure of a national icon.",
-      "publishedAt": "2026-08-31T18:27:02.000Z",
-      "score": 7.04,
-      "roles": [],
+      "id": "yt9k20",
+      "source": "hn",
+      "title": "Dimethyl Mercury Exposure Incident at MIT",
+      "url": "https://twitter.com/andrew_n_carr/status/2093524390390694232",
+      "summary": "<a href=\"https:&#x2F;&#x2F;whdh.com&#x2F;news&#x2F;first-on-7-patient-brought-to-mgh-for-exposure-to-chemical-substance-prompts-large-emergency-response&#x2F;\" rel=\"nofollow\">https:&#x2F;&#x2F;whdh.com&#x2F;news&#x2F;first-on-7-patient-brought-to-mgh-for-...</a><p><a href=\"https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;mit&#x2F;comments&#x2F;1w12gb9&#x2F;dimethyl_mercury_poisoning&#x2F;\" rel=\"nofollow\">https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;mit&#x2F;comments&#x2F;1w12gb9&#x2F;dimethyl_mercu...</a>",
+      "publishedAt": "2026-08-29T05:17:59.000Z",
+      "engagement": 87,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49487099",
+      "score": 7.05,
+      "roles": [
+        "sre"
+      ],
       "products": [],
       "scoreBreakdown": {
-        "role": 0,
+        "role": 3,
         "product": 0,
-        "source": 2,
-        "recency": 5.04,
-        "engagement": 0,
+        "source": 1,
+        "recency": 0.14,
+        "engagement": 2.92,
         "noise": 0
       }
     },
@@ -1861,29 +2010,6 @@
         "source": 2,
         "recency": 0.04,
         "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "yt9k20",
-      "source": "hn",
-      "title": "Dimethyl Mercury Exposure Incident at MIT",
-      "url": "https://twitter.com/andrew_n_carr/status/2093524390390694232",
-      "summary": "<a href=\"https:&#x2F;&#x2F;whdh.com&#x2F;news&#x2F;first-on-7-patient-brought-to-mgh-for-exposure-to-chemical-substance-prompts-large-emergency-response&#x2F;\" rel=\"nofollow\">https:&#x2F;&#x2F;whdh.com&#x2F;news&#x2F;first-on-7-patient-brought-to-mgh-for-...</a><p><a href=\"https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;mit&#x2F;comments&#x2F;1w12gb9&#x2F;dimethyl_mercury_poisoning&#x2F;\" rel=\"nofollow\">https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;mit&#x2F;comments&#x2F;1w12gb9&#x2F;dimethyl_mercu...</a>",
-      "publishedAt": "2026-08-29T05:17:59.000Z",
-      "engagement": 84,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49487099",
-      "score": 7.03,
-      "roles": [
-        "sre"
-      ],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 3,
-        "product": 0,
-        "source": 1,
-        "recency": 0.14,
-        "engagement": 2.89,
         "noise": 0
       }
     },
@@ -1932,6 +2058,26 @@
       }
     },
     {
+      "id": "8g8tw8",
+      "source": "nyt",
+      "subSource": "home",
+      "title": "Lionel Messi’s Retirement From Soccer Sparks Heartbreak Across Argentina",
+      "url": "https://www.nytimes.com/2026/08/31/world/americas/lionel-messi-retirement-soccer-argentina.html",
+      "summary": "Lionel Messi’s retirement from the national soccer team, though widely expected, sparked fears of a diminished squad, and heartbreak over the departure of a national icon.",
+      "publishedAt": "2026-08-31T18:27:02.000Z",
+      "score": 6.95,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 4.95,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
       "id": "ygmqrq",
       "source": "hn",
       "title": "ReactOS 0.4.16",
@@ -1940,14 +2086,14 @@
       "publishedAt": "2026-08-31T08:13:37.000Z",
       "engagement": 142,
       "commentsUrl": "https://news.ycombinator.com/item?id=49506978",
-      "score": 6.99,
+      "score": 6.95,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 2.76,
+        "recency": 2.71,
         "engagement": 3.23,
         "noise": 0
       }
@@ -1960,14 +2106,14 @@
       "url": "https://www.bbc.co.uk/news/articles/cpwlxy49225o?at_medium=RSS&at_campaign=rss",
       "summary": "The prediction market operator Kalshi says Santos made barred trades and misleading comments that influenced prices.",
       "publishedAt": "2026-08-31T18:15:12.000Z",
-      "score": 6.98,
+      "score": 6.89,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 4.98,
+        "recency": 4.89,
         "engagement": 0,
         "noise": 0
       }
@@ -1981,14 +2127,14 @@
       "publishedAt": "2026-08-31T06:03:02.000Z",
       "engagement": 199,
       "commentsUrl": "https://news.ycombinator.com/item?id=49506142",
-      "score": 6.88,
+      "score": 6.84,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 2.43,
+        "recency": 2.39,
         "engagement": 3.45,
         "noise": 0
       }
@@ -2001,14 +2147,14 @@
       "url": "https://www.nytimes.com/2026/08/31/world/americas/warring-cartels-target-women-in-mexico.html",
       "summary": "A two-year war between rival Sinaloa Cartel factions is driving a surge in killings and disappearances targeting women.",
       "publishedAt": "2026-08-31T17:52:03.000Z",
-      "score": 6.87,
+      "score": 6.78,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 4.87,
+        "recency": 4.78,
         "engagement": 0,
         "noise": 0
       }
@@ -2021,14 +2167,14 @@
       "url": "https://www.bbc.co.uk/news/articles/c5ylvgq9q71o?at_medium=RSS&at_campaign=rss",
       "summary": "Rescuers have resorted to explosives as they struggle to reach trapped workers, as the flooding death toll reaches 939.",
       "publishedAt": "2026-08-31T17:30:47.000Z",
-      "score": 6.77,
+      "score": 6.69,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 4.77,
+        "recency": 4.69,
         "engagement": 0,
         "noise": 0
       }
@@ -2040,15 +2186,38 @@
       "url": "https://www.theguardian.com/us-news/2026/aug/31/trump-datacenter-comments",
       "summary": "Three-quarters of Americans said in a recent poll that they oppose datacenters being built next to their homes\nDonald Trump has criticized communities pushing back against datacenter projects across the US amid a growing backlash, warning those that reject them risk becoming “backwards and poor”.\nAs controversy surrounding local datacenter plans continues to swirl around election campaigns nationwide ahead of November’s midterm elections, the US president declared Americans “will only have yourselves to blame” if they are canceled.\n Continue reading...",
       "publishedAt": "2026-08-31T17:32:02.000Z",
-      "score": 6.77,
+      "score": 6.69,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 4.77,
+        "recency": 4.69,
         "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "yuy476",
+      "source": "hn",
+      "title": "Show HN: We built the smallest dual-band aircraft tracker",
+      "url": "https://pantsforbirds.com/the-worlds-smallest-dual-band-ads-b-receiver-module/",
+      "summary": "We&#x27;ve been building open source embedded ADS-B receivers for a while, and spent the past 8 months smallifying our existing receiver tech with a new chip from Semtech. Ask me anything about ADSB or hardware manufacturing!",
+      "publishedAt": "2026-08-26T20:38:44.000Z",
+      "engagement": 59,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49455557",
+      "score": 6.67,
+      "roles": [
+        "developer"
+      ],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 3,
+        "product": 0,
+        "source": 1,
+        "recency": 0,
+        "engagement": 2.67,
         "noise": 0
       }
     },
@@ -2061,38 +2230,36 @@
       "publishedAt": "2026-08-31T08:33:01.000Z",
       "engagement": 85,
       "commentsUrl": "https://news.ycombinator.com/item?id=49507121",
-      "score": 6.72,
+      "score": 6.67,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 2.81,
+        "recency": 2.77,
         "engagement": 2.9,
         "noise": 0
       }
     },
     {
-      "id": "yuy476",
+      "id": "ygoq4m",
       "source": "hn",
-      "title": "Show HN: We built the smallest dual-band aircraft tracker",
-      "url": "https://pantsforbirds.com/the-worlds-smallest-dual-band-ads-b-receiver-module/",
-      "summary": "We&#x27;ve been building open source embedded ADS-B receivers for a while, and spent the past 8 months smallifying our existing receiver tech with a new chip from Semtech. Ask me anything about ADSB or hardware manufacturing!",
-      "publishedAt": "2026-08-26T20:38:44.000Z",
-      "engagement": 58,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49455557",
-      "score": 6.66,
-      "roles": [
-        "developer"
-      ],
+      "title": "“I just chose words carefully”",
+      "url": "https://unsung.aresluna.org/i-just-chose-words-carefully/",
+      "summary": "",
+      "publishedAt": "2026-08-30T22:49:48.000Z",
+      "engagement": 1160,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49503601",
+      "score": 6.56,
+      "roles": [],
       "products": [],
       "scoreBreakdown": {
-        "role": 3,
+        "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 0,
-        "engagement": 2.66,
+        "recency": 1.56,
+        "engagement": 4,
         "noise": 0
       }
     },
@@ -2104,77 +2271,15 @@
       "url": "https://www.nytimes.com/2026/08/31/climate/pennsylvanias-ai-gold-rush-meets-second-thoughts.html",
       "summary": "Amid a backlash, Gov. Josh Shapiro is pumping the brakes on enormous data centers. But in a region scarred by the collapse of the steel industry, some welcome billions in construction.",
       "publishedAt": "2026-08-31T16:56:41.000Z",
-      "score": 6.61,
+      "score": 6.53,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 4.61,
+        "recency": 4.53,
         "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "ygoq4m",
-      "source": "hn",
-      "title": "“I just chose words carefully”",
-      "url": "https://unsung.aresluna.org/i-just-chose-words-carefully/",
-      "summary": "",
-      "publishedAt": "2026-08-30T22:49:48.000Z",
-      "engagement": 1158,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49503601",
-      "score": 6.59,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 1.59,
-        "engagement": 4,
-        "noise": 0
-      }
-    },
-    {
-      "id": "yy0071",
-      "source": "bbc",
-      "subSource": "tech",
-      "title": "AI could cause global economic downturn, Andrew Bailey warns G20",
-      "url": "https://www.bbc.co.uk/news/articles/c99dym3prl1o?at_medium=RSS&at_campaign=rss",
-      "summary": "The governor of the Bank of England warned of AI's “volatility” caused by energy shocks from the US-Iran war.",
-      "publishedAt": "2026-08-31T16:49:11.000Z",
-      "score": 6.58,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 4.58,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "ygm8yf",
-      "source": "hn",
-      "title": "I attended the State of the Map conference",
-      "url": "https://povesham.wordpress.com/2026/08/30/state-of-the-map-2026-openstreetmap-conference/",
-      "summary": "Recent and related: <i>State of the Map 2026</i> - <a href=\"https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=49478401\">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=49478401</a> - Aug 2026 (62 comments)",
-      "publishedAt": "2026-08-31T08:57:35.000Z",
-      "engagement": 61,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49507280",
-      "score": 6.57,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 2.88,
-        "engagement": 2.69,
         "noise": 0
       }
     },
@@ -2187,66 +2292,47 @@
       "publishedAt": "2026-08-31T03:20:33.000Z",
       "engagement": 211,
       "commentsUrl": "https://news.ycombinator.com/item?id=49505219",
-      "score": 6.56,
+      "score": 6.53,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 2.07,
+        "recency": 2.04,
         "engagement": 3.49,
         "noise": 0
       }
     },
     {
-      "id": "edk9j7",
-      "source": "bbc",
-      "subSource": "world",
-      "title": "'I haven't lost my hope' - the search for missing loved ones",
-      "url": "https://www.bbc.co.uk/news/videos/c4g79v842xjo?at_medium=RSS&at_campaign=rss",
-      "summary": "Relatives of those still missing in the fatal floods in Nepal hold onto hope that their loved ones have survived.",
-      "publishedAt": "2026-08-31T16:42:17.000Z",
-      "score": 6.55,
+      "id": "ygm8yf",
+      "source": "hn",
+      "title": "I attended the State of the Map conference",
+      "url": "https://povesham.wordpress.com/2026/08/30/state-of-the-map-2026-openstreetmap-conference/",
+      "summary": "Recent and related: <i>State of the Map 2026</i> - <a href=\"https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=49478401\">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=49478401</a> - Aug 2026 (62 comments)",
+      "publishedAt": "2026-08-31T08:57:35.000Z",
+      "engagement": 61,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49507280",
+      "score": 6.52,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
-        "source": 2,
-        "recency": 4.55,
-        "engagement": 0,
+        "source": 1,
+        "recency": 2.83,
+        "engagement": 2.69,
         "noise": 0
       }
     },
     {
-      "id": "q3gwyu",
-      "source": "nyt",
-      "subSource": "business",
-      "title": "A $480,000-a-Year Pill Reflects a New Normal for Cancer Drugs",
-      "url": "https://www.nytimes.com/2026/08/31/business/pancreatic-cancer-drug-prices.html",
-      "summary": "Rasonque, the new pancreatic cancer treatment from Revolution Medicines, illustrates the huge inflation in cancer drug prices over the past two decades.",
-      "publishedAt": "2026-08-31T16:43:57.000Z",
-      "score": 6.55,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 4.55,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "3bhd8x",
+      "id": "yy0071",
       "source": "bbc",
-      "subSource": "world",
-      "title": "Company offering reward for safe return of truckload of beer",
-      "url": "https://www.bbc.co.uk/news/articles/c780wzj86pno?at_medium=RSS&at_campaign=rss",
-      "summary": "Police say a thief presented false documentation at a California distribution centre before driving off with the shipment.",
-      "publishedAt": "2026-08-31T16:32:59.000Z",
+      "subSource": "tech",
+      "title": "AI could cause global economic downturn, Andrew Bailey warns G20",
+      "url": "https://www.bbc.co.uk/news/articles/c99dym3prl1o?at_medium=RSS&at_campaign=rss",
+      "summary": "The governor of the Bank of England warned of AI's “volatility” caused by energy shocks from the US-Iran war.",
+      "publishedAt": "2026-08-31T16:49:11.000Z",
       "score": 6.5,
       "roles": [],
       "products": [],
@@ -2260,6 +2346,66 @@
       }
     },
     {
+      "id": "q3gwyu",
+      "source": "nyt",
+      "subSource": "business",
+      "title": "A $480,000-a-Year Pill Reflects a New Normal for Cancer Drugs",
+      "url": "https://www.nytimes.com/2026/08/31/business/pancreatic-cancer-drug-prices.html",
+      "summary": "Rasonque, the new pancreatic cancer treatment from Revolution Medicines, illustrates the huge inflation in cancer drug prices over the past two decades.",
+      "publishedAt": "2026-08-31T16:43:57.000Z",
+      "score": 6.48,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 4.48,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "edk9j7",
+      "source": "bbc",
+      "subSource": "world",
+      "title": "'I haven't lost my hope' - the search for missing loved ones",
+      "url": "https://www.bbc.co.uk/news/videos/c4g79v842xjo?at_medium=RSS&at_campaign=rss",
+      "summary": "Relatives of those still missing in the fatal floods in Nepal hold onto hope that their loved ones have survived.",
+      "publishedAt": "2026-08-31T16:42:17.000Z",
+      "score": 6.47,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 4.47,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "3bhd8x",
+      "source": "bbc",
+      "subSource": "world",
+      "title": "Company offering reward for safe return of truckload of beer",
+      "url": "https://www.bbc.co.uk/news/articles/c780wzj86pno?at_medium=RSS&at_campaign=rss",
+      "summary": "Police say a thief presented false documentation at a California distribution centre before driving off with the shipment.",
+      "publishedAt": "2026-08-31T16:32:59.000Z",
+      "score": 6.43,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 4.43,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
       "id": "ygm4oa",
       "source": "hn",
       "title": "1960s theory that Stonehenge was a prehistoric computer",
@@ -2268,34 +2414,15 @@
       "publishedAt": "2026-08-31T09:57:34.000Z",
       "engagement": 35,
       "commentsUrl": "https://news.ycombinator.com/item?id=49507810",
-      "score": 6.39,
+      "score": 6.34,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 3.06,
+        "recency": 3,
         "engagement": 2.33,
-        "noise": 0
-      }
-    },
-    {
-      "id": "77rwem",
-      "source": "guardian",
-      "title": "‘Superhuman’ AI tool spots heart disease in less than 2 seconds",
-      "url": "https://www.theguardian.com/technology/2026/aug/31/superhuman-ai-tool-spots-heart-disease",
-      "summary": "Technology trained on millions of routine ECGs could fast-track high-risk patients for treatment\nDoctors have developed a “superhuman” AI tool that can spot heart disease in less than two seconds.\nThe groundbreaking technology has been trained on millions of patients and works by extracting more information from a routine electrocardiogram (ECG) than the human eye can typically see.\n Continue reading...",
-      "publishedAt": "2026-08-31T16:00:29.000Z",
-      "score": 6.36,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 4.36,
-        "engagement": 0,
         "noise": 0
       }
     },
@@ -2308,7 +2435,7 @@
       "summary": "Hello everyone\n I have a small project where I need to load a sharepoint list to my logic app. With get items, I am able to get the data with certain pagination but it takes almost 2 minutes, so I decided to just take the fields I need via HTTP. It got much faster but I experiance a limit of 5000 items that can be received from sharepoint, and I do not have a option of pagination in HTTP Request c",
       "publishedAt": "2026-08-31T13:55:50.000Z",
       "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w3ejxp/how_to_avoid_the_5000_limit_on_http_request_to/",
-      "score": 6.36,
+      "score": 6.3,
       "roles": [],
       "products": [
         "azure"
@@ -2317,68 +2444,26 @@
         "role": 0,
         "product": 2.5,
         "source": 0,
-        "recency": 3.86,
+        "recency": 3.8,
         "engagement": 0,
         "noise": 0
       }
     },
     {
-      "id": "yg6tl1",
-      "source": "hn",
-      "title": "Undocumented Atari Slapstic side-channel in a Marble Madness reimplementation",
-      "url": "https://magno73.github.io/marble-love/slapstic/",
-      "summary": "",
-      "publishedAt": "2026-08-31T15:13:57.000Z",
-      "engagement": 5,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49510774",
-      "score": 6.34,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 4.17,
-        "engagement": 1.17,
-        "noise": 0
-      }
-    },
-    {
-      "id": "tlaz0x",
-      "source": "nyt",
-      "subSource": "home",
-      "title": "This Marine Died in the Iraq War. His Mother Asks, ‘What Was It For?’",
-      "url": "https://www.nytimes.com/2026/08/31/us/politics/iraq-war-marine-death.html",
-      "summary": "Travis Fuller was from my hometown. I went back and talked with his family about how they made sense of his death, 25 years after Sept. 11.",
-      "publishedAt": "2026-08-31T15:45:12.000Z",
-      "score": 6.3,
+      "id": "77rwem",
+      "source": "guardian",
+      "title": "‘Superhuman’ AI tool spots heart disease in less than 2 seconds",
+      "url": "https://www.theguardian.com/technology/2026/aug/31/superhuman-ai-tool-spots-heart-disease",
+      "summary": "Technology trained on millions of routine ECGs could fast-track high-risk patients for treatment\nDoctors have developed a “superhuman” AI tool that can spot heart disease in less than two seconds.\nThe groundbreaking technology has been trained on millions of patients and works by extracting more information from a routine electrocardiogram (ECG) than the human eye can typically see.\n Continue reading...",
+      "publishedAt": "2026-08-31T16:00:29.000Z",
+      "score": 6.29,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 4.3,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "szsrb6",
-      "source": "bbc",
-      "subSource": "world",
-      "title": "John Galliano exhibition at New York Met cancelled after backlash",
-      "url": "https://www.bbc.co.uk/news/articles/c4gkp6pgy03o?at_medium=RSS&at_campaign=rss",
-      "summary": "The exhibition faced criticism over the British fashion designer's conviction for making antisemitic remarks in 2011.",
-      "publishedAt": "2026-08-31T15:30:05.000Z",
-      "score": 6.24,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 4.24,
+        "recency": 4.29,
         "engagement": 0,
         "noise": 0
       }
@@ -2407,23 +2492,42 @@
       }
     },
     {
-      "id": "ygkyen",
-      "source": "hn",
-      "title": "A milestone in expanding access to AI",
-      "url": "https://openai.com/index/expanding-access-to-ai-with-chatgpt-ads/",
-      "summary": "",
-      "publishedAt": "2026-08-31T13:07:48.000Z",
-      "engagement": 9,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49509312",
-      "score": 6.18,
+      "id": "tlaz0x",
+      "source": "nyt",
+      "subSource": "home",
+      "title": "This Marine Died in the Iraq War. His Mother Asks, ‘What Was It For?’",
+      "url": "https://www.nytimes.com/2026/08/31/us/politics/iraq-war-marine-death.html",
+      "summary": "Travis Fuller was from my hometown. I went back and talked with his family about how they made sense of his death, 25 years after Sept. 11.",
+      "publishedAt": "2026-08-31T15:45:12.000Z",
+      "score": 6.22,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
-        "source": 1,
-        "recency": 3.68,
-        "engagement": 1.5,
+        "source": 2,
+        "recency": 4.22,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "szsrb6",
+      "source": "bbc",
+      "subSource": "world",
+      "title": "John Galliano exhibition at New York Met cancelled after backlash",
+      "url": "https://www.bbc.co.uk/news/articles/c4gkp6pgy03o?at_medium=RSS&at_campaign=rss",
+      "summary": "The exhibition faced criticism over the British fashion designer's conviction for making antisemitic remarks in 2011.",
+      "publishedAt": "2026-08-31T15:30:05.000Z",
+      "score": 6.16,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 4.16,
+        "engagement": 0,
         "noise": 0
       }
     },
@@ -2434,17 +2538,38 @@
       "url": "https://dreamstation.systems/personal/ntppost.html",
       "summary": "",
       "publishedAt": "2026-08-31T02:23:03.000Z",
-      "engagement": 138,
+      "engagement": 143,
       "commentsUrl": "https://news.ycombinator.com/item?id=49504905",
-      "score": 6.17,
+      "score": 6.16,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 1.96,
-        "engagement": 3.21,
+        "recency": 1.92,
+        "engagement": 3.24,
+        "noise": 0
+      }
+    },
+    {
+      "id": "ygkyen",
+      "source": "hn",
+      "title": "A milestone in expanding access to AI",
+      "url": "https://openai.com/index/expanding-access-to-ai-with-chatgpt-ads/",
+      "summary": "",
+      "publishedAt": "2026-08-31T13:07:48.000Z",
+      "engagement": 9,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49509312",
+      "score": 6.12,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 3.62,
+        "engagement": 1.5,
         "noise": 0
       }
     },
@@ -2456,14 +2581,14 @@
       "url": "https://www.bbc.co.uk/news/articles/c2l80eq5lxno?at_medium=RSS&at_campaign=rss",
       "summary": "The request comes after Google made the switch for US-based users over the weekend. MapQuest, another US map provider, said it will not change the name.",
       "publishedAt": "2026-08-31T15:00:11.000Z",
-      "score": 6.11,
+      "score": 6.04,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 4.11,
+        "recency": 4.04,
         "engagement": 0,
         "noise": 0
       }
@@ -2476,14 +2601,14 @@
       "url": "https://www.nytimes.com/2026/08/29/business/energy-environment/venezuela-alejandro-betancourt-oil-trump.html",
       "summary": "The administration will work with a private Venezuelan oil company that has close ties to the country’s government.",
       "publishedAt": "2026-08-31T14:59:33.000Z",
-      "score": 6.11,
+      "score": 6.04,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 4.11,
+        "recency": 4.04,
         "engagement": 0,
         "noise": 0
       }
@@ -2495,14 +2620,14 @@
       "url": "https://www.theguardian.com/australia-news/2026/sep/01/how-misinformation-ai-hallucinations-infiltrating-australian-parliament",
       "summary": "Exclusive: Guardian analysis reveals that dozens of policy submissions from across the political spectrum incorrectly summarise real research and invent or wrongly cite sources\n\nFollow our Australia news live blog for latest updates\n\nGet our breaking news email, free app or daily news podcast\n\nAustralia’s government inquiry process is supposed to help parliament make better decisions, hearing from experts and constituents alike. But Guardian Australia can reveal that the system is being flooded with AI-generated material, which is inventing studies and attributing nonexistent research to real academics and authors.\nIn some cases, committee reports have cited submissions in which the majority of sources appear to be AI-generated “hallucinations”, when large language models (LLMs) invent content that looks real but doesn’t actually exist.\n Continue reading...",
       "publishedAt": "2026-08-31T15:00:29.000Z",
-      "score": 6.11,
+      "score": 6.04,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 4.11,
+        "recency": 4.04,
         "engagement": 0,
         "noise": 0
       }
@@ -2516,36 +2641,15 @@
       "publishedAt": "2026-08-30T23:39:35.000Z",
       "engagement": 176,
       "commentsUrl": "https://news.ycombinator.com/item?id=49503934",
-      "score": 6.04,
+      "score": 6.01,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 1.67,
+        "recency": 1.64,
         "engagement": 3.37,
-        "noise": 0
-      }
-    },
-    {
-      "id": "ygm4jy",
-      "source": "hn",
-      "title": "All CERN accelerators now on the road to HiLumi",
-      "url": "https://home.cern/all-cern-accelerators-now-on-the-road-to-hilumi/",
-      "summary": "",
-      "publishedAt": "2026-08-31T10:05:34.000Z",
-      "engagement": 19,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49507861",
-      "score": 6.03,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 3.08,
-        "engagement": 1.95,
         "noise": 0
       }
     },
@@ -2556,16 +2660,16 @@
       "url": "https://kuleshov-group.github.io/blog/blog/2026/how-to-build-a-diffusion-language-model/",
       "summary": "",
       "publishedAt": "2026-08-30T23:41:32.000Z",
-      "engagement": 169,
+      "engagement": 171,
       "commentsUrl": "https://news.ycombinator.com/item?id=49503956",
-      "score": 6.02,
+      "score": 6,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 1.67,
+        "recency": 1.64,
         "engagement": 3.35,
         "noise": 0
       }
@@ -2578,7 +2682,7 @@
       "url": "https://www.nytimes.com/2026/08/28/business/trump-venezuela-oil-deal.html",
       "summary": "The president said an agreement between the countries covered more than 65 billion barrels of reserves. A U.S. official said it would involve a partnership with a private company.",
       "publishedAt": "2026-08-30T15:08:52.000Z",
-      "score": 6.01,
+      "score": 5.99,
       "roles": [
         "manager"
       ],
@@ -2587,7 +2691,7 @@
         "role": 3,
         "product": 0,
         "source": 2,
-        "recency": 1.01,
+        "recency": 0.99,
         "engagement": 0,
         "noise": 0
       }
@@ -2599,14 +2703,14 @@
       "url": "https://www.theguardian.com/thefilter-us/2026/aug/31/best-work-from-home-office-setup-upgrades",
       "summary": "Build a home office you’ll actually enjoying working from with tried-and-true upgrades – from inexpensive speakers to a stand that can turn an iPad into a second monitor\n\nThe best wireless earbuds in the US – tested\n\nSign up for the Filter US newsletter, your weekly guide to buying fewer, better things\n\nIf you work from home, even just a few days a week, you need more than a laptop perched on a sticky kitchen table. A dedicated desk setup allows you to step away from distractions, plop in your office chair and get to work.\nIt also creates a vital separation between your personal and professional life. After spending my initial work-from-home days on a living room couch, I quickly realized the importance of creating a separate space, and I have spent seven years refining it. As a tech writer, I have tested dozens of products for my desk setup, and have found some to be totally invaluable. Here are the tried-and-true upgrades that will make working from home easier, more comfortable and even more productive.\n Continue reading...",
       "publishedAt": "2026-08-31T14:15:27.000Z",
-      "score": 5.94,
+      "score": 5.87,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 3.94,
+        "recency": 3.87,
         "engagement": 0,
         "noise": 0
       }
@@ -2619,14 +2723,14 @@
       "url": "https://www.nytimes.com/2026/08/26/world/asia/nepal-tibet-floods-wtk.html",
       "summary": "The authorities in Nepal and Tibet said that more than 4,400 people were missing since a deadly Himalayan landslide and glacial collapse. Rescuers are searching for survivors.",
       "publishedAt": "2026-08-31T14:13:41.000Z",
-      "score": 5.93,
+      "score": 5.86,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 3.93,
+        "recency": 3.86,
         "engagement": 0,
         "noise": 0
       }
@@ -2639,14 +2743,14 @@
       "url": "https://www.bbc.co.uk/news/articles/cx2z72x5z1po?at_medium=RSS&at_campaign=rss",
       "summary": "The attack on Larak Island in the Strait of Hormuz - the first known US strike since late July - has killed two people and injured two others.",
       "publishedAt": "2026-08-31T13:47:30.000Z",
-      "score": 5.83,
+      "score": 5.76,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 3.83,
+        "recency": 3.76,
         "engagement": 0,
         "noise": 0
       }
@@ -2659,7 +2763,7 @@
       "url": "https://www.nytimes.com/2026/08/30/business/the-case-of-the-truly-incorrigible-cubicle-yakker.html",
       "summary": "Plus: Is it normal to video-interview for a job while the hiring panel’s cameras are all off?",
       "publishedAt": "2026-08-30T09:01:51.000Z",
-      "score": 5.71,
+      "score": 5.69,
       "roles": [
         "manager"
       ],
@@ -2668,7 +2772,7 @@
         "role": 3,
         "product": 0,
         "source": 2,
-        "recency": 0.71,
+        "recency": 0.69,
         "engagement": 0,
         "noise": 0
       }
@@ -2681,14 +2785,14 @@
       "url": "https://www.bbc.co.uk/news/articles/cddv92n194vo?at_medium=RSS&at_campaign=rss",
       "summary": "A 22-year-old Italian woman was killed and several injured at a techno rave in Aarau.",
       "publishedAt": "2026-08-31T13:11:35.000Z",
-      "score": 5.7,
+      "score": 5.63,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 3.7,
+        "recency": 3.63,
         "engagement": 0,
         "noise": 0
       }
@@ -2701,36 +2805,36 @@
       "url": "https://www.nytimes.com/2026/08/29/us/politics/trump-economy-inflation.html",
       "summary": "To win in 2024, the president promised an economic course correction. Almost two years later, his agenda has made that fight even harder.",
       "publishedAt": "2026-08-31T12:56:44.000Z",
-      "score": 5.64,
+      "score": 5.58,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 3.64,
+        "recency": 3.58,
         "engagement": 0,
         "noise": 0
       }
     },
     {
-      "id": "ygpd3a",
+      "id": "ygmwrv",
       "source": "hn",
-      "title": "Continuous Diffusion Language Models (CDLM's)",
-      "url": "https://sander.ai/2026/08/24/continuous-dlms.html",
+      "title": "Since it was stripped of planetary status, Pluto’s defenders have been fighting",
+      "url": "https://www.theguardian.com/science/2026/aug/31/forbidden-planet-was-plutos-2006-demotion-a-big-mistake",
       "summary": "",
-      "publishedAt": "2026-08-30T20:46:53.000Z",
-      "engagement": 128,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49502611",
-      "score": 5.57,
+      "publishedAt": "2026-08-31T06:05:07.000Z",
+      "engagement": 27,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49506148",
+      "score": 5.56,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 1.41,
-        "engagement": 3.17,
+        "recency": 2.39,
+        "engagement": 2.17,
         "noise": 0
       }
     },
@@ -2741,14 +2845,14 @@
       "url": "https://www.theguardian.com/technology/2026/aug/31/amelia-dimoldenberg-chicken-shop-date-youtube-tv",
       "summary": "Amelia Dimoldenberg says publicists ignored her interview show for years but she can now be picky over A-list guests\nJust a decade ago, Amelia Dimoldenberg found it impossible to drum up any mainstream celebrities to come on her mock date YouTube show, in which she chats awkwardly with guests over chicken and chips.\nEven persuading a local actor connected with her London youth club to come on took years of prodding. Managers of A-listers with movies or albums to push instead battled to claim a spot on the hallowed cushions of the primetime TV chatshow sofa.\n Continue reading...",
       "publishedAt": "2026-08-31T12:00:25.000Z",
-      "score": 5.45,
+      "score": 5.39,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 3.45,
+        "recency": 3.39,
         "engagement": 0,
         "noise": 0
       }
@@ -2761,14 +2865,14 @@
       "url": "https://www.bbc.co.uk/news/articles/c2l80j2rdlxo?at_medium=RSS&at_campaign=rss",
       "summary": "More than 20 organisations have written a joint letter to John Swinney urging him to scrap his plan for a legal cap on some food and drink prices.",
       "publishedAt": "2026-08-31T11:56:50.000Z",
-      "score": 5.44,
+      "score": 5.38,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 3.44,
+        "recency": 3.38,
         "engagement": 0,
         "noise": 0
       }
@@ -2781,14 +2885,14 @@
       "url": "https://www.bbc.co.uk/news/articles/c93vgv4kr49o?at_medium=RSS&at_campaign=rss",
       "summary": "Jurors have five options before them as they decide the fate of the former nurse charged with killing her three children.",
       "publishedAt": "2026-08-31T11:53:21.000Z",
-      "score": 5.42,
+      "score": 5.37,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 3.42,
+        "recency": 3.37,
         "engagement": 0,
         "noise": 0
       }
@@ -2800,16 +2904,16 @@
       "url": "https://people.kernel.org/monsieuricon/creepy-crawlies",
       "summary": "",
       "publishedAt": "2026-08-29T17:49:01.000Z",
-      "engagement": 1324,
+      "engagement": 1326,
       "commentsUrl": "https://news.ycombinator.com/item?id=49491791",
-      "score": 5.29,
+      "score": 5.28,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 0.29,
+        "recency": 0.28,
         "engagement": 4,
         "noise": 0
       }
@@ -2822,14 +2926,14 @@
       "url": "https://www.bbc.co.uk/news/articles/c783x05nnlko?at_medium=RSS&at_campaign=rss",
       "summary": "Kenya Airways says the strike has caused delays of more than six hours, with some flights cancelled.",
       "publishedAt": "2026-08-31T10:54:01.000Z",
-      "score": 5.23,
+      "score": 5.18,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 3.23,
+        "recency": 3.18,
         "engagement": 0,
         "noise": 0
       }
@@ -2842,7 +2946,7 @@
       "url": "https://www.nytimes.com/2026/08/29/business/nepal-hydropower-flood.html",
       "summary": "The loss of power-generating capacity has raised questions about an ambitious expansion of renewable energy in one of the world’s most hazard-prone mountain regions.",
       "publishedAt": "2026-08-29T09:23:11.000Z",
-      "score": 5.18,
+      "score": 5.17,
       "roles": [
         "sre"
       ],
@@ -2851,7 +2955,7 @@
         "role": 3,
         "product": 0,
         "source": 2,
-        "recency": 0.18,
+        "recency": 0.17,
         "engagement": 0,
         "noise": 0
       }
@@ -2863,7 +2967,7 @@
       "url": "https://www.theguardian.com/news/ng-interactive/2026/aug/29/hilarity-unease-and-relief-games-show-china-is-not-over-the-finish-line-in-humanoid-robot-race",
       "summary": "Five-day showcase reveals leaps Beijing has made in humanoid tech, but also its limitations as US rivals come up from the rear\nWith exploding pelvises, enough comic pratfalls for a Buster Keaton show reel and the odd moment of ruthless violence, the World Humanoid Robot Games in Beijing gripped the world this week with an unsettling mixture of hilarity, trepidation and relief.\nThe five-day showcase staked out China’s claim to undisputed leadership in humanoid robotics as android martial artists landed knockout roundhouse kicks and robot teams marched into the arena heralded by flag-waving captains astride giant robotic dogs. The games’ blue-riband event, the 100m, did not disappoint when the robot-sprinters ran quicker than Usain Bolt before slamming mindlessly into a padded wall in a blaze of sparks, flames and flying mechanical limbs.\n Continue reading...",
       "publishedAt": "2026-08-29T05:00:19.000Z",
-      "score": 5.14,
+      "score": 5.13,
       "roles": [
         "manager"
       ],
@@ -2872,27 +2976,7 @@
         "role": 3,
         "product": 0,
         "source": 2,
-        "recency": 0.14,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "z6bb9z",
-      "source": "bbc",
-      "subSource": "world",
-      "title": "South African airline defends low-altitude aerial stunt over packed stadium",
-      "url": "https://www.bbc.co.uk/news/articles/c3rew8jqny5o?at_medium=RSS&at_campaign=rss",
-      "summary": "Airlink says the manoeuvre with two planes in close formation involved careful and precise planning.",
-      "publishedAt": "2026-08-31T10:18:07.000Z",
-      "score": 5.12,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 3.12,
+        "recency": 0.13,
         "engagement": 0,
         "noise": 0
       }
@@ -2915,6 +2999,26 @@
         "product": 0,
         "source": 2,
         "recency": 0.1,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "z6bb9z",
+      "source": "bbc",
+      "subSource": "world",
+      "title": "South African airline defends low-altitude aerial stunt over packed stadium",
+      "url": "https://www.bbc.co.uk/news/articles/c3rew8jqny5o?at_medium=RSS&at_campaign=rss",
+      "summary": "Airlink says the manoeuvre with two planes in close formation involved careful and precise planning.",
+      "publishedAt": "2026-08-31T10:18:07.000Z",
+      "score": 5.07,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 3.07,
         "engagement": 0,
         "noise": 0
       }
@@ -2964,26 +3068,6 @@
       }
     },
     {
-      "id": "ebem2q",
-      "source": "bbc",
-      "subSource": "world",
-      "title": "From playing Serena Williams on screen to following in her footsteps",
-      "url": "https://www.bbc.co.uk/sport/tennis/articles/cy9zq3xn45yo?at_medium=RSS&at_campaign=rss",
-      "summary": "Having played a young Serena Williams on the big screen, teenager Thea Frodin is ready to follow in the American great's footsteps at the US Open.",
-      "publishedAt": "2026-08-31T09:58:50.000Z",
-      "score": 5.06,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 3.06,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
       "id": "i99rao",
       "source": "guardian",
       "title": "Pentagon’s blacklisting of Anthropic was unlawful, US judge rules",
@@ -3022,6 +3106,26 @@
         "product": 0,
         "source": 2,
         "recency": 0.02,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "ebem2q",
+      "source": "bbc",
+      "subSource": "world",
+      "title": "From playing Serena Williams on screen to following in her footsteps",
+      "url": "https://www.bbc.co.uk/sport/tennis/articles/cy9zq3xn45yo?at_medium=RSS&at_campaign=rss",
+      "summary": "Having played a young Serena Williams on the big screen, teenager Thea Frodin is ready to follow in the American great's footsteps at the US Open.",
+      "publishedAt": "2026-08-31T09:58:50.000Z",
+      "score": 5.01,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 3.01,
         "engagement": 0,
         "noise": 0
       }
@@ -3142,15 +3246,57 @@
       "url": "https://www.bbc.co.uk/news/articles/cew95ke74l7o?at_medium=RSS&at_campaign=rss",
       "summary": "A private family funeral is held for the singer who died on Tuesday at the age of 80.",
       "publishedAt": "2026-08-31T09:24:50.000Z",
-      "score": 4.96,
+      "score": 4.91,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 2.96,
+        "recency": 2.91,
         "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "ytddd0",
+      "source": "hn",
+      "title": "Damn fine tiny cafe",
+      "url": "https://sandyuraz.com/blogs/tiny-cafe/",
+      "summary": "My hobby of building miniatures and taking pretty pictures",
+      "publishedAt": "2026-08-28T16:43:11.000Z",
+      "engagement": 350,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49481141",
+      "score": 4.88,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 0.06,
+        "engagement": 3.82,
+        "noise": 0
+      }
+    },
+    {
+      "id": "ygopyk",
+      "source": "hn",
+      "title": "Accidental Aesthetics and Romance of Power Wires",
+      "url": "https://www.governance.fyi/p/accidental-aesthetics-and-romance",
+      "summary": "",
+      "publishedAt": "2026-08-30T23:00:15.000Z",
+      "engagement": 32,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49503672",
+      "score": 4.86,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 1.58,
+        "engagement": 2.28,
         "noise": 0
       }
     },
@@ -3162,14 +3308,14 @@
       "url": "https://www.nytimes.com/2026/08/31/business/polestar-discounts-ev-china.html",
       "summary": "The Polestar 4 is a solid car, and current incentives make it a bargain. But the company, a Chinese-owned brand, is being forced from the U.S. market.",
       "publishedAt": "2026-08-31T09:02:46.000Z",
-      "score": 4.9,
+      "score": 4.85,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 2.9,
+        "recency": 2.85,
         "engagement": 0,
         "noise": 0
       }
@@ -3182,76 +3328,14 @@
       "url": "https://www.nytimes.com/2026/08/31/world/middleeast/west-bank-israel.html",
       "summary": "A growing number of former Israeli generals, intelligence officials and prime ministers are accusing settlers in the West Bank of committing ethnic cleansing with government support. “Once a society behaves this way,” one said, “that society is doomed.”",
       "publishedAt": "2026-08-31T09:00:40.000Z",
-      "score": 4.89,
+      "score": 4.84,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 2.89,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "ytddd0",
-      "source": "hn",
-      "title": "Damn fine tiny cafe",
-      "url": "https://sandyuraz.com/blogs/tiny-cafe/",
-      "summary": "My hobby of building miniatures and taking pretty pictures",
-      "publishedAt": "2026-08-28T16:43:11.000Z",
-      "engagement": 349,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49481141",
-      "score": 4.88,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 0.07,
-        "engagement": 3.82,
-        "noise": 0
-      }
-    },
-    {
-      "id": "ygopyk",
-      "source": "hn",
-      "title": "Accidental Aesthetics and Romance of Power Wires",
-      "url": "https://www.governance.fyi/p/accidental-aesthetics-and-romance",
-      "summary": "",
-      "publishedAt": "2026-08-30T23:00:15.000Z",
-      "engagement": 31,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49503672",
-      "score": 4.86,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 1.6,
-        "engagement": 2.26,
-        "noise": 0
-      }
-    },
-    {
-      "id": "ieqfca",
-      "source": "bbc",
-      "subSource": "world",
-      "title": "Algeria president seeks death penalty for arsonists after deadly forest fires",
-      "url": "https://www.bbc.co.uk/news/articles/cvgy41lwe0jo?at_medium=RSS&at_campaign=rss",
-      "summary": "President Abdelmadjid Tebboune says he is not ruling out foul play after 100 wildfires were recorded.",
-      "publishedAt": "2026-08-31T08:13:40.000Z",
-      "score": 4.76,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 2.76,
+        "recency": 2.84,
         "engagement": 0,
         "noise": 0
       }
@@ -3263,17 +3347,37 @@
       "url": "https://labs.ripe.net/author/andrew_campling/dns-abuse-and-criminal-infrastructure-beyond-definitions-and-blocklists/",
       "summary": "<a href=\"https:&#x2F;&#x2F;view.officeapps.live.com&#x2F;op&#x2F;view.aspx?src=https%3A%2F%2Fhosted-files.sched.co%2Ficann86%2F3f%2FGreg%2520Aaron%2520Interisle%2520Report%2520Presentation%2520ICANN86%2520v8June2026.pptx&amp;wdOrigin=BROWSELINK\" rel=\"nofollow\">https:&#x2F;&#x2F;view.officeapps.live.com&#x2F;op&#x2F;view.aspx?src=https%3A%2...</a>",
       "publishedAt": "2026-08-30T14:30:55.000Z",
-      "engagement": 69,
+      "engagement": 70,
       "commentsUrl": "https://news.ycombinator.com/item?id=49498993",
-      "score": 4.74,
+      "score": 4.73,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 0.97,
-        "engagement": 2.77,
+        "recency": 0.96,
+        "engagement": 2.78,
+        "noise": 0
+      }
+    },
+    {
+      "id": "ieqfca",
+      "source": "bbc",
+      "subSource": "world",
+      "title": "Algeria president seeks death penalty for arsonists after deadly forest fires",
+      "url": "https://www.bbc.co.uk/news/articles/cvgy41lwe0jo?at_medium=RSS&at_campaign=rss",
+      "summary": "President Abdelmadjid Tebboune says he is not ruling out foul play after 100 wildfires were recorded.",
+      "publishedAt": "2026-08-31T08:13:40.000Z",
+      "score": 4.71,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 2.71,
+        "engagement": 0,
         "noise": 0
       }
     },
@@ -3286,15 +3390,36 @@
       "publishedAt": "2026-08-30T17:05:32.000Z",
       "engagement": 50,
       "commentsUrl": "https://news.ycombinator.com/item?id=49500504",
-      "score": 4.69,
+      "score": 4.68,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 1.13,
+        "recency": 1.11,
         "engagement": 2.56,
+        "noise": 0
+      }
+    },
+    {
+      "id": "ysqcyz",
+      "source": "hn",
+      "title": "Smartphone LED detects hidden cameras with AI",
+      "url": "https://www.chosun.com/english/industry-en/2026/08/30/SBFXUIJQYZEARKP5T4FBAY25HQ/",
+      "summary": "",
+      "publishedAt": "2026-08-30T06:52:04.000Z",
+      "engagement": 94,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49496292",
+      "score": 4.58,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 0.61,
+        "engagement": 2.97,
         "noise": 0
       }
     },
@@ -3306,15 +3431,36 @@
       "url": "https://www.bbc.co.uk/sport/formula1/articles/ckg8w8qj5z9o?at_medium=RSS&at_campaign=rss",
       "summary": "A selection of images from the Italian Grand Prix at Monza, which has hosted more Formula 1 races than any other circuit.",
       "publishedAt": "2026-08-31T07:06:17.000Z",
-      "score": 4.58,
+      "score": 4.54,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 2.58,
+        "recency": 2.54,
         "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "yud0xt",
+      "source": "hn",
+      "title": "Dwarf Fortress is getting the mother of all magic updates",
+      "url": "https://www.rockpapershotgun.com/dwarf-fortress-is-getting-the-mother-of-all-magic-updates-extending-to-the-fundamental-cosmological-makeup-of-the-universe",
+      "summary": "",
+      "publishedAt": "2026-08-27T16:45:22.000Z",
+      "engagement": 221,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49467636",
+      "score": 4.54,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 0.02,
+        "engagement": 3.52,
         "noise": 0
       }
     },
@@ -3326,57 +3472,15 @@
       "url": "https://www.bbc.co.uk/news/articles/c8xkqjdk142o?at_medium=RSS&at_campaign=rss",
       "summary": "Han Hak-ja, 83, gave South Korea's former first lady two Chanel bags and a diamond necklace, a court found.",
       "publishedAt": "2026-08-31T06:56:40.000Z",
-      "score": 4.56,
+      "score": 4.52,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 2.56,
+        "recency": 2.52,
         "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "ysqcyz",
-      "source": "hn",
-      "title": "Smartphone LED detects hidden cameras with AI",
-      "url": "https://www.chosun.com/english/industry-en/2026/08/30/SBFXUIJQYZEARKP5T4FBAY25HQ/",
-      "summary": "",
-      "publishedAt": "2026-08-30T06:52:04.000Z",
-      "engagement": 89,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49496292",
-      "score": 4.55,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 0.62,
-        "engagement": 2.93,
-        "noise": 0
-      }
-    },
-    {
-      "id": "yud0xt",
-      "source": "hn",
-      "title": "Dwarf Fortress is getting the mother of all magic updates",
-      "url": "https://www.rockpapershotgun.com/dwarf-fortress-is-getting-the-mother-of-all-magic-updates-extending-to-the-fundamental-cosmological-makeup-of-the-universe",
-      "summary": "",
-      "publishedAt": "2026-08-27T16:45:22.000Z",
-      "engagement": 211,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49467636",
-      "score": 4.51,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 0.02,
-        "engagement": 3.49,
         "noise": 0
       }
     },
@@ -3389,14 +3493,14 @@
       "publishedAt": "2026-08-30T02:35:14.000Z",
       "engagement": 95,
       "commentsUrl": "https://news.ycombinator.com/item?id=49495171",
-      "score": 4.46,
+      "score": 4.45,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 1,
-        "recency": 0.48,
+        "recency": 0.47,
         "engagement": 2.97,
         "noise": 0
       }
@@ -3408,14 +3512,14 @@
       "url": "https://www.theguardian.com/games/ng-interactive/2026/aug/31/the-biggest-video-games-for-autumn-2026-gta-vi",
       "summary": "There are juggernauts and indie gems aplenty for when the nights draw in, from an ingenious puzzle game to blockbusters such as Marvel’s Wolverine and Call of Duty\n• See all of our unmissable autumn arts recommendations here\nAfter 20 years away, Capcom’s hyper kinetic action adventure returns, pitting skilled samurai Miyamoto Musashi against hordes of warriors and demons in Edo-period Kyoto. Master the complex combat then prepare for flashing blades, disembodied limbs and geysers of spraying blood.\n\r\n • 4 September; PC, PS5, Switch 2, Xbox\n Continue reading...",
       "publishedAt": "2026-08-31T04:00:14.000Z",
-      "score": 4.15,
+      "score": 4.12,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 2.15,
+        "recency": 2.12,
         "engagement": 0,
         "noise": 0
       }
@@ -3427,9 +3531,9 @@
       "url": "https://laser.consti.de",
       "summary": "",
       "publishedAt": "2026-08-29T12:28:11.000Z",
-      "engagement": 77,
+      "engagement": 79,
       "commentsUrl": "https://news.ycombinator.com/item?id=49489376",
-      "score": 4.05,
+      "score": 4.06,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
@@ -3437,7 +3541,7 @@
         "product": 0,
         "source": 1,
         "recency": 0.21,
-        "engagement": 2.84,
+        "engagement": 2.85,
         "noise": 0
       }
     },
@@ -3448,9 +3552,9 @@
       "url": "https://tmpout.sh/5/",
       "summary": "",
       "publishedAt": "2026-08-25T13:15:10.000Z",
-      "engagement": 90,
+      "engagement": 102,
       "commentsUrl": "https://news.ycombinator.com/item?id=49433481",
-      "score": 3.94,
+      "score": 4.02,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
@@ -3458,7 +3562,28 @@
         "product": 0,
         "source": 1,
         "recency": 0,
-        "engagement": 2.94,
+        "engagement": 3.02,
+        "noise": 0
+      }
+    },
+    {
+      "id": "yud09v",
+      "source": "hn",
+      "title": "Reverse engineering my ADHD test",
+      "url": "https://nullpt.rs/reverse-engineering-adhd-test",
+      "summary": "",
+      "publishedAt": "2026-08-27T16:49:40.000Z",
+      "engagement": 77,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49467700",
+      "score": 3.85,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 0.02,
+        "engagement": 2.84,
         "noise": 0
       }
     },
@@ -3484,27 +3609,6 @@
       }
     },
     {
-      "id": "yud09v",
-      "source": "hn",
-      "title": "Reverse engineering my ADHD test",
-      "url": "https://nullpt.rs/reverse-engineering-adhd-test",
-      "summary": "",
-      "publishedAt": "2026-08-27T16:49:40.000Z",
-      "engagement": 70,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49467700",
-      "score": 3.79,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 0.02,
-        "engagement": 2.78,
-        "noise": 0
-      }
-    },
-    {
       "id": "bnsnwn",
       "source": "bbc",
       "subSource": "world",
@@ -3512,36 +3616,15 @@
       "url": "https://www.bbc.co.uk/news/articles/c4g4r4lxx25o?at_medium=RSS&at_campaign=rss",
       "summary": "The US-Canada trade war is being felt on both sides of the border.",
       "publishedAt": "2026-08-31T00:05:22.000Z",
-      "score": 3.71,
+      "score": 3.68,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 1.71,
+        "recency": 1.68,
         "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "yvh8fz",
-      "source": "hn",
-      "title": "Relm4 makes developing beautiful cross-platform applications idiomatic",
-      "url": "https://relm4.org/",
-      "summary": "",
-      "publishedAt": "2026-08-26T10:38:56.000Z",
-      "engagement": 63,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49446705",
-      "score": 3.71,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 0,
-        "engagement": 2.71,
         "noise": 0
       }
     },
@@ -3574,14 +3657,14 @@
       "url": "https://www.bbc.co.uk/news/articles/cx279dml00ro?at_medium=RSS&at_campaign=rss",
       "summary": "So-called financial favouritism can cause jealousy and resentment long into adulthood. Here is how experts say you can avoid it",
       "publishedAt": "2026-08-30T23:22:24.000Z",
-      "score": 3.64,
+      "score": 3.61,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 1.64,
+        "recency": 1.61,
         "engagement": 0,
         "noise": 0
       }
@@ -3594,14 +3677,14 @@
       "url": "https://www.nytimes.com/2026/08/29/business/reporters-denied-g20-meeting.html",
       "summary": "Specific reporters from The New York Times, The Wall Street Journal and Bloomberg were not granted credentials to cover the meeting of financial leaders next week in Asheville, N.C.",
       "publishedAt": "2026-08-30T22:55:25.000Z",
-      "score": 3.6,
+      "score": 3.57,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 1.6,
+        "recency": 1.57,
         "engagement": 0,
         "noise": 0
       }
@@ -3636,7 +3719,7 @@
       "summary": "I've created a multi-tenant application under our company that is currently still in staging.\n Initially, I created the databases manually using the Basic tier, but I later decided that the application should handle database provisioning automatically. At one point, I decided to remove all the existing tenants in staging so that I could reseed all the databases from scratch.\n The problem is that t",
       "publishedAt": "2026-08-30T15:48:52.000Z",
       "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w2l2hc/accidental_provision/",
-      "score": 3.55,
+      "score": 3.53,
       "roles": [],
       "products": [
         "azure"
@@ -3645,7 +3728,7 @@
         "role": 0,
         "product": 2.5,
         "source": 0,
-        "recency": 1.05,
+        "recency": 1.03,
         "engagement": 0,
         "noise": 0
       }
@@ -3657,9 +3740,9 @@
       "url": "https://fraware.github.io/EVERYTHING-RINGS/",
       "summary": "",
       "publishedAt": "2026-08-27T16:24:44.000Z",
-      "engagement": 41,
+      "engagement": 42,
       "commentsUrl": "https://news.ycombinator.com/item?id=49467365",
-      "score": 3.45,
+      "score": 3.47,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
@@ -3667,7 +3750,28 @@
         "product": 0,
         "source": 1,
         "recency": 0.02,
-        "engagement": 2.43,
+        "engagement": 2.45,
+        "noise": 0
+      }
+    },
+    {
+      "id": "yttyao",
+      "source": "hn",
+      "title": "'Mad honey' that can stop your heart is being sold online",
+      "url": "https://phys.org/news/2026-08-mad-honey-heart-sold-online.html",
+      "summary": "",
+      "publishedAt": "2026-08-28T09:17:27.000Z",
+      "engagement": 37,
+      "commentsUrl": "https://news.ycombinator.com/item?id=49476239",
+      "score": 3.41,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 1,
+        "recency": 0.04,
+        "engagement": 2.37,
         "noise": 0
       }
     },
@@ -3679,14 +3783,14 @@
       "url": "https://www.bbc.co.uk/news/videos/c5ydwy004v0o?at_medium=RSS&at_campaign=rss",
       "summary": "Heavy rain has hampered relief efforts in Nepal where thousands remain missing after flash floods hit its border with Tibet.",
       "publishedAt": "2026-08-30T20:40:02.000Z",
-      "score": 3.4,
+      "score": 3.37,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 1.4,
+        "recency": 1.37,
         "engagement": 0,
         "noise": 0
       }
@@ -3721,7 +3825,7 @@
       "summary": "submitted by    /u/kiler_shadow  \n [link]   [comments]",
       "publishedAt": "2026-08-30T11:47:55.000Z",
       "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w2ffv6/entra_microsft_erorr/",
-      "score": 3.33,
+      "score": 3.32,
       "roles": [],
       "products": [
         "azure"
@@ -3730,29 +3834,8 @@
         "role": 0,
         "product": 2.5,
         "source": 0,
-        "recency": 0.83,
+        "recency": 0.82,
         "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "yttyao",
-      "source": "hn",
-      "title": "'Mad honey' that can stop your heart is being sold online",
-      "url": "https://phys.org/news/2026-08-mad-honey-heart-sold-online.html",
-      "summary": "",
-      "publishedAt": "2026-08-28T09:17:27.000Z",
-      "engagement": 28,
-      "commentsUrl": "https://news.ycombinator.com/item?id=49476239",
-      "score": 3.24,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 1,
-        "recency": 0.04,
-        "engagement": 2.19,
         "noise": 0
       }
     },
@@ -3786,7 +3869,7 @@
       "summary": "submitted by    /u/jmjmalik22  \n [link]   [comments]",
       "publishedAt": "2026-08-30T08:11:38.000Z",
       "commentsUrl": "https://www.reddit.com/r/AZURE/comments/1w2blt4/fabricprepcom_opensource_initiation_to_mock_exams/",
-      "score": 3.17,
+      "score": 3.16,
       "roles": [],
       "products": [
         "azure"
@@ -3795,7 +3878,27 @@
         "role": 0,
         "product": 2.5,
         "source": 0,
-        "recency": 0.67,
+        "recency": 0.66,
+        "engagement": 0,
+        "noise": 0
+      }
+    },
+    {
+      "id": "znoxy",
+      "source": "bbc",
+      "subSource": "business",
+      "title": "School uniform swap shop 'saves money and tackles second hand clothes stigma'",
+      "url": "https://www.bbc.co.uk/news/articles/crr452d45nyo?at_medium=RSS&at_campaign=rss",
+      "summary": "A free initiative which started with one school four years ago now has more than 200 involved.",
+      "publishedAt": "2026-08-30T17:16:18.000Z",
+      "score": 3.13,
+      "roles": [],
+      "products": [],
+      "scoreBreakdown": {
+        "role": 0,
+        "product": 0,
+        "source": 2,
+        "recency": 1.13,
         "engagement": 0,
         "noise": 0
       }
@@ -3808,34 +3911,33 @@
       "url": "https://www.nytimes.com/2026/08/31/business/private-equity-college-sports.html",
       "summary": "As desperate as many athletic programs are for money, they are proceeding cautiously when it comes to deals with private equity.",
       "publishedAt": "2026-08-31T18:52:09.000Z",
-      "score": 3.16,
+      "score": 3.07,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 5.16,
+        "recency": 5.07,
         "engagement": 0,
         "noise": 4
       }
     },
     {
-      "id": "znoxy",
-      "source": "bbc",
-      "subSource": "business",
-      "title": "School uniform swap shop 'saves money and tackles second hand clothes stigma'",
-      "url": "https://www.bbc.co.uk/news/articles/crr452d45nyo?at_medium=RSS&at_campaign=rss",
-      "summary": "A free initiative which started with one school four years ago now has more than 200 involved.",
-      "publishedAt": "2026-08-30T17:16:18.000Z",
-      "score": 3.15,
+      "id": "t5f79i",
+      "source": "guardian",
+      "title": "The datacenter backlash is bringing the entire political spectrum together – against big tech billionaires",
+      "url": "https://www.theguardian.com/us-news/ng-interactive/2026/aug/30/data-center-politics-democrats-republicans",
+      "summary": "The movement against datacenters is uniting Americans because they perfectly illustrate how a few individuals hold all the power to control decisions that affect our lives\nBryce Gustafson has been knocking on doors in Indiana for more than a decade. The lead organizer with Citizens Action Coalition (CAC), a consumer and environmental organization, he usually encounters a mix of reactions when he’s out canvassing; whatever issue he’s talking about, there’s always at least a few people on the other side. But at a recent festival in the rural town of Monrovia, Indiana, he was struck by an unusual spirit of unity.\nHe was there about a proposed datacenter, a 550-acre (222-hectare) Google project in this small town of 1,600 people. “I had 50 people I talked to,” Gustafson told me. “Nobody wanted that datacenter in their community. And at least a half a dozen people came up to me to say, ‘Hey, I voted for Trump. What the heck’s he doing, supporting these things?’”\n Continue reading...",
+      "publishedAt": "2026-08-30T16:08:17.000Z",
+      "score": 3.05,
       "roles": [],
       "products": [],
       "scoreBreakdown": {
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 1.15,
+        "recency": 1.05,
         "engagement": 0,
         "noise": 0
       }
@@ -3848,45 +3950,6 @@
       "url": "https://www.bbc.co.uk/sport/football/articles/c780w17lw02o?at_medium=RSS&at_campaign=rss",
       "summary": "Venture capitalist Joshua Kushner says he would not have got involved in Fifa president Gianni Infantino's scrapped plan to sell off stakes in the World Cup if he had known how the football world reacted.",
       "publishedAt": "2026-08-31T18:38:55.000Z",
-      "score": 3.1,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 5.1,
-        "engagement": 0,
-        "noise": 4
-      }
-    },
-    {
-      "id": "t5f79i",
-      "source": "guardian",
-      "title": "The datacenter backlash is bringing the entire political spectrum together – against big tech billionaires",
-      "url": "https://www.theguardian.com/us-news/ng-interactive/2026/aug/30/data-center-politics-democrats-republicans",
-      "summary": "The movement against datacenters is uniting Americans because they perfectly illustrate how a few individuals hold all the power to control decisions that affect our lives\nBryce Gustafson has been knocking on doors in Indiana for more than a decade. The lead organizer with Citizens Action Coalition (CAC), a consumer and environmental organization, he usually encounters a mix of reactions when he’s out canvassing; whatever issue he’s talking about, there’s always at least a few people on the other side. But at a recent festival in the rural town of Monrovia, Indiana, he was struck by an unusual spirit of unity.\nHe was there about a proposed datacenter, a 550-acre (222-hectare) Google project in this small town of 1,600 people. “I had 50 people I talked to,” Gustafson told me. “Nobody wanted that datacenter in their community. And at least a half a dozen people came up to me to say, ‘Hey, I voted for Trump. What the heck’s he doing, supporting these things?’”\n Continue reading...",
-      "publishedAt": "2026-08-30T16:08:17.000Z",
-      "score": 3.07,
-      "roles": [],
-      "products": [],
-      "scoreBreakdown": {
-        "role": 0,
-        "product": 0,
-        "source": 2,
-        "recency": 1.07,
-        "engagement": 0,
-        "noise": 0
-      }
-    },
-    {
-      "id": "arp04s",
-      "source": "nyt",
-      "subSource": "business",
-      "title": "These Tanks Can Hold 90 Million Barrels of Oil. They Have Just 22 Million.",
-      "url": "https://www.nytimes.com/2026/08/28/business/energy-environment/oil-storage-iran-war.html",
-      "summary": "Oil companies and governments are consuming their once vast stockpiles as Iran and the United States continue to struggle for control over the Strait of Hormuz.",
-      "publishedAt": "2026-08-30T15:04:31.000Z",
       "score": 3.01,
       "roles": [],
       "products": [],
@@ -3894,9 +3957,9 @@
         "role": 0,
         "product": 0,
         "source": 2,
-        "recency": 1.01,
+        "recency": 5.01,
         "engagement": 0,
-        "noise": 0
+        "noise": 4
       }
     }
   ]
