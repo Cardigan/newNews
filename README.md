@@ -5,8 +5,6 @@ fed by a GitHub Actions cron job that fetches news from BBC, The Guardian,
 Hacker News, and Reddit, scores each item against role + product keyword
 profiles, and commits a `public/data/feed.json` artifact the client reads.
 
-> **Public news only.** No Microsoft-confidential content. No internal sources.
-
 ## Architecture
 
 ```
