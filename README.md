@@ -1,10 +1,5 @@
 # newNews
 
-A curated industry news feed for a ~50-person team at Microsoft working on
-Azure / Azure Government data-platform products (Power Query Online,
-HDInsight, OneLake, Service Assist, Microsoft Fabric, Data Factory, Dataflows
-Gen2, Pipelines, etc.).
-
 This is a **proof of concept**: a static Next.js site hosted on GitHub Pages,
 fed by a GitHub Actions cron job that fetches news from BBC, The Guardian,
 Hacker News, and Reddit, scores each item against role + product keyword
