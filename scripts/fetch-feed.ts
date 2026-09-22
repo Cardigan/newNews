@@ -2,6 +2,7 @@ import { writeFileSync, existsSync, readFileSync, mkdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { dirname, resolve } from 'node:path';
 import { fetchAll } from '../lib/curation/sources';
+import { sanitizeArticle } from '../lib/curation/sanitize';
 import { scoreArticle } from '../lib/curation/score';
 import type {
   FeedFile,
@@ -65,7 +66,8 @@ async function main() {
   const raw = await fetchAll();
   console.log(`[fetch-feed] raw items: ${raw.length}`);
 
-  const deduped = dedupe(raw);
+  const sanitized = raw.map(sanitizeArticle);
+  const deduped = dedupe(sanitized);
   console.log(`[fetch-feed] after dedupe: ${deduped.length}`);
 
   const scored = deduped

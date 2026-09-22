@@ -2,9 +2,8 @@
 // CSP that prevents embedding. For these we skip the reader pane entirely
 // and just pop a new tab — saves the user from staring at a sad-face icon.
 //
-// Reddit isn't technically frame-blocked, but it's blocked by some enterprise
-// networks, so we treat it the
-// same way.
+// Reddit isn't technically frame-blocked, but some enterprise networks block
+// it, so we treat it the same way.
 const BLOCKED_FRAME_DOMAINS = [
   'bbc.co.uk',
   'bbc.com',
