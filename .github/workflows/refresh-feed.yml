@@ -31,7 +31,19 @@ jobs:
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add public/data/feed.json
             git commit -m "chore(feed): refresh $(date -u +%Y-%m-%dT%H:%MZ)"
-            git push
+            for attempt in 1 2 3; do
+              if git push; then
+                break
+              fi
+
+              if [[ "$attempt" -eq 3 ]]; then
+                echo "git push failed after ${attempt} attempts"
+                exit 1
+              fi
+
+              echo "git push failed on attempt ${attempt}; retrying in 15 seconds..."
+              sleep 15
+            done
           else
             echo "No feed changes."
           fi
